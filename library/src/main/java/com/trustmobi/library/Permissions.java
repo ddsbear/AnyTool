@@ -18,8 +18,6 @@ import static android.os.Build.VERSION_CODES.M;
 
 /**
  * Permission-related helpers
- * <p>
- * Created by Oasis on 2016/9/27.
  */
 public class Permissions {
 
