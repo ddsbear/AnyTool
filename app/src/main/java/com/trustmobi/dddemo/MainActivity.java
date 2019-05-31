@@ -2,14 +2,17 @@ package com.trustmobi.dddemo;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.trustmobi.library.Dialogs;
 import com.trustmobi.library.Permissions;
+import com.trustmobi.library.SnackBars;
 import com.trustmobi.library.utils.VToast;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +22,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+    }
+
+    public void onTest(View view) {
+        SnackBars.Additional ad = SnackBars.withLink("百度", Uri.parse("https://www.baidu.com"));
+        Snackbar snackbar = SnackBars.make(view, "dds", ad);
+        if (snackbar != null) {
+            snackbar.show();
+        }
+//        Snackbar.make(view, "dds", Snackbar.LENGTH_SHORT)
+//                .setAction("dds", null)
+//                .show();
 
     }
 
@@ -71,4 +86,6 @@ public class MainActivity extends AppCompatActivity {
         }, 2000);
 
     }
+
+
 }

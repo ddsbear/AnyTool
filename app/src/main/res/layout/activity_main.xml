@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/root"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".MainActivity">
@@ -17,11 +18,19 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/button0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onTest"
+                android:text="Test"
+                android:textAllCaps="false" />
+
+            <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onPermission"
-                android:text="申请权限" />
+                android:text="申请单个权限" />
 
 
             <Button
