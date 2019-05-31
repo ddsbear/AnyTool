@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/root"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".MainActivity">
@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onTest"
-                android:text="Test"
+                android:text="Snake"
                 android:textAllCaps="false" />
 
             <Button
@@ -31,7 +31,6 @@
                 android:layout_height="wrap_content"
                 android:onClick="onPermission"
                 android:text="申请单个权限" />
-
 
             <Button
                 android:id="@+id/button1"
@@ -49,6 +48,13 @@
                 android:text="简单弹出progressDialog"
                 android:textAllCaps="false" />
 
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onHook"
+                android:text="Hook测试"
+                android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 

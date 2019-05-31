@@ -13,7 +13,7 @@ import android.view.View;
 import com.trustmobi.library.Dialogs;
 import com.trustmobi.library.Permissions;
 import com.trustmobi.library.SnackBars;
-import com.trustmobi.library.utils.VToast;
+import com.trustmobi.library.Toasts;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Permissions.request(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, integer -> {
                 if (integer == PackageManager.PERMISSION_GRANTED) {
-                    VToast.show(MainActivity.this, "成功accept : " + integer);
+                    Toasts.showShort(MainActivity.this, "成功accept : " + integer);
                 } else {
-                    VToast.show(MainActivity.this, "失败accept : " + integer);
+                    Toasts.showShort(MainActivity.this, "失败accept : " + integer);
                 }
 
 
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     public void onDialog(View view) {
         Dialogs.buildAlert(this, "title", "content ")
                 .withOkButton(() -> {
-                    VToast.show(MainActivity.this, "onDialog");
+                    Toasts.showShort(MainActivity.this, "onDialog");
                 })
                 .withCancelButton()
                 .show();
@@ -88,4 +88,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // hook
+    public void onHook(View view) {
+        HackActivity.openActivity(this);
+    }
 }
