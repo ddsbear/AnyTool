@@ -8,7 +8,8 @@ Here is a record of the common problems encountered in Android development and h
 1. request permission
 
    ```java
-     Permissions.request(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, 				Manifest.permission.CAMERA}, integer -> {
+     Permissions.request(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+     Manifest.permission.CAMERA}, integer -> {
                    if (integer == PackageManager.PERMISSION_GRANTED) {
                        Toasts.showShort(MainActivity.this, "成功accept : " + integer);
                    } else {
@@ -17,7 +18,6 @@ Here is a record of the common problems encountered in Android development and h
                });
    ```
    
-
 2. Dialog  tool
 
 3. Toast tool 
