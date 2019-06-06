@@ -38,16 +38,17 @@ public class MainActivity extends AppCompatActivity {
         DialogActivity.openActivity(this);
     }
 
-    // hook
-    public void onHook(View view) {
-        HackActivity.openActivity(this);
-    }
-
     // Toast
     public void onToast(View view) {
         ToastActivity.openActivity(this);
 
 
     }
+
+    // hook
+    public void onHook(View view) {
+        HackActivity.openActivity(this);
+    }
+
 
 }

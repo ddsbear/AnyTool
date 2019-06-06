@@ -17,5 +17,49 @@ Here is a record of the common problems encountered in Android development and h
                });
    ```
    
+
+2. Dialog  tool
+
+3. Toast tool 
+
+4. hook tool
+
+   ```java
+   class HackDemo{
+       
+     private int foo() {
+         return 7;
+    }
+       
+   }
    
+   // hook above 
+   
+   Hack.HackedMethod0<Integer, HackDemo, Hack.Unchecked, Hack.Unchecked, Hack.Unchecked>     foo
+                       = Hack
+                       .into(HackDemo.class)
+                       .method("foo")
+                       .returning(int.class)
+                       .withoutParams();
+   
+   foo.invoke().on(simple)
+   ```
+
+   
+
+5. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
