@@ -124,7 +124,7 @@ public class HackActivity extends AppCompatActivity {
                             .withoutParams());
 
 
-            Toasts.showShort(this, "测试成功");
+            Toasts.showShort(this, "Hook Test success !");
 
 
         } catch (IOException e) {

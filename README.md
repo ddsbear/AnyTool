@@ -5,19 +5,17 @@ Here is a record of the common problems encountered in Android development and h
 
 ## Records
 
-1. permission
+1. request permission
 
    ```java
-    Permissions.request(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, integer -> {
+     Permissions.request(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, 				Manifest.permission.CAMERA}, integer -> {
                    if (integer == PackageManager.PERMISSION_GRANTED) {
-                       VToast.show(MainActivity.this, "success accept : " + integer);
+                       Toasts.showShort(MainActivity.this, "成功accept : " + integer);
                    } else {
-                       VToast.show(MainActivity.this, "failed accept : " + integer);
+                       Toasts.showShort(MainActivity.this, "失败accept : " + integer);
                    }
-   
-   
                });
    ```
-
+   
    
 

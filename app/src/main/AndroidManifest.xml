@@ -13,8 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.utils.dddemo.HackActivity" />
-        <activity android:name="com.utils.dddemo.MainActivity">
+        <activity android:name=".DialogActivity"></activity>
+        <activity android:name=".ToastActivity" />
+        <activity android:name=".HackActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
