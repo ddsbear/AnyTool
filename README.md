@@ -3,8 +3,6 @@ Here is a record of the common problems encountered in Android development and h
 
 
 
-
-
 ## Records
 
 1. permission

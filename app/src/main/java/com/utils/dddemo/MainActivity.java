@@ -40,15 +40,17 @@ public class MainActivity extends AppCompatActivity {
     // Permission
     public void onPermission(View view) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Permissions.request(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, integer -> {
-                if (integer == PackageManager.PERMISSION_GRANTED) {
-                    Toasts.showShort(MainActivity.this, "成功accept : " + integer);
-                } else {
-                    Toasts.showShort(MainActivity.this, "失败accept : " + integer);
-                }
-
-
-            });
+            Permissions.request(this,
+                    new String[]{
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.CAMERA},
+                    integer -> {
+                        if (integer == PackageManager.PERMISSION_GRANTED) {
+                            Toasts.showShort(MainActivity.this, "成功accept : " + integer);
+                        } else {
+                            Toasts.showShort(MainActivity.this, "失败accept : " + integer);
+                        }
+                    });
         }
 
     }
