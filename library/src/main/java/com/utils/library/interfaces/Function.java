@@ -22,7 +22,7 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package com.utils.library.utils;
+package com.utils.library.interfaces;
 
 /**
  * Represents a function that accepts one argument and produces a result.

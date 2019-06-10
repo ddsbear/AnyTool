@@ -1,4 +1,4 @@
-package com.utils.library.utils;
+package com.utils.library.interfaces;
 
 /**
  * {@link Consumer} with {@link ThrowableConsumer}

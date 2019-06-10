@@ -22,7 +22,7 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
-package com.utils.library.utils;
+package com.utils.library.interfaces;
 
 /**
  * Represents an operation that accepts a single input argument and returns no

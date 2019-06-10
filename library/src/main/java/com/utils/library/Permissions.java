@@ -13,7 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 
-import com.utils.library.utils.Consumer;
+import com.utils.library.interfaces.Consumer;
 
 import java.util.ArrayList;
 import java.util.List;
