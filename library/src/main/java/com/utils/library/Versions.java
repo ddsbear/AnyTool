@@ -10,6 +10,7 @@ public class Versions {
         if (sVersionCode == 0) loadVersionInfo(context);
         return sVersionCode;
     }
+
     public static String name(final Context context) {
         if (sVersionName == null) loadVersionInfo(context);
         return sVersionName;

@@ -9,7 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.TextView;
 
-import com.utils.library.utils.WebContent;
+import com.utils.library.snack.WebContent;
 
 /**
  * @author Oasis

@@ -4,8 +4,8 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.utils.library.utils.Supplier;
-import com.utils.library.utils.Suppliers;
+import com.utils.library.hack.Supplier;
+import com.utils.library.hack.Suppliers;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
