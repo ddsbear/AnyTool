@@ -51,4 +51,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // enc dec
+    public void onEncDec(View view) {
+    }
 }

@@ -27,7 +27,7 @@ Here is a record of the common problems encountered in Android development and h
    ```java
    class HackDemo{
        
-     private int foo() {
+     private int fuc() {
          return 7;
     }
        
@@ -38,7 +38,7 @@ Here is a record of the common problems encountered in Android development and h
    Hack.HackedMethod0<Integer, HackDemo, Hack.Unchecked, Hack.Unchecked, Hack.Unchecked>     foo
                        = Hack
                        .into(HackDemo.class)
-                       .method("foo")
+                       .method("fuc")
                        .returning(int.class)
                        .withoutParams();
    
@@ -47,7 +47,11 @@ Here is a record of the common problems encountered in Android development and h
 
    
 
-5. 
+5. Encrypt  and Decrypt 
+
+   
+
+   
 
 
 
