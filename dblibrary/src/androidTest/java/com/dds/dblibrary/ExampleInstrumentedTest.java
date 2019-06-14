@@ -1,4 +1,4 @@
-package com.trustmobi.dblibrary;
+package com.dds.dblibrary;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

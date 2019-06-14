@@ -5,17 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class EncDecActivity extends AppCompatActivity {
+public class DBActivity extends AppCompatActivity {
 
 
     public static void openActivity(Activity activity) {
-        Intent intent = new Intent(activity, EncDecActivity.class);
+        Intent intent = new Intent(activity, DBActivity.class);
         activity.startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_enc_dec);
+        setContentView(R.layout.activity_db);
     }
 }

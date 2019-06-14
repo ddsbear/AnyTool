@@ -53,5 +53,13 @@ public class MainActivity extends AppCompatActivity {
 
     // enc dec
     public void onEncDec(View view) {
+        EncDecActivity.openActivity(this);
+
+    }
+
+    // test db
+    public void onDBTest(View view) {
+        DBActivity.openActivity(this);
+
     }
 }

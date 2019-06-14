@@ -56,6 +56,14 @@
                 android:onClick="onEncDec"
                 android:text="Enc,Dec"
                 android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onDBTest"
+                android:text="DBTest"
+                android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 
