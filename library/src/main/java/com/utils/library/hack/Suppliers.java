@@ -14,7 +14,8 @@
 package com.utils.library.hack;
 
 import android.os.SystemClock;
-import android.support.annotation.VisibleForTesting;
+
+import androidx.annotation.VisibleForTesting;
 
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;

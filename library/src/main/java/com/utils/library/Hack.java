@@ -1,8 +1,9 @@
 package com.utils.library;
 
-import android.support.annotation.CheckResult;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.CheckResult;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.utils.library.hack.Supplier;
 import com.utils.library.hack.Suppliers;

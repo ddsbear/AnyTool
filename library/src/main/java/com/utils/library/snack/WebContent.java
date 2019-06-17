@@ -9,14 +9,15 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.CheckResult;
-import android.support.annotation.Nullable;
+import android.util.Log;
+import android.util.TypedValue;
+
+import androidx.annotation.CheckResult;
+import androidx.annotation.Nullable;
 import androidx.browser.customtabs.CustomTabsClient;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.browser.customtabs.CustomTabsServiceConnection;
 import androidx.browser.customtabs.CustomTabsSession;
-import android.util.Log;
-import android.util.TypedValue;
 
 /**
  * Helper class for viewing web content with Chrome Custom Tabs support.

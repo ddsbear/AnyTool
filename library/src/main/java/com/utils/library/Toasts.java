@@ -3,9 +3,10 @@ package com.utils.library;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.IntDef;
-import android.support.annotation.StringRes;
 import android.widget.Toast;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.StringRes;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

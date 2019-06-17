@@ -1,8 +1,9 @@
-package com.dds.jetpack;
+package com.dds.jetpack.workmanager;
+
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
+import androidx.annotation.NonNull;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
@@ -13,7 +14,6 @@ import androidx.work.WorkerParameters;
 
 public class UploadWorker extends Worker {
 
-
     public UploadWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
@@ -21,11 +21,6 @@ public class UploadWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        uploadImages();
-        return Result.success();
-    }
-
-    private void uploadImages() {
-
+        return null;
     }
 }

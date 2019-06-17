@@ -3,12 +3,13 @@ package com.utils.library;
 import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.CheckResult;
-import androidx.browser.customtabs.CustomTabsSession;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.CheckResult;
+import androidx.browser.customtabs.CustomTabsSession;
+
+import com.google.android.material.snackbar.Snackbar;
 import com.utils.library.snack.WebContent;
 
 /**
@@ -130,7 +131,7 @@ public class SnackBars {
 
     private static Snackbar tweak(final Snackbar snackbar) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) snackbar.getView().setZ(999);
-        final TextView msg_view = snackbar.getView().findViewById(android.support.design.R.id.snackbar_text);
+        final TextView msg_view = snackbar.getView().findViewById(R.id.snackbar_text);
         msg_view.setMaxLines(KMaxLines);    // Extend max lines
         msg_view.setTextColor(0xffffffff);    // Workaround the light theme conflict
         return snackbar;

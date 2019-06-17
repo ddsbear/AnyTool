@@ -1,2 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dds.jetpack" />
+    package="com.dds.jetpack">
+
+    <application>
+        <activity android:name=".RoomActivity"></activity>
+    </application>
+
+</manifest>
