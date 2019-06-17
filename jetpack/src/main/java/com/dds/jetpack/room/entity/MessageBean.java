@@ -2,24 +2,33 @@ package com.dds.jetpack.room.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 /**
  * 消息实体类
  */
+
+
+//@Entity(foreignKeys = {
+//        @ForeignKey(entity = UserInfo.class, parentColumns = {"userId"}, childColumns = {"userId"}),
+//        @ForeignKey(entity = UserInfo.class, parentColumns = {"userId"}, childColumns = {"fromId"})})
 @Entity(tableName = "message")
 public class MessageBean {
+    @PrimaryKey
     @ColumnInfo(name = "msgId")
     private long msgId;
     @ColumnInfo(name = "userId")
     private long userId;
     @ColumnInfo(name = "fromId")
     private long fromId;
-    @ColumnInfo(name = "toId")
-    private long toId;
     @ColumnInfo(name = "content")
     private String content;
     @ColumnInfo(name = "mediaFilePath")
     private String mediaFilePath;
+    @ColumnInfo(name = "updateTime")
+    private long updateTime;
+    @ColumnInfo(name = "msgType")
+    private int msgType;
 
 
     public long getMsgId() {
@@ -46,14 +55,6 @@ public class MessageBean {
         this.fromId = fromId;
     }
 
-    public long getToId() {
-        return toId;
-    }
-
-    public void setToId(long toId) {
-        this.toId = toId;
-    }
-
     public String getContent() {
         return content;
     }
@@ -68,5 +69,21 @@ public class MessageBean {
 
     public void setMediaFilePath(String mediaFilePath) {
         this.mediaFilePath = mediaFilePath;
+    }
+
+    public long getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(long updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public int getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(int msgType) {
+        this.msgType = msgType;
     }
 }

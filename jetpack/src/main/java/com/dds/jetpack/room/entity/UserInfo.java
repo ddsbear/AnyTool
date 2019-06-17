@@ -10,6 +10,8 @@ import androidx.room.PrimaryKey;
  * android_shuai@163.com
  */
 
+//@Entity(primaryKeys = {"userId", "userName"})  // 组合主键
+//@Entity(indices = {@Index(name = "userName", value = {"name"}), @Index(name = "email", value = {"email"})})
 @Entity(tableName = "user_info")
 public class UserInfo {
     @PrimaryKey
@@ -23,6 +25,18 @@ public class UserInfo {
     private String avatar;
     @ColumnInfo(name = "email")
     private String email;
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
     public UserInfo() {
     }
 

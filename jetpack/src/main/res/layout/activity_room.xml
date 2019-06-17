@@ -28,11 +28,13 @@
                 android:id="@+id/button6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onDelete"
                 android:text="delete" />
 
             <Button
                 android:id="@+id/button7"
                 android:layout_width="match_parent"
+                android:onClick="onUpdate"
                 android:layout_height="wrap_content"
                 android:text="update" />
 
@@ -60,7 +62,7 @@
                 android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="result"
+                android:hint="输出结果"
                 android:textIsSelectable="true" />
         </LinearLayout>
 

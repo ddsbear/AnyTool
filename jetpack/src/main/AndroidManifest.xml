@@ -3,7 +3,8 @@
     package="com.dds.jetpack">
 
     <application>
-        <activity android:name=".RoomActivity"></activity>
+        <activity android:name=".JetPackActivity"></activity>
+        <activity android:name=".RoomActivity" />
     </application>
 
 </manifest>

@@ -35,7 +35,7 @@ dependencies {
     implementation 'net.sourceforge.streamsupport:android-retrofuture:1.7.1'
     implementation project(path: ':library')
     implementation project(path: ':dblibrary')
-
+    implementation project(path: ':jetpack')
     // test
     implementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'

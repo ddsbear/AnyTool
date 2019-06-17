@@ -8,6 +8,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dds.jetpack.JetPackActivity;
 import com.utils.library.Permissions;
 import com.utils.library.Toasts;
 
@@ -59,8 +60,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // test db
-    public void onDBTest(View view) {
+    public void onLitePal(View view) {
         DBActivity.openActivity(this);
+
+    }
+
+    // test JetPack
+    public void onJetpack(View view) {
+        JetPackActivity.openActivity(this);
 
     }
 }

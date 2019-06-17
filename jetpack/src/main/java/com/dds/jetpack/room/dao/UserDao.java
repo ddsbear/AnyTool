@@ -20,12 +20,15 @@ public interface UserDao {
     @Query("Select * from user_info")
     List<UserInfo> getAll();
 
+    @Query("Select * from user_info where userId = 3103")
+    UserInfo getUser();
+
     @Insert
-    void insertAll(UserInfo... users);
+    void insert(UserInfo users);
 
     @Delete
-    void delete(UserInfo... users);
+    void delete(UserInfo users);
 
     @Update
-    void update(UserInfo... users);
+    void update(UserInfo users);
 }
