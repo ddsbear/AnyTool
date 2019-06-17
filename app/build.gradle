@@ -8,7 +8,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
@@ -25,20 +25,20 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'com.android.support:customtabs:28.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.browser:browser:1.0.0'
+
+    // other
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'net.sourceforge.streamsupport:android-retrostreams:1.7.1'
+    implementation 'net.sourceforge.streamsupport:android-retrofuture:1.7.1'
     implementation project(path: ':library')
     implementation project(path: ':dblibrary')
 
-    implementation 'net.sourceforge.streamsupport:android-retrostreams:1.7.1'
-    implementation 'net.sourceforge.streamsupport:android-retrofuture:1.7.1'
-
-
     // test
     implementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 
 }

@@ -1,1 +1,1 @@
-include ':app', ':library', ':dblibrary'
+include ':app', ':library', ':dblibrary', ':jetpack'

@@ -26,12 +26,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.browser:browser:1.0.0'
 
-
-    // other
-    implementation 'com.google.android.material:material:1.0.0'
-
+    // WorkManager
+    implementation "android.arch.work:work-runtime:1.0.1"
 
     // test
     testImplementation 'junit:junit:4.12'

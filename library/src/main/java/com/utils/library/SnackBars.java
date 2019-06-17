@@ -4,7 +4,7 @@ import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.CheckResult;
-import android.support.customtabs.CustomTabsSession;
+import androidx.browser.customtabs.CustomTabsSession;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.TextView;
