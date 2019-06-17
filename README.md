@@ -49,9 +49,17 @@ Here is a record of the common problems encountered in Android development and h
 
 5. Encrypt  and Decrypt 
 
-   
+6. LitePal 
 
-   
+7. Jetpack Test 
+
+   room 
+
+   WorkManager
+
+    
+
+    
 
 
 
