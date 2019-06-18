@@ -21,5 +21,11 @@
         android:layout_height="wrap_content"
         android:text="WorkManager"
         android:textAllCaps="false" />
-
+    <Button
+        android:id="@+id/button13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onCamera"
+        android:text="CameraX"
+        android:textAllCaps="false" />
 </LinearLayout>
