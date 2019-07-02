@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.CheckResult;
 import androidx.browser.customtabs.CustomTabsSession;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.utils.library.snack.WebContent;
 
@@ -22,14 +23,14 @@ public class SnackBars {
 
     @CheckResult
     public static Snackbar make(final View coordinator, final int text_res, final Additional... additional) {
-        final Snackbar snackbar = Snackbar.make(coordinator, text_res, DEFAULT_DURATION);
+        final Snackbar snackbar = Snackbar.make(coordinator, text_res, Snackbar.LENGTH_LONG);
         for (final Additional add : additional) if (add != null) add.invoke(snackbar);
         return tweak(snackbar);
     }
 
     @CheckResult
     public static Snackbar make(final View coordinator, final CharSequence text, final Additional... additional) {
-        final Snackbar snackbar = Snackbar.make(coordinator, text, DEFAULT_DURATION);
+        final Snackbar snackbar = Snackbar.make(coordinator, text, Snackbar.LENGTH_LONG);
         for (final Additional add : additional) if (add != null) add.invoke(snackbar);
         return tweak(snackbar);
     }
@@ -39,7 +40,7 @@ public class SnackBars {
         return new Additional() {
             @Override
             public void invoke(Snackbar snackbar) {
-                snackbar.setDuration(Snackbar.LENGTH_INDEFINITE);
+                snackbar.setDuration(BaseTransientBottomBar.LENGTH_LONG);
             }
         };
     }
