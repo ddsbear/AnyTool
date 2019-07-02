@@ -1,4 +1,4 @@
-package com.dds.cameraview;
+package com.dds.camera;
 
 import android.content.Context;
 import androidx.test.InstrumentationRegistry;

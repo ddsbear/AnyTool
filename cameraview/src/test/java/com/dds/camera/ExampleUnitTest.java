@@ -1,4 +1,4 @@
-package com.dds.cameraview;
+package com.dds.camera;
 
 import org.junit.Test;
 
