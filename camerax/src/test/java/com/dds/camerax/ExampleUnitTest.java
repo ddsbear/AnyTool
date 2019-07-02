@@ -1,4 +1,4 @@
-package com.trustmobi.jetpack_kotlin;
+package com.dds.camerax;
 
 import org.junit.Test;
 

@@ -1,7 +1,6 @@
-package com.trustmobi.jetpack_kotlin;
+package com.dds.camerax;
 
 import android.content.Context;
-
 import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
@@ -22,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.trustmobi.jetpack_kotlin.test", appContext.getPackageName());
+        assertEquals("com.dds.camerax.test", appContext.getPackageName());
     }
 }
