@@ -1,1 +1,1 @@
-include ':app', ':library', ':dblibrary', ':jetpack', ':camerax', ':cameraview'
+include ':app', ':library', ':dblibrary', ':jetpack', ':camerax', ':cameraview', ':videoplayer'
