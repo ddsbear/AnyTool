@@ -1,12 +1,10 @@
 package com.dds.videoplayer;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.*;
 import com.dds.videoplayer.utils.Utils;
 
@@ -18,7 +16,7 @@ import java.util.TimerTask;
  * Created by dds on 2019/7/4.
  * android_shuai@163.com
  */
-public abstract class IVideoView extends FrameLayout implements View.OnClickListener,
+public abstract class VideoViewInterface extends FrameLayout implements View.OnClickListener,
         SeekBar.OnSeekBarChangeListener, View.OnTouchListener {
     public static final String TAG = "dds_IVideoView";
 
@@ -28,10 +26,10 @@ public abstract class IVideoView extends FrameLayout implements View.OnClickList
     public TextView currentTimeTextView, totalTimeTextView;
     public ViewGroup textureViewContainer;
     public ViewGroup topContainer, bottomContainer;
-    public VpTextureView textureView;
+    public TextureViewD textureView;
 
 
-    public IMediaPlayer iMediaPlayer;
+    public MediaInterface iMediaInterface;
     public DataSource dataSource;
     public Class mediaInterfaceClass;
 
@@ -41,6 +39,9 @@ public abstract class IVideoView extends FrameLayout implements View.OnClickList
 
     protected Timer UPDATE_PROGRESS_TIMER;
     protected ProgressTimerTask mProgressTimerTask;
+
+    protected AudioManager mAudioManager;
+
     // 播放状态
     public int state = -1;
     public static final int STATE_IDLE = -1;
@@ -61,19 +62,19 @@ public abstract class IVideoView extends FrameLayout implements View.OnClickList
     public static final int SCREEN_TINY = 2;
 
 
-    public static IVideoView CURRENT_VP;
+    public static VideoViewInterface CURRENT_VP;
 
     public abstract int getLayoutId();
 
     protected abstract void showWifiDialog();
 
 
-    public IVideoView(Context context) {
+    public VideoViewInterface(Context context) {
         super(context);
         init(context);
     }
 
-    public IVideoView(Context context, AttributeSet attrs) {
+    public VideoViewInterface(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
@@ -119,9 +120,15 @@ public abstract class IVideoView extends FrameLayout implements View.OnClickList
         Log.i(TAG, "onStateNormal " + " [" + this.hashCode() + "] ");
         state = STATE_NORMAL;
         cancelProgressTimer();
-        if (iMediaPlayer != null) iMediaPlayer.release();
+        if (iMediaInterface != null) iMediaInterface.release();
     }
 
+    // 设置状态 - Preparing
+    public void onStatePreparing() {
+        Log.i(TAG, "onStatePreparing " + " [" + this.hashCode() + "] ");
+        state = STATE_PREPARING;
+        resetProgressAndTime();
+    }
 
     // 设置状态 - pause
     public void onStatePause() {
@@ -136,18 +143,30 @@ public abstract class IVideoView extends FrameLayout implements View.OnClickList
         startProgressTimer();
     }
 
-    public boolean preloading = false;
 
     // 设置状态 prepare
     public void onPrepared() {
         Log.i(TAG, "onPrepared " + " [" + this.hashCode() + "] ");
         state = STATE_PREPARED;
 
-        if (!preloading) {
-            iMediaPlayer.start();//这里原来是非线程
-            preloading = false;
-        }
+        //这里是 start 哦
+        iMediaInterface.start();
 
+    }
+
+
+    public void onError(int what, int extra) {
+        Log.e(TAG, "onError " + what + " - " + extra + " [" + this.hashCode() + "] ");
+        if (what != 38 && extra != -38 && what != -38 && extra != 38 && extra != -19) {
+            onStateError();
+            iMediaInterface.release();
+        }
+    }
+
+    public void onStateError() {
+        Log.i(TAG, "onStateError " + " [" + this.hashCode() + "] ");
+        state = STATE_ERROR;
+        cancelProgressTimer();
     }
 
     @Override
@@ -172,12 +191,12 @@ public abstract class IVideoView extends FrameLayout implements View.OnClickList
             // 暂停
             else if (state == STATE_PLAYING) {
                 Log.d(TAG, "pauseVideo [" + this.hashCode() + "] ");
-                iMediaPlayer.pause();
+                iMediaInterface.pause();
                 onStatePause();
             }
             // 重新播放
             else if (state == STATE_PAUSE) {
-                iMediaPlayer.start();
+                iMediaInterface.start();
                 onStatePlaying();
             }
             // 重新播放
@@ -194,27 +213,48 @@ public abstract class IVideoView extends FrameLayout implements View.OnClickList
     // 开始播放，需要反射获取播放器的类型
     public void startVideo() {
         Log.d(TAG, "startVideo [" + this.hashCode() + "] ");
-        setCurrentJzvd(this);
+        setCurrentVideoView(this);
         try {
-            Constructor<IMediaPlayer> constructor = mediaInterfaceClass.getConstructor(IMediaPlayer.class);
-            this.iMediaPlayer = constructor.newInstance(this);
+            Constructor<MediaInterface> constructor = mediaInterfaceClass.getConstructor(VideoViewInterface.class);
+            this.iMediaInterface = constructor.newInstance(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
         addTextureView();
+        mAudioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
+        mAudioManager.requestAudioFocus(onAudioFocusChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+
+        // 设置屏幕常亮
+        Utils.scanForActivity(getContext()).getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        //设置状态为Preparing
+        onStatePreparing();
     }
+
+    public void onAutoCompletion() {
+        Runtime.getRuntime().gc();
+
+    }
+
 
 
     public void reset() {
 
     }
 
+    public void resetProgressAndTime() {
+        progressBar.setProgress(0);
+        progressBar.setSecondaryProgress(0);
+        currentTimeTextView.setText(Utils.stringForTime(0));
+        totalTimeTextView.setText(Utils.stringForTime(0));
+    }
+
 
     public void addTextureView() {
         Log.d(TAG, "addTextureView [" + this.hashCode() + "] ");
         if (textureView != null) textureViewContainer.removeView(textureView);
-        textureView = new VpTextureView(getContext().getApplicationContext());
-        textureView.setSurfaceTextureListener(iMediaPlayer);
+        textureView = new TextureViewD(getContext().getApplicationContext());
+        textureView.setSurfaceTextureListener(iMediaInterface);
 
         FrameLayout.LayoutParams layoutParams =
                 new FrameLayout.LayoutParams(
@@ -287,7 +327,7 @@ public abstract class IVideoView extends FrameLayout implements View.OnClickList
         long position = 0;
         if (state == STATE_PLAYING || state == STATE_PAUSE) {
             try {
-                position = iMediaPlayer.getCurrentPosition();
+                position = iMediaInterface.getCurrentPosition();
             } catch (IllegalStateException e) {
                 e.printStackTrace();
                 return position;
@@ -299,7 +339,7 @@ public abstract class IVideoView extends FrameLayout implements View.OnClickList
     public long getDuration() {
         long duration = 0;
         try {
-            duration = iMediaPlayer.getDuration();
+            duration = iMediaInterface.getDuration();
         } catch (IllegalStateException e) {
             e.printStackTrace();
             return duration;
@@ -315,11 +355,50 @@ public abstract class IVideoView extends FrameLayout implements View.OnClickList
 
 
     //====================================================================
-    public static void setCurrentJzvd(IVideoView jzvd) {
+    public static void setCurrentVideoView(VideoViewInterface jzvd) {
         if (CURRENT_VP != null) {
             CURRENT_VP.reset();
         }
         CURRENT_VP = jzvd;
     }
+
+
+    //-------------------------------------------------------------------
+    public static AudioManager.OnAudioFocusChangeListener onAudioFocusChangeListener =
+            new AudioManager.OnAudioFocusChangeListener() {//是否新建个class，代码更规矩，并且变量的位置也很尴尬
+                @Override
+                public void onAudioFocusChange(int focusChange) {
+                    switch (focusChange) {
+                        case AudioManager.AUDIOFOCUS_GAIN:
+                            break;
+                        case AudioManager.AUDIOFOCUS_LOSS:
+                            releaseAllVideos();
+                            Log.d(TAG, "AUDIOFOCUS_LOSS [" + this.hashCode() + "]");
+                            break;
+                        case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+                            try {
+                                VideoViewInterface player = CURRENT_VP;
+                                if (player != null && player.state == VideoViewInterface.STATE_PLAYING) {
+                                    player.startButton.performClick();
+                                }
+                            } catch (IllegalStateException e) {
+                                e.printStackTrace();
+                            }
+                            Log.d(TAG, "AUDIOFOCUS_LOSS_TRANSIENT [" + this.hashCode() + "]");
+                            break;
+                        case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                            break;
+                    }
+                }
+            };
+
+    public static void releaseAllVideos() {
+        Log.d(TAG, "releaseAllVideos");
+        if (CURRENT_VP != null) {
+            CURRENT_VP.reset();
+            CURRENT_VP = null;
+        }
+    }
+
 
 }

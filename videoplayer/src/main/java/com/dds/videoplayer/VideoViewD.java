@@ -9,13 +9,13 @@ import android.util.AttributeSet;
  * Created by dds on 2019/7/4.
  * android_shuai@163.com
  */
-public class VideoView extends IVideoView {
+public class VideoViewD extends VideoViewInterface {
 
-    public VideoView(Context context) {
+    public VideoViewD(Context context) {
         super(context);
     }
 
-    public VideoView(Context context, AttributeSet attrs) {
+    public VideoViewD(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

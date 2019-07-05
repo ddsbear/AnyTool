@@ -1,6 +1,7 @@
 package com.dds.videoplayer;
 
 import android.graphics.SurfaceTexture;
+import android.os.Handler;
 import android.view.Surface;
 import android.view.TextureView;
 import com.dds.videoplayer.utils.WorkerHandler;
@@ -9,16 +10,16 @@ import com.dds.videoplayer.utils.WorkerHandler;
  * Created by dds on 2019/7/4.
  * android_shuai@163.com
  */
-public abstract class IMediaPlayer implements TextureView.SurfaceTextureListener {
+public abstract class MediaInterface  implements TextureView.SurfaceTextureListener {
 
 
     public static final String TAG = "IMediaPlayer";
     public static SurfaceTexture SAVED_SURFACE;
     protected WorkerHandler wHandler;
-    public IVideoView iVideoView;
+    public VideoViewInterface iVideoView;
+    public Handler handler;
 
-
-    public IMediaPlayer(IVideoView videoView) {
+    public MediaInterface(VideoViewInterface videoView) {
         this.iVideoView = videoView;
     }
 

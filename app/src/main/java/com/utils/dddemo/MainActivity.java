@@ -70,4 +70,9 @@ public class MainActivity extends AppCompatActivity {
         JetPackActivity.openActivity(this);
 
     }
+
+    // videoPlayer
+    public void onVideoPlayer(View view) {
+        VideoPlayActivity.openActivity(this);
+    }
 }

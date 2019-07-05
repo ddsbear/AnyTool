@@ -21,7 +21,7 @@ public class CameraView extends FrameLayout {
     private CameraEngine mCameraEngine;
     private CameraCallbacks mCameraCallbacks;
 
-    List<CameraListener> mListeners = new CopyOnWriteArrayList<>();
+    private List<CameraListener> mListeners = new CopyOnWriteArrayList<>();
 
     public CameraView(@NonNull Context context) {
         this(context, null);
@@ -44,7 +44,6 @@ public class CameraView extends FrameLayout {
 
         mCameraCallbacks = new CameraCallbacks();
         mCameraEngine = instantiateCameraController(mCameraCallbacks);
-
 
 
     }

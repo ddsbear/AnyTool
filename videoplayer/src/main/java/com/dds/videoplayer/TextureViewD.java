@@ -9,7 +9,7 @@ import android.view.View;
  * Created by dds on 2019/7/4.
  * android_shuai@163.com
  */
-public class VpTextureView extends TextureView {
+public class TextureViewD extends TextureView {
 
     public static final int VIDEO_IMAGE_DISPLAY_TYPE_ADAPTER = 0;//DEFAULT
     public static final int VIDEO_IMAGE_DISPLAY_TYPE_FILL_PARENT = 1;
@@ -19,18 +19,16 @@ public class VpTextureView extends TextureView {
     public static int VIDEO_IMAGE_DISPLAY_TYPE = VIDEO_IMAGE_DISPLAY_TYPE_ADAPTER;
 
 
-    protected static final String TAG = "JZResizeTextureView";
-
     public int currentVideoWidth = 0;
     public int currentVideoHeight = 0;
 
-    public VpTextureView(Context context) {
+    public TextureViewD(Context context) {
         super(context);
         currentVideoWidth = 0;
         currentVideoHeight = 0;
     }
 
-    public VpTextureView(Context context, AttributeSet attrs) {
+    public TextureViewD(Context context, AttributeSet attrs) {
         super(context, attrs);
         currentVideoWidth = 0;
         currentVideoHeight = 0;

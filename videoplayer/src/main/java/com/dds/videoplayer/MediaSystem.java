@@ -3,21 +3,24 @@ package com.dds.videoplayer;
 import android.graphics.SurfaceTexture;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.PlaybackParams;
+import android.os.Handler;
 import android.view.Surface;
+import android.view.TextureView;
 import com.dds.videoplayer.utils.WorkerHandler;
 
 /**
  * Created by dds on 2019/7/4.
  * android_shuai@163.com
  */
-public class MediaSystem extends IMediaPlayer implements MediaPlayer.OnPreparedListener,
+public class MediaSystem extends MediaInterface implements MediaPlayer.OnPreparedListener,
         MediaPlayer.OnCompletionListener, MediaPlayer.OnBufferingUpdateListener,
         MediaPlayer.OnSeekCompleteListener, MediaPlayer.OnErrorListener,
-        MediaPlayer.OnInfoListener, MediaPlayer.OnVideoSizeChangedListener {
+        MediaPlayer.OnInfoListener, MediaPlayer.OnVideoSizeChangedListener, TextureView.SurfaceTextureListener {
 
     public MediaPlayer mediaPlayer;
 
-    public MediaSystem(IVideoView videoView) {
+    public MediaSystem(VideoViewInterface videoView) {
         super(videoView);
     }
 
@@ -25,6 +28,7 @@ public class MediaSystem extends IMediaPlayer implements MediaPlayer.OnPreparedL
     @Override
     public void prepare() {
         wHandler = WorkerHandler.get(TAG);
+        handler = new Handler();
         wHandler.post(() -> {
             try {
                 mediaPlayer = new MediaPlayer();
@@ -42,8 +46,9 @@ public class MediaSystem extends IMediaPlayer implements MediaPlayer.OnPreparedL
                 mediaPlayer.setScreenOnWhilePlaying(true);
                 // 设置播放路径
                 mediaPlayer.setDataSource(iVideoView.dataSource.getCurrentUrl().toString());
-                mediaPlayer.prepareAsync();
+
                 mediaPlayer.setSurface(new Surface(SAVED_SURFACE));
+                mediaPlayer.prepareAsync();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -55,33 +60,52 @@ public class MediaSystem extends IMediaPlayer implements MediaPlayer.OnPreparedL
 
     @Override
     public void start() {
-
-
+        wHandler.post(() -> mediaPlayer.start());
     }
 
 
     @Override
     public void pause() {
-
+        wHandler.post(() -> mediaPlayer.pause());
     }
 
     @Override
     public void seekTo(long time) {
-
+        wHandler.post(() -> {
+            try {
+                mediaPlayer.seekTo((int) time);
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @Override
     public void release() {
+        WorkerHandler.destroy();
+        if (mediaPlayer != null) {
+            mediaPlayer = null;
+        }
 
     }
 
     @Override
-    public void setVolume(float left, float right) {
-
+    public void setVolume(float leftVolume, float rightVolume) {
+        if (wHandler == null) return;
+        wHandler.post(() -> {
+            if (mediaPlayer != null) mediaPlayer.setVolume(leftVolume, rightVolume);
+        });
     }
 
     @Override
     public void setSpeed(float speed) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            PlaybackParams pp = mediaPlayer.getPlaybackParams();
+            pp.setSpeed(speed);
+            mediaPlayer.setPlaybackParams(pp);
+        } else {
+            // 23以下設置播放速率
+        }
 
     }
 
@@ -92,17 +116,25 @@ public class MediaSystem extends IMediaPlayer implements MediaPlayer.OnPreparedL
 
     @Override
     public long getCurrentPosition() {
-        return 0;
+        if (mediaPlayer != null) {
+            return mediaPlayer.getCurrentPosition();
+        } else {
+            return 0;
+        }
     }
 
     @Override
     public long getDuration() {
-        return 0;
+        if (mediaPlayer != null) {
+            return mediaPlayer.getDuration();
+        } else {
+            return 0;
+        }
     }
 
     @Override
     public boolean isPlaying() {
-        return false;
+        return mediaPlayer.isPlaying();
     }
 
     // region  --------各种回调
@@ -110,13 +142,13 @@ public class MediaSystem extends IMediaPlayer implements MediaPlayer.OnPreparedL
     // --------------------------setOnPreparedListener-----------------------------
     @Override
     public void onPrepared(MediaPlayer mp) {
-        wHandler.post(() -> iVideoView.onPrepared());
+        handler.post(() -> iVideoView.onPrepared());
     }
 
     // -------------------------setOnCompletionListener---------------------------
     @Override
     public void onCompletion(MediaPlayer mp) {
-
+        handler.post(() -> iVideoView.onAutoCompletion());
     }
 
     // ------------------------setOnBufferingUpdateListener-----------------------
@@ -133,6 +165,7 @@ public class MediaSystem extends IMediaPlayer implements MediaPlayer.OnPreparedL
 
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
+        wHandler.post(() -> iVideoView.onError(what, extra));
         return false;
     }
 
@@ -146,7 +179,7 @@ public class MediaSystem extends IMediaPlayer implements MediaPlayer.OnPreparedL
 
     }
 
-    //-----------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
         if (SAVED_SURFACE == null) {

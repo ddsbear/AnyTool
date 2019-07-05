@@ -72,6 +72,14 @@
                 android:onClick="onJetpack"
                 android:text="Jetpack"
                 android:textAllCaps="false" />
+
+            <Button
+                    android:id="@+id/button7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="onVideoPlayer"
+                    android:text="VideoPlayer"
+                    android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 

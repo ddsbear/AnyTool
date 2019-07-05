@@ -10,11 +10,16 @@ public class DataSource {
 
     public static final String URL_KEY_DEFAULT = "URL_KEY_DEFAULT";
     public String title = "";
-    public LinkedHashMap<String, String> urlsMap = new LinkedHashMap<>();
+    public LinkedHashMap urlsMap = new LinkedHashMap<>();
     public int currentUrlIndex;
 
 
     public DataSource(String url) {
+        urlsMap.put(URL_KEY_DEFAULT, url);
+        currentUrlIndex = 0;
+    }
+
+    public DataSource(Object url) {
         urlsMap.put(URL_KEY_DEFAULT, url);
         currentUrlIndex = 0;
     }
@@ -25,13 +30,13 @@ public class DataSource {
         currentUrlIndex = 0;
     }
 
-    public DataSource(LinkedHashMap<String, String> urlsMap) {
+    public DataSource(LinkedHashMap urlsMap) {
         this.urlsMap.clear();
         this.urlsMap.putAll(urlsMap);
         currentUrlIndex = 0;
     }
 
-    public DataSource(LinkedHashMap<String, String> urlsMap, String title) {
+    public DataSource(LinkedHashMap urlsMap, String title) {
         this.urlsMap.clear();
         this.urlsMap.putAll(urlsMap);
         this.title = title;
@@ -62,7 +67,8 @@ public class DataSource {
 
 
     public DataSource cloneMe() {
-        LinkedHashMap<String, String> map = new LinkedHashMap<>(urlsMap);
+        LinkedHashMap map = new LinkedHashMap();
+        map.putAll(urlsMap);
         return new DataSource(map, title);
     }
 }
