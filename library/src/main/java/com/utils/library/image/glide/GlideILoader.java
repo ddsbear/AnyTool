@@ -2,16 +2,17 @@ package com.utils.library.image.glide;
 
 import android.app.Activity;
 import android.widget.ImageView;
-import com.utils.library.image.ImageLoader;
+import com.bumptech.glide.Glide;
+import com.utils.library.image.ILoader;
 
 
-public class GlideImageLoader implements ImageLoader {
+public class GlideILoader implements ILoader {
 
-    public GlideImageLoader() {
+    public GlideILoader() {
     }
 
     @Override
     public void displayImage(Activity activity, String imageUrl, ImageView view) {
-        // Glide.with(activity).load(imageUrl).into(view);
+        Glide.with(activity).load(imageUrl).into(view);
     }
 }

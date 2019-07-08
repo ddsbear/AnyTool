@@ -8,11 +8,11 @@
         tools:context="com.utils.dddemo.VideoPlayActivity">
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="match_parent">
 
-        <com.dds.videoplayer.VideoViewD
+        <com.dds.videoplayer.VideoViewDD
                 android:id="@+id/vp_video"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"/>
+                android:layout_height="match_parent"/>
     </LinearLayout>
 </LinearLayout>

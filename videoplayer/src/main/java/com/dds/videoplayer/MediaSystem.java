@@ -18,9 +18,9 @@ public class MediaSystem extends MediaInterface implements MediaPlayer.OnPrepare
         MediaPlayer.OnSeekCompleteListener, MediaPlayer.OnErrorListener,
         MediaPlayer.OnInfoListener, MediaPlayer.OnVideoSizeChangedListener, TextureView.SurfaceTextureListener {
 
-    public MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer;
 
-    public MediaSystem(VideoViewInterface videoView) {
+    public MediaSystem(VideoViewDD videoView) {
         super(videoView);
     }
 
@@ -171,6 +171,7 @@ public class MediaSystem extends MediaInterface implements MediaPlayer.OnPrepare
 
     @Override
     public boolean onInfo(MediaPlayer mp, int what, int extra) {
+        handler.post(() -> iVideoView.onInfo(what, extra));
         return false;
     }
 

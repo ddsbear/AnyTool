@@ -10,16 +10,17 @@ import com.dds.videoplayer.utils.WorkerHandler;
  * Created by dds on 2019/7/4.
  * android_shuai@163.com
  */
-public abstract class MediaInterface  implements TextureView.SurfaceTextureListener {
+public abstract class MediaInterface implements TextureView.SurfaceTextureListener {
 
 
-    public static final String TAG = "IMediaPlayer";
-    public static SurfaceTexture SAVED_SURFACE;
+    protected static final String TAG = "IMediaPlayer";
+    protected static SurfaceTexture SAVED_SURFACE;
     protected WorkerHandler wHandler;
-    public VideoViewInterface iVideoView;
-    public Handler handler;
+    protected Handler handler;
 
-    public MediaInterface(VideoViewInterface videoView) {
+    protected VideoViewDD iVideoView;
+
+    public MediaInterface(VideoViewDD videoView) {
         this.iVideoView = videoView;
     }
 
