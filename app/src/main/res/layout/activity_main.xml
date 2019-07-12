@@ -80,6 +80,16 @@
                     android:onClick="onVideoPlayer"
                     android:text="VideoPlayer"
                     android:textAllCaps="false" />
+
+
+
+            <Button
+                    android:id="@+id/button8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="onDbFrameWork"
+                    android:text="徒手撸数据库框架"
+                    android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 

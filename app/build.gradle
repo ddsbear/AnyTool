@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.trustmobi.dddemo"
+        applicationId "aaa.aaa.aaademo"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -42,5 +42,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation project(path: ':cameraview')
     implementation project(path: ':videoplayer')
+    implementation project(path: ':dbframwork')
 
 }

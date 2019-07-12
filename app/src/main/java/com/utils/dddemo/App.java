@@ -2,17 +2,20 @@ package com.utils.dddemo;
 
 import android.app.Application;
 
-import com.dds.dblibrary.LitePalUtil;
-
 /**
  * Created by dds on 2019/6/14.
  * android_shuai@163.com
  */
 public class App extends Application {
+    private static App app;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        app = this;
+    }
 
-        LitePalUtil.init(this);
+    public static App getApp() {
+        return app;
     }
 }

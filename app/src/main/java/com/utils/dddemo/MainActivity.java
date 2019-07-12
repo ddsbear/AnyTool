@@ -5,9 +5,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.dds.jetpack.JetPackActivity;
 import com.utils.library.Permissions;
 import com.utils.library.Toasts;
@@ -61,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     // test db
     public void onLitePal(View view) {
-        DBActivity.openActivity(this);
+        LitePalActivity.openActivity(this);
 
     }
 
@@ -74,5 +72,11 @@ public class MainActivity extends AppCompatActivity {
     // videoPlayer
     public void onVideoPlayer(View view) {
         VideoPlayActivity.openActivity(this);
+    }
+
+
+    // 徒手撸一个数据库框架
+    public void onDbFrameWork(View view) {
+        DBFrameworkActivity.openActivity(this);
     }
 }
