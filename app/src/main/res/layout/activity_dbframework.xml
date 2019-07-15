@@ -8,6 +8,22 @@
         android:orientation="vertical"
         tools:context="com.utils.dddemo.DBFrameworkActivity">
 
+
+    <TextView
+            android:text="当前用户:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/textView"/>
+    <Button
+            android:text="登录用户1"
+            android:layout_width="match_parent"
+            android:onClick="onLogin1"
+            android:layout_height="wrap_content" android:id="@+id/button18"/>
+
+    <Button
+            android:text="登录用户2"
+            android:layout_width="match_parent"
+            android:onClick="onLogin2"
+            android:layout_height="wrap_content" android:id="@+id/button19"/>
     <Button
             android:text="add"
             android:layout_width="match_parent"
@@ -25,8 +41,5 @@
             android:text="search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/button17"/>
-    <Button
-            android:text="Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/button18"/>
+
 </LinearLayout>

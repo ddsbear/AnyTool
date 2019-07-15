@@ -1,5 +1,4 @@
-package com.utils.dddemo.db;
-
+package com.dds.dbframwork.sub_db;
 
 import com.dds.dbframwork.annotation.DbField;
 import com.dds.dbframwork.annotation.DbTable;
@@ -9,8 +8,12 @@ import com.dds.dbframwork.annotation.DbTable;
 public class User {
     @DbField("_id")
     private String id;
+    @DbField("name")
     private String name;
+    @DbField("pwd")
     private String password;
+
+    private Integer state;
 
     public User(String id, String name, String password) {
         this.id = id;
@@ -47,4 +50,11 @@ public class User {
     }
 
 
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
 }
