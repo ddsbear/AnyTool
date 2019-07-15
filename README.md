@@ -33,9 +33,9 @@ Here is a record of the common problems encountered in Android development and h
 
 手撸数据库框架
 
-- [Android徒手撸数据库系列——注解与反射数据库关系模型](any2_dbframwork/zmark/mark1)
-- [Android徒手撸数据库系列——实现单表的增删改查](any2_dbframwork/zmark/mark2)
-- [Android徒手撸数据库系列——数据库级联升级](any2_dbframwork/zmark/mark3)
+- [Android徒手撸数据库系列——注解与反射数据库关系模型](any2_dbframwork/zmark/mark1.md)
+- [Android徒手撸数据库系列——实现单表的增删改查](any2_dbframwork/zmark/mark2.md)
+- [Android徒手撸数据库系列——数据库级联升级](any2_dbframwork/zmark/mark3.md)
 
 
 
