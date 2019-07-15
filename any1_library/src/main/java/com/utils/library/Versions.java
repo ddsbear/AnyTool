@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 
+/**
+ * 版本信息类
+ */
 public class Versions {
 
     public static int code(final Context context) {
@@ -33,6 +36,7 @@ public class Versions {
     /** @param v version code as of {@link android.os.Build.VERSION#SDK_INT} */
     public static String getAndroidVersionNumber(final int v) {
         switch (v) {
+        case 29: return "Q";
         case 28: return "9.0";
         case 27: return "8.1";
         case 26: return "8.0";

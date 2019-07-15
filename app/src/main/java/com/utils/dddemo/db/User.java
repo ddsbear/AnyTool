@@ -3,11 +3,10 @@ package com.utils.dddemo.db;
 
 import com.dds.dbframwork.annotation.DbField;
 import com.dds.dbframwork.annotation.DbTable;
-import com.dds.dbframwork.db.BaseBean;
 
 
 @DbTable("tb_user")
-public class User extends BaseBean {
+public class User {
     @DbField("_id")
     private String id;
     private String name;
