@@ -21,9 +21,9 @@ Here is a record of the common problems encountered in Android development and h
 
 - 一些简单的Dialog和Toast以及SnackBar
 
-- 网络请求封装模块
+- 代理模式封装网络请求模块 net
 
-- 图片显示封装模块
+- 代理模式封装图片显示模块 image
 
   
 
@@ -31,8 +31,11 @@ Here is a record of the common problems encountered in Android development and h
 
 ## 2. dbframework
 
+手撸数据库框架
 
-
+- [Android徒手撸数据库系列——注解与反射数据库关系模型](any2_dbframwork/zmark/mark1)
+- [Android徒手撸数据库系列——实现单表的增删改查](any2_dbframwork/zmark/mark2)
+- [Android徒手撸数据库系列——数据库级联升级](any2_dbframwork/zmark/mark3)
 
 
 

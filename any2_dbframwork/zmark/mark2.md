@@ -92,21 +92,95 @@ public class Condition {
 
 ## 2. 数据的删除
 
+数据库删除和更新差不多
 
-
-
+```java
+  @Override
+    public int delete(T where) {
+        Map<String, String> map = getValues(where);
+        Condition condition = new Condition(map);
+        return mSqLiteDatabase.delete(mTableName, condition.whereCause, condition.whereArgs);}
+```
 
 
 
 ## 3. 数据的查询
 
+查询的话拿到Cursor后需要对返回结果进行处理
+
+```java
+  private List<T> getResult(Cursor cursor, T where) {
+        ArrayList<T> list = new ArrayList();
+        T item;
+        while (cursor.moveToNext()) {
+            try {
+                item = (T) where.getClass().newInstance();
+                for (Map.Entry<String, Field> stringFieldEntry : cacheMap.entrySet()) {
+                    // 获取列名
+                    String columnName = (String) ((Map.Entry) stringFieldEntry).getKey();
+                    // 根据列名拿到游标的位置
+                    int columnIndex = cursor.getColumnIndex(columnName);
+                    Field field = (Field) ((Map.Entry) stringFieldEntry).getValue();
+                    Class type = field.getType();
+                    if (columnIndex != -1) {
+                        if (type == String.class) {
+                            //反射方式赋值
+                            field.set(item, cursor.getString(columnIndex));
+                        } else if (type == Double.class) {
+                            field.set(item, cursor.getDouble(columnIndex));
+                        } else if (type == Integer.class) {
+                            field.set(item, cursor.getInt(columnIndex));
+                        } else if (type == Long.class) {
+                            field.set(item, cursor.getLong(columnIndex));
+                        } else if (type == byte[].class) {
+                            field.set(item, cursor.getBlob(columnIndex));
+                            /*
+                            不支持的类型
+                             */
+                        } else {
+                            continue;
+                        }
+                    }
+                }
+                list.add(item);
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return list;
+    }
+```
+
+从之前缓存的字段信息中查询出对应的字段信息，然后使用反射对其赋值
+
+下面是整个查询方法
+
+```java
+   @Override
+    public List<T> query(T where, String orderBy, Integer startIndex, Integer limit) {
+        Map map = getValues(where);
+        String limitString = null;
+        if (startIndex != null && limit != null) {
+            limitString = startIndex + " , " + limit;
+        }
+        Condition condition = new Condition(map);
+        Cursor cursor = mSqLiteDatabase.query(mTableName, null, condition.whereCause
+                , condition.whereArgs, null, null, orderBy, limitString);
+        List<T> result = getResult(cursor, where);
+        cursor.close();
+        return result;
+
+    }
+```
 
 
 
+## 详细代码
 
-
-
-
+https://github.com/ddssingsong/AnyTool
 
 
 

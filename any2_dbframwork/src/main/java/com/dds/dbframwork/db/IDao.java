@@ -41,4 +41,7 @@ public interface IDao<T> {
      * @return 查询结果集
      */
     List<T> query(T where);
+
+
+    List<T> query(T where,String orderBy,Integer startIndex,Integer limit);
 }
