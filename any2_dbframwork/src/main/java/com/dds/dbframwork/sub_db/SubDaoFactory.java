@@ -46,7 +46,7 @@ public class SubDaoFactory extends DaoFactory {
     // 获取子查询Dao
     public synchronized <T extends BaseDao<M>, M> T getSubDao(Class<T> daoClass, Class<M> entityClass) {
         BaseDao baseDao = null;
-        if (map.get(daoClass.getSimpleName()) != null) {
+        if (map.get(DbEnums.database.getValue(mDbParentDir)) != null) {
             return (T) map.get(DbEnums.database.getValue(mDbParentDir));
         }
         String dbPath = DbEnums.database.getValue(mDbParentDir);
@@ -58,7 +58,7 @@ public class SubDaoFactory extends DaoFactory {
         try {
             baseDao = daoClass.newInstance();
             baseDao.init(subSdb, entityClass);
-            map.put(daoClass.getSimpleName(), baseDao);
+            map.put(DbEnums.database.getValue(mDbParentDir), baseDao);
             return (T) baseDao;
         } catch (InstantiationException e) {
             e.printStackTrace();
