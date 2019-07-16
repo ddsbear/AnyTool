@@ -25,21 +25,25 @@
             android:onClick="onLogin2"
             android:layout_height="wrap_content" android:id="@+id/button19"/>
     <Button
-            android:text="add"
+            android:text="SubInsert"
             android:layout_width="match_parent"
-            android:onClick="onAdd"
+            android:textAllCaps="false"
+            android:onClick="onSubInsert"
             android:layout_height="wrap_content" android:id="@+id/button14"/>
     <Button
             android:text="Delete"
             android:layout_width="match_parent"
+            android:textAllCaps="false"
             android:layout_height="wrap_content" android:id="@+id/button15"/>
     <Button
             android:text="Update"
             android:layout_width="match_parent"
+            android:textAllCaps="false"
             android:layout_height="wrap_content" android:id="@+id/button16"/>
     <Button
             android:text="search"
             android:layout_width="match_parent"
+            android:textAllCaps="false"
             android:layout_height="wrap_content" android:id="@+id/button17"/>
 
 </LinearLayout>

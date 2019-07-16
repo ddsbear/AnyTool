@@ -12,7 +12,7 @@ public class User {
     private String name;
     @DbField("pwd")
     private String password;
-
+    // 登录状态
     private Integer state;
 
     public User(String id, String name, String password) {

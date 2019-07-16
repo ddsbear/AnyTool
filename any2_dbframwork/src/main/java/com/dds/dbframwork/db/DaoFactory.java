@@ -22,11 +22,13 @@ public class DaoFactory {
     }
 
     // dataBase实例
-    private SQLiteDatabase sdb;
+    protected SQLiteDatabase sdb;
     // 数据库名称
     protected String mDbName;
     // 数据库路径
     protected String mDbPath;
+    // 数据库父路径
+    protected String mDbParentDir;
 
     protected Map<String, BaseDao> map = Collections.synchronizedMap(new HashMap<String, BaseDao>());
 
@@ -37,7 +39,9 @@ public class DaoFactory {
         if (null == sdb) {
             mDbName = dbName;
             mDbPath = context.getDatabasePath(dbName).getPath();
-            File dir = new File(context.getDatabasePath(dbName).getParent());
+            mDbParentDir = context.getDatabasePath(dbName).getParent();
+
+            File dir = new File(mDbParentDir);
             if (!dir.exists()) {
                 dir.mkdirs();
             }
@@ -56,6 +60,7 @@ public class DaoFactory {
         return baseDao;
     }
 
+    // 根据dao和对象获取BaseDao对象
     public synchronized <T extends BaseDao<M>, M> T getBaseDao(Class<T> daoClass, Class<M> entityClass) {
         BaseDao baseDao = null;
         if (map.get(daoClass.getSimpleName()) != null) {

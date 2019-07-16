@@ -16,7 +16,7 @@ import java.util.*;
  * android_shuai@163.com
  */
 public class BaseDao<T> implements IDao<T> {
-    private final static String TAG = "dds_DaoImpl";
+    private final static String TAG = "dds_BaseDao";
     private SQLiteDatabase mSqLiteDatabase;
     private String mTableName;
     private Class<T> mEntityClass;

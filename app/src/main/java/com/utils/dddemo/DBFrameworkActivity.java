@@ -3,19 +3,20 @@ package com.utils.dddemo;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import com.dds.dbframwork.db.BaseDao;
 import com.dds.dbframwork.db.DaoFactory;
+import com.dds.dbframwork.sub_db.SubDaoFactory;
 import com.dds.dbframwork.sub_db.User;
 import com.dds.dbframwork.sub_db.UserDao;
+import com.utils.dddemo.db.UserInfo;
+import com.utils.dddemo.db.UserInfoDao;
 
 public class DBFrameworkActivity extends AppCompatActivity {
 
     private TextView textView;
-    UserDao userDao;
+    private UserDao userDao;
 
     public static void openActivity(Activity activity) {
         Intent intent = new Intent(activity, DBFrameworkActivity.class);
@@ -30,9 +31,13 @@ public class DBFrameworkActivity extends AppCompatActivity {
         DaoFactory.getInstance().init(App.getApp(), "dbTest.db");
 
         userDao = DaoFactory.getInstance().getBaseDao(UserDao.class, User.class);
+
+        User currentUser = userDao.getCurrentUser();
+        if (currentUser != null) {
+            textView.setText("当前登录用户：" + currentUser.getName());
+        }
     }
 
-    private int i = 0;
 
     // 测试登陆和切换用户
     public void onLogin1(View view) {
@@ -40,30 +45,33 @@ public class DBFrameworkActivity extends AppCompatActivity {
         user.setPassword("123456");
         user.setName("用户1");
         user.setId("n0001");
-
+        userDao.insert(user);
+        // 显示登录用户
+        User currentUser = userDao.getCurrentUser();
+        textView.setText("当前登录用户：" + currentUser.getName());
     }
 
     public void onLogin2(View view) {
-
         User user = new User();
         user.setPassword("123456");
         user.setName("用户2");
         user.setId("n0002");
+        userDao.insert(user);
+        User currentUser = userDao.getCurrentUser();
+        textView.setText("当前登录用户：" + currentUser.getName());
     }
 
 
-    public void onAdd(View view) {
-        User user = new User();
-        user.setId("n000" + i);
-        user.setPassword("123456");
-        user.setName("张三" + (++i));
+    // 设置插入数据
+    public void onSubInsert(View view) {
+        SubDaoFactory.getInstance().init(this, "dbTest.db");
+        UserInfoDao photoDao = SubDaoFactory.getInstance().getSubDao(UserInfoDao.class, UserInfo.class);
 
-        // 数据库增加一条数据
-        BaseDao<User> baseDao = DaoFactory.getInstance().getBaseDao(User.class);
-        long insert = baseDao.insert(user);
-        Log.e("dds_test", "返回结果：" + insert);
-
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserId(123456L);
+        userInfo.setUserName("N1234");
+        userInfo.setNickName("ddssingsong");
+        userInfo.setMarkName("mark");
+        photoDao.insert(userInfo);
     }
-
-
 }

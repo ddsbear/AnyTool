@@ -1,5 +1,6 @@
 package com.dds.dbframwork.sub_db;
 
+import android.util.Log;
 import com.dds.dbframwork.db.BaseDao;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  * android_shuai@163.com
  */
 public class UserDao extends BaseDao<User> {
-
+    private final static String TAG = "dds_UserDao";
 
     enum State {Default, Login}
 
@@ -18,15 +19,34 @@ public class UserDao extends BaseDao<User> {
         List<User> list = query(new User());
         User where;
         for (User user : list) {
-            // 设置其他人为未登录
+            if (entity.getId().equals(user.getId())) {
+                continue;
+            }
+
+            if (user.getState() == State.Default.ordinal()) {
+                continue;
+            }
+            // 设置之前用户为未登录
             where = new User();
             where.setId(user.getId());
             user.setState(State.Default.ordinal());
             update(user, where);
+            Log.i(TAG, user.getName() + "-->logout");
         }
         // 设置当前用户为登录状态
         entity.setState(State.Login.ordinal());
-        return super.insert(entity);
+        where = new User();
+        where.setId(entity.getId());
+        int result = update(entity, where);
+        if (result > 0) {
+            Log.i(TAG, entity.getName() + "-->reLogin");
+            return result;
+        } else {
+            Log.i(TAG, entity.getName() + "-->first login");
+            return super.insert(entity);
+        }
+
+
     }
 
 
