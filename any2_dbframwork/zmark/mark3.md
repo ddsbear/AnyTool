@@ -208,11 +208,29 @@ public synchronized <T extends BaseDao<M>, M> T getBaseDao(Class<T> daoClass, Cl
 
 ## 6. 测试向表中插入数据
 
+因为获取存入的位置需要Context，需要先调用之前init方法，获取位置
+
+```java
+
+    // 设置插入数据
+    public void onSubInsert(View view) {
+        SubDaoFactory.getInstance().init(this, "dbTest.db");
+        UserInfoDao photoDao = SubDaoFactory.getInstance().getSubDao(UserInfoDao.class, UserInfo.class);
+
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserId(123456L);
+        userInfo.setUserName("N1234");
+        userInfo.setNickName("ddssingsong");
+        userInfo.setMarkName("mark");
+        photoDao.insert(userInfo);
+    }
+```
 
 
 
+## 详细代码
 
-
+https://github.com/ddssingsong/AnyTool
 
 
 
