@@ -1,0 +1,60 @@
+﻿<!-- 请保证该文档一定是 UTF-8编码 -->
+<updateXml>
+    <createVersion version="V003">
+        <createDb name="user">
+            <!-- 设备与软件关联信息 -->
+            <sql_createTable>
+                create table if not exists tb_user(
+                name TEXT,
+                password TEXT,
+                loginName TEXT,
+                lastLoginTime,
+                user_id Integer primary key
+                );
+            </sql_createTable>
+        </createDb>
+        <createDb name="login">
+            <!-- 设备与软件关联信息 -->
+            <sql_createTable>
+                create table if not exists tb_photo(
+                time TEXT,
+                path TEXT,
+                to_user TEXT,
+                sendTime TEXT
+                );
+            </sql_createTable>
+        </createDb>
+    </createVersion>
+
+    <updateStep
+        versionFrom="V002"
+        versionTo="V003">
+		
+        <updateDb name="login">
+            <sql_before>alter table tb_photo rename to bak_tb_photo;</sql_before>
+            <sql_after>
+                insert into tb_photo(time,
+                path)
+                select time,path
+                from bak_tb_photo;
+            </sql_after>
+            <sql_after>
+                drop table if exists bak_tb_photo;
+            </sql_after>
+        </updateDb>
+		
+        <updateDb name="user">
+            <sql_before>alter table tb_user rename to bak_t_user;</sql_before>
+            <sql_after>
+                insert into tb_user(name,
+                password)
+                select name,password
+                from bak_tb_user;
+            </sql_after>
+            <sql_after>
+                drop table if exists bak_t_user;
+            </sql_after>
+        </updateDb>
+    </updateStep>
+
+</updateXml>

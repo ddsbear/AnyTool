@@ -61,8 +61,7 @@ public class DBFrameworkActivity extends AppCompatActivity {
         textView.setText("当前登录用户：" + currentUser.getName());
     }
 
-
-    // 设置插入数据
+    // 测试插入数据
     public void onSubInsert(View view) {
         SubDaoFactory.getInstance().init(this, "dbTest.db");
         UserInfoDao photoDao = SubDaoFactory.getInstance().getSubDao(UserInfoDao.class, UserInfo.class);
@@ -73,5 +72,10 @@ public class DBFrameworkActivity extends AppCompatActivity {
         userInfo.setNickName("ddssingsong");
         userInfo.setMarkName("mark");
         photoDao.insert(userInfo);
+    }
+
+    // 测试升级
+    public void onUpdate(View view) {
+
     }
 }
