@@ -1,5 +1,7 @@
 ﻿<!-- 请保证该文档一定是 UTF-8编码 -->
 <updateXml>
+
+
     <createVersion version="V003">
         <createDb name="user">
             <!-- 设备与软件关联信息 -->
@@ -25,6 +27,8 @@
             </sql_createTable>
         </createDb>
     </createVersion>
+
+
 
     <updateStep
         versionFrom="V002"

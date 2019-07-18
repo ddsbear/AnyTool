@@ -15,7 +15,7 @@ public class CreateDb {
     // 表名
     private String tableName;
 
-    // 需要创建的表名称
+
     private List<String> sqlCreates;
 
 
