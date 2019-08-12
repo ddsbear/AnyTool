@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import com.dds.jetpack.JetPackActivity;
+import com.dds.uilibrary.UILibraryActivity;
 import com.utils.library.Permissions;
 import com.utils.library.Toasts;
 
@@ -78,5 +79,10 @@ public class MainActivity extends AppCompatActivity {
     // 徒手撸一个数据库框架
     public void onDbFrameWork(View view) {
         DBFrameworkActivity.openActivity(this);
+    }
+
+    // UI仓库
+    public void onUILibrary(View view) {
+        UILibraryActivity.openActivity(this);
     }
 }

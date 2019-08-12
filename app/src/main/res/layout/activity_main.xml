@@ -90,6 +90,13 @@
                     android:onClick="onDbFrameWork"
                     android:text="徒手撸数据库框架"
                     android:textAllCaps="false" />
+
+            <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="onUILibrary"
+                    android:text="UILibrary"
+                    android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 

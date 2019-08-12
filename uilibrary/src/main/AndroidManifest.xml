@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.dds.uilibrary">
+
+    <application>
+        <meta-data android:name="android.max_aspect" android:value="2.1"/>
+        <activity android:name=".DragPhotoActivity"
+                  android:theme="@style/translucent">
+            <meta-data android:name="android.notch_support" android:value="true"/>
+        </activity>
+        <activity android:name=".UILibraryActivity">
+        </activity>
+    </application>
+
+</manifest>

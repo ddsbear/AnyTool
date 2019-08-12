@@ -39,6 +39,9 @@ Here is a record of the common problems encountered in Android development and h
 
 
 
+## 3. UI
+
+1. 大图拖拽返回效果实现
 
 
 

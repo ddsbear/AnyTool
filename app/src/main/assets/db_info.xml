@@ -1,0 +1,20 @@
+<dbinfo>
+
+    <!--用户切换用户-->
+    <dbname value="user"/>
+
+
+
+
+
+
+
+
+    <!--
+
+    internal    data/data/package/
+    external    sdcard/
+
+    -->
+    <storage value="internal"/>
+</dbinfo>

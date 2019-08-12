@@ -1,10 +1,6 @@
-﻿<!-- 请保证该文档一定是 UTF-8编码 -->
-<updateXml>
-
-
+﻿<updateXml>
     <createVersion version="V003">
         <createDb name="user">
-            <!-- 设备与软件关联信息 -->
             <sql_createTable>
                 create table if not exists tb_user(
                 name TEXT,
@@ -16,7 +12,6 @@
             </sql_createTable>
         </createDb>
         <createDb name="login">
-            <!-- 设备与软件关联信息 -->
             <sql_createTable>
                 create table if not exists tb_photo(
                 time TEXT,

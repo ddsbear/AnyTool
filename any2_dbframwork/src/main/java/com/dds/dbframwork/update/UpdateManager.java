@@ -39,7 +39,7 @@ public class UpdateManager {
     }
 
 
-    public void CheckCreateTable(Context context) {
+    public void checkCreateTable(Context context) {
         // 解析xml中的创建表的语句
         UpdateDbXml updateDbXml = readDbXml(context);
 
@@ -48,8 +48,6 @@ public class UpdateManager {
         xmlFile = new File(filesDir, "update.xml");
         thisVersion = readVersion(xmlFile);
         Log.i(TAG, "thisVersion=" + thisVersion);
-
-
 
 
     }
