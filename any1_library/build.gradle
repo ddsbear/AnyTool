@@ -37,6 +37,8 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
+    // okhttp3
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.14.2'
 
     // test
     testImplementation 'junit:junit:4.12'
