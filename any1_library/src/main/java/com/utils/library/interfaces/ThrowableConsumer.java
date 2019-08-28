@@ -1,5 +1,7 @@
 package com.utils.library.interfaces;
 
+import com.utils.library.permission.Consumer;
+
 /**
  * {@link Consumer} with {@link ThrowableConsumer}
  * <p>

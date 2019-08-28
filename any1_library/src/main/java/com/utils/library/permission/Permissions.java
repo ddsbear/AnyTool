@@ -1,4 +1,4 @@
-package com.utils.library;
+package com.utils.library.permission;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Process;
 
@@ -13,8 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
-
-import com.utils.library.interfaces.Consumer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +31,35 @@ public class Permissions {
      * @param callback will be called if request is not canceled, with either
      *                 {@link PackageManager#PERMISSION_GRANTED} or {@link PackageManager#PERMISSION_DENIED}
      */
-    @RequiresApi(M)
     public static void request(Activity activity, String permission, Consumer<Integer> callback) {
+        if (Build.VERSION.SDK_INT >= M) {
+            request2(activity, permission, callback);
+        } else {
+            if (has(activity, permission)) {
+                callback.accept(0);
+            } else {
+                callback.accept(-1);
+            }
+        }
+
+    }
+
+    public static void request(Activity activity, String[] permissions, Consumer<Integer> callback) {
+        if (Build.VERSION.SDK_INT >= M) {
+            request2(activity, permissions, callback);
+        } else {
+            if (has(activity, permissions)) {
+                callback.accept(0);
+            } else {
+                callback.accept(-1);
+            }
+
+        }
+
+    }
+
+    @RequiresApi(M)
+    public static void request2(Activity activity, String permission, Consumer<Integer> callback) {
         final FragmentManager fm = activity.getFragmentManager();
         if (!has(activity, permission)) {
             fm.beginTransaction().add(new PermissionRequestFragment(new String[]{permission}, callback), null).commitAllowingStateLoss();
@@ -47,7 +73,7 @@ public class Permissions {
      *                 {@link PackageManager#PERMISSION_GRANTED} or {@link PackageManager#PERMISSION_DENIED}
      */
     @RequiresApi(M)
-    public static void request(Activity activity, String[] permissions, Consumer<Integer> callback) {
+    public static void request2(Activity activity, String[] permissions, Consumer<Integer> callback) {
         final FragmentManager fm = activity.getFragmentManager();
         if (!has(activity, permissions)) {
             fm.beginTransaction().add(new PermissionRequestFragment(permissions, callback), null).commitAllowingStateLoss();
