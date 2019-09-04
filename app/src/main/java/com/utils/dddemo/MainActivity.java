@@ -2,14 +2,15 @@ package com.utils.dddemo;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.dds.jetpack.JetPackActivity;
 import com.dds.uilibrary.UILibraryActivity;
-import com.utils.library.permission.Permissions;
 import com.utils.library.Toasts;
+import com.utils.library.permission.Permissions;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,15 +23,15 @@ public class MainActivity extends AppCompatActivity {
 
     // Permission
     public void onPermission(View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Permissions.request(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, integer -> {
-                if (integer == PackageManager.PERMISSION_GRANTED) {
-                    Toasts.showShort(MainActivity.this, "成功accept : " + integer);
-                } else {
-                    Toasts.showShort(MainActivity.this, "失败accept : " + integer);
-                }
-            });
-        }
+        Permissions.request(this, new String[]{
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA}, integer -> {
+            if (integer == PackageManager.PERMISSION_GRANTED) {
+                Toasts.showShort(MainActivity.this, "成功accept : " + integer);
+            } else {
+                Toasts.showShort(MainActivity.this, "失败accept : " + integer);
+            }
+        });
 
     }
 
@@ -84,5 +85,9 @@ public class MainActivity extends AppCompatActivity {
     // UI仓库
     public void onUILibrary(View view) {
         UILibraryActivity.openActivity(this);
+    }
+
+    // 测试网络
+    public void onNet(View view) {
     }
 }
