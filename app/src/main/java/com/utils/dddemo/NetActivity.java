@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,50 +29,23 @@ import java.util.concurrent.Executors;
 public class NetActivity extends AppCompatActivity {
     private KeyPair keyPair;
     private ExecutorService executor = Executors.newSingleThreadExecutor();
-
+    private EditText text1;
+    private EditText text2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net);
-
+        text1 = findViewById(R.id.text1);
+        text2 = findViewById(R.id.text2);
         HttpRequestPresenter.init(new OkHttpRequest());
-    }
-
-    public void post(View view) {
-        executor.execute(() -> {
-            try {
-                // 生成密钥对
-                keyPair = CA.generateKeyPair();
-                // 生成p10请求
-                String url = "";
-                Map<String, String> map = new HashMap<>();
-                map.put("p10", "");
-                HttpRequestPresenter.getInstance().post(url, map, new ICallback() {
-                    @Override
-                    public void onSuccess(String result) {
-                        Log.e("dds_test", result);
-                    }
-
-                    @Override
-                    public void onFailure(int code, Throwable t) {
-                        Log.e("dds_error", t.toString());
-
-                    }
-                });
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-
     }
 
     public void get(View view) {
 
     }
 
-    public void tls(View view) {
+    public void requestP10(View view) {
         executor.execute(() -> {
             try {
                 // 生成密钥对
@@ -101,7 +75,34 @@ public class NetActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
+    }
 
+    public void post(View view) {
+        executor.execute(() -> {
+            try {
+                // 生成密钥对
+                keyPair = CA.generateKeyPair();
+                // 生成p10请求
+                String url = "";
+                Map<String, String> map = new HashMap<>();
+                map.put("p10", "");
+                HttpRequestPresenter.getInstance().post(url, map, new ICallback() {
+                    @Override
+                    public void onSuccess(String result) {
+                        Log.e("dds_test", result);
+                    }
+
+                    @Override
+                    public void onFailure(int code, Throwable t) {
+                        Log.e("dds_error", t.toString());
+
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
     }
 

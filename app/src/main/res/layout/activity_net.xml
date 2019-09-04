@@ -7,11 +7,29 @@
         android:padding="16dp"
         tools:context="com.utils.dddemo.NetActivity">
 
+    <EditText
+            android:id="@+id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="p10其请求例如：https://192.168.1.12" />
+
+    <EditText
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="测试接口例如：https://192.168.1.12" />
+
     <Button
             android:layout_width="match_parent"
-            android:onClick="post"
             android:layout_height="wrap_content"
-            android:text="post" />
+            android:onClick="requestP10"
+            android:text="请求p10" />
+
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="post"
+            android:text="测试接口" />
 
     <Button
             android:layout_width="match_parent"
@@ -20,10 +38,5 @@
             android:text="get" />
 
 
-    <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="tls"
-            android:text="双向认证" />
 </LinearLayout>
 
