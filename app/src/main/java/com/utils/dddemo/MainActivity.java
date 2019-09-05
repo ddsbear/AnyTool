@@ -89,5 +89,6 @@ public class MainActivity extends AppCompatActivity {
 
     // 测试网络
     public void onNet(View view) {
+        NetActivity.openActivity(this);
     }
 }

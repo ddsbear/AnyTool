@@ -47,9 +47,13 @@ Here is a record of the common problems encountered in Android development and h
 ## 4. git教程
    [git教程](git_markdown/git_markdown.pptx)
 
+## 5. 网络相关
 
+    [Android 生成p10请求]()
 
+    [Android 合成p12证书]()
 
+    [okHttp单向和双向请求]()
 
 
 

@@ -1,12 +1,16 @@
 package com.utils.dddemo;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +35,15 @@ public class NetActivity extends AppCompatActivity {
     private ExecutorService executor = Executors.newSingleThreadExecutor();
     private EditText text1;
     private EditText text2;
+    private EditText text3;
+
+    private TextView text;
+    private StringBuilder sb = new StringBuilder();
+
+    public static void openActivity(Activity activity) {
+        Intent intent = new Intent(activity, NetActivity.class);
+        activity.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,23 +51,31 @@ public class NetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_net);
         text1 = findViewById(R.id.text1);
         text2 = findViewById(R.id.text2);
+        text3 = findViewById(R.id.text3);
+        text = findViewById(R.id.text);
         HttpRequestPresenter.init(new OkHttpRequest());
-    }
 
-    public void get(View view) {
 
+        text1.setText("https://192.168.1.44/1.php");
+        text2.setText("https://192.168.1.44/2.php");
+        text3.setText("https://192.168.1.44:4431/2.php");
     }
 
     public void requestP10(View view) {
+        sb = new StringBuilder();
+        sb.append("开始请求...").append("\n");
+        text.setText(sb.toString());
         executor.execute(() -> {
             try {
                 // 生成密钥对
                 keyPair = CA.generateKeyPair();
                 // 生成p10请求
                 String pks10 = CA.generatePKCS10(keyPair);
-                String url = "";
+                String url = text1.getText().toString();
                 Map<String, String> map = new HashMap<>();
                 map.put("p10", pks10);
+                sb.append("url:").append(url).append("\n");
+                sb.append("param:p10=").append(pks10).append("\n");
                 HttpRequestPresenter.getInstance().post(url, map, new ICallback() {
                     @Override
                     public void onSuccess(String result) {
@@ -67,35 +88,71 @@ public class NetActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(int code, Throwable t) {
                         Log.e("dds_error", t.toString());
-
+                        sb.append("双向建立失败：").append(t.toString()).append("\n");
+                        Message message = new Message();
+                        message.what = 2;
+                        handler.sendMessage(message);
                     }
                 });
 
             } catch (Exception e) {
-                e.printStackTrace();
+                sb.append("双向建立失败：").append(e.toString()).append("\n");
+                Message message = new Message();
+                message.what = 2;
+                handler.sendMessage(message);
             }
         });
     }
 
+    public void loadP12(View view) {
+        sb = new StringBuilder();
+        sb.append("开始加载p12...").append("\n");
+        text.setText(sb.toString());
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/test.p12";
+        InputStream certificate;
+        File file = new File(path);
+        if (file.exists()) {
+            try {
+                certificate = new FileInputStream(file);
+                HttpRequestPresenter.getInstance().setCertificate(certificate, "");
+                sb.append("双向建立完成").append("\n");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                sb.append("双向建立失败").append(e.toString()).append("\n");
+            }
+        } else {
+            sb.append("双向建立失败：sd/test.p12 no exist").append("\n");
+        }
+        text.setText(sb.toString());
+
+    }
+
     public void post(View view) {
+        String url = text2.getText().toString();
+        sb.append("开始请求接口").append("\n");
+        sb.append(url).append("\n");
+        text.setText(sb.toString());
         executor.execute(() -> {
             try {
-                // 生成密钥对
-                keyPair = CA.generateKeyPair();
-                // 生成p10请求
-                String url = "";
                 Map<String, String> map = new HashMap<>();
-                map.put("p10", "");
-                HttpRequestPresenter.getInstance().post(url, map, new ICallback() {
+                HttpRequestPresenter.getInstance().get(url, map, new ICallback() {
                     @Override
                     public void onSuccess(String result) {
                         Log.e("dds_test", result);
+                        sb.append("请求成功：" + result);
+                        Message message = new Message();
+                        message.obj = result;
+                        message.what = 2;
+                        handler.sendMessage(message);
                     }
 
                     @Override
                     public void onFailure(int code, Throwable t) {
                         Log.e("dds_error", t.toString());
-
+                        sb.append("请求失败：" + t.toString());
+                        Message message = new Message();
+                        message.what = 2;
+                        handler.sendMessage(message);
                     }
                 });
 
@@ -104,6 +161,46 @@ public class NetActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void post2(View view) {
+        String url = text3.getText().toString();
+        sb.append("开始请求接口").append("\n");
+        sb.append(url).append("\n");
+        text.setText(sb.toString());
+        executor.execute(() -> {
+            try {
+                Map<String, String> map = new HashMap<>();
+                map.put("param", "param");
+                HttpRequestPresenter.getInstance().get(url, map, new ICallback() {
+                    @Override
+                    public void onSuccess(String result) {
+                        Log.e("dds_test", result);
+                        sb.append("请求成功：").append(result).append("\n");
+                        Message message = new Message();
+                        message.obj = result;
+                        message.what = 2;
+                        handler.sendMessage(message);
+                    }
+
+                    @Override
+                    public void onFailure(int code, Throwable t) {
+                        Log.e("dds_error", t.toString());
+                        sb.append("请求失败：").append(t.toString()).append("\n");
+                        Message message = new Message();
+                        message.what = 2;
+                        handler.sendMessage(message);
+                    }
+                });
+
+            } catch (Exception e) {
+                Log.e("dds_error", e.toString());
+                sb.append("请求失败：").append(e.toString()).append("\n");
+                Message message = new Message();
+                message.what = 2;
+                handler.sendMessage(message);
+            }
+        });
     }
 
     private Handler handler = new Handler(Looper.getMainLooper()) {
@@ -114,8 +211,10 @@ public class NetActivity extends AppCompatActivity {
                     // 获取到p7证书，需要用这个证书生成p12证书进行认证
                     String p7 = (String) msg.obj;
                     PrivateKey aPrivate = keyPair.getPrivate();
+                    sb.append("response result:p7=").append(p7).append("\n");
                     try {
-                        String path = getFilesDir().getAbsolutePath() + "/test.p12";
+                        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/test.p12";
+                        // 保存p12证书
                         CA.storeP12(aPrivate, p7, path, "123456");
                         InputStream certificate = null;
                         File file = new File(path);
@@ -123,19 +222,27 @@ public class NetActivity extends AppCompatActivity {
                             try {
                                 certificate = new FileInputStream(file);
                                 HttpRequestPresenter.getInstance().setCertificate(certificate, "123456");
-
-
+                                sb.append("双向建立成功").append("\n");
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();
+                                sb.append("双向建立失败：" + e.toString()).append("\n");
                             }
                         }
 
                     } catch (Exception e) {
                         e.printStackTrace();
+                        sb.append("双向建立失败：").append(e.toString()).append("\n");
                     }
 
+                    text.setText(sb.toString());
+                    break;
+
+                case 2:
+                    text.setText(sb.toString());
                     break;
             }
         }
     };
+
+
 }
