@@ -1,8 +1,8 @@
 package com.dds.cipher;
 
-import org.junit.Test;
+import com.dds.cipher.javaImpl.JavaMd5;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -12,6 +12,17 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+        // assertEquals(4, 2 + 2);
+
+        JavaMd5 javaMd5 = new JavaMd5();
+        String s = javaMd5.Md5("111111");
+
+        System.out.println("md5 16:" + s.substring(8, 24));
+        System.out.println("md5 32:" + s);
+
+
+        String s2 = javaMd5.Md5Twice("123456");
+        System.out.println("md5 twice 16:" + s2.substring(8, 24));
+        System.out.println("md5 twice 32:" + s2);
     }
 }

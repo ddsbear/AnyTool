@@ -56,9 +56,9 @@ public class NetActivity extends AppCompatActivity {
         HttpRequestPresenter.init(new OkHttpRequest());
 
 
-        text1.setText("https://192.168.1.44/1.php");
-        text2.setText("https://192.168.1.44/2.php");
-        text3.setText("https://192.168.1.44:4431/2.php");
+        text1.setText("https://192.168.33.30/1.php");
+        text2.setText("https://192.168.33.30/1.php");
+        text3.setText("https://192.168.33.30:4431/1.php");
     }
 
     public void requestP10(View view) {

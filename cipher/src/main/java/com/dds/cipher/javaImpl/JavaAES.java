@@ -9,6 +9,7 @@ import java.io.InputStream;
  * android_shuai@163.com
  */
 public class JavaAES implements AES {
+
     @Override
     public String encryptText(String sSrc, String sKey) {
         return null;
