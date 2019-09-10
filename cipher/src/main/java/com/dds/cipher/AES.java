@@ -9,17 +9,17 @@ import java.io.InputStream;
 
 public interface AES {
 
-    String encryptText(String sSrc, String sKey);
+    String encText(String sSrc, String sKey);
 
-    String decryptText(String sSrc, String sKey, int length);
+    String decText(String sSrc, String sKey, int length);
 
-    long encryptFile(String inputFileUrl, String outFileUrl, String sKey);
+    long encFile(String inputFileUrl, String outFileUrl, String sKey);
 
-    InputStream decryptFile(String inputFileUrl, String sKey, int length);
+    InputStream decFile(String inputFileUrl, String sKey, int length);
 
-    byte[] AesEncryptByte(String key, byte[] data, int needPad);
+    byte[] AesEncByte(String key, byte[] data, int needPad);
 
-    byte[] AesDecryptByte(String key, byte[] encData, int hasPad);
+    byte[] AesDecByte(String key, byte[] encData, int hasPad);
 
     String generateRandomCharAndNumber();
 

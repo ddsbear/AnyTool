@@ -24,17 +24,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="测试单向例如：https://192.168.1.12" />
+
         <EditText
                 android:id="@+id/text3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="测试双向接口例如：https://192.168.1.12:4434" />
+
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:onClick="requestP10"
                 android:text="请求p10获取p7并建立双向通道" />
+
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:onClick="requestP10"
+                android:text="请求" />
 
         <Button
                 android:layout_width="match_parent"
@@ -49,6 +58,7 @@
                 android:layout_marginTop="10dp"
                 android:onClick="post"
                 android:text="测试单向接口" />
+
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

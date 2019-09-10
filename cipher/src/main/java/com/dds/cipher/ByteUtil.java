@@ -32,7 +32,6 @@ public class ByteUtil {
         return d;
     }
 
-
     public static String byte2HexStr(byte[] b, int len) {
         String stmt;
         StringBuilder sb = new StringBuilder();

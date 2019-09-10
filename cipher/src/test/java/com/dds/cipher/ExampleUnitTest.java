@@ -1,5 +1,6 @@
 package com.dds.cipher;
 
+import com.dds.cipher.javaImpl.JavaAES;
 import com.dds.cipher.javaImpl.JavaMd5;
 
 import org.junit.Test;
@@ -24,5 +25,20 @@ public class ExampleUnitTest {
         String s2 = javaMd5.Md5Twice("123456");
         System.out.println("md5 twice 16:" + s2.substring(8, 24));
         System.out.println("md5 twice 32:" + s2);
+    }
+
+    @Test
+    public void aes() {
+
+        AES cipher = new JavaAES(32);
+
+        String text = "哈哈哈";
+        String key = "123456";
+        String s = cipher.encText(text, key);
+        System.out.println("src:" + text + ",key：" + key);
+        System.out.println("加密 result:" + s);
+
+        String s1 = cipher.decText(s, key, 32);
+        System.out.println("解密 result:" + s1);
     }
 }
