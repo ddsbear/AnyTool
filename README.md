@@ -1,35 +1,36 @@
-# Overide
+# Override
 Here is a record of the common problems encountered in Android development and how they have been solved elegantly and simply
 
-本项目旨在优雅的解决Android开发中遇到的各种问题，制作出开发过程中所需要的各种工具
-
-为你的开源节省时间
+本项目旨在优雅的解决Android开发中遇到的各种问题
 
 ## feature
 
 - 基于androidx
-- 模块分离
-- 没事就更新，升级快
+- 模块分离，需要哪个功能就拷贝哪个
+- 每一个问题都会配有一篇文章
+- 请注意，这不仅仅是轮子
 
-## 1. library
+## Module
 
-这里主要是一些工具类：[跳转到详细介绍](any1_library/README.md)
+下面是各个模块的功能介绍，每个功能都介绍的非常详细
 
-- 权限请求类 Permissions（超简单使用和集成）
+### 1.any_library
 
-- Hook私有类方法类Hack
-
-- 一些简单的Dialog和Toast以及SnackBar
-
-- 代理模式封装网络请求模块 net
-
-- 代理模式封装图片显示模块 image
-
-  
+这里放了一些常用的工具类
 
 
 
-## 2. dbframework
+相关文章
+
+- [优雅的解决Android运行时权限问题](yellow/优雅的解决Android运行时权限问题.md)
+- 优雅的hook私有方法
+- 如何优雅的使用代理模式封装网络请求和图片加载
+
+
+
+
+
+### 2. dbframework
 
 手撸数据库框架
 
@@ -39,20 +40,20 @@ Here is a record of the common problems encountered in Android development and h
 
 
 
-## 3. UI
+### 3. UI
 
 1. 大图拖拽返回效果实现
 
 
-## 4. git教程
+### 4. git教程
    [git教程](git_markdown/git_markdown.pptx)
 
-## 5. 网络相关
+### 5. 网络相关
 
     [Android 生成p10请求]()
-
+    
     [Android 合成p12证书]()
-
+    
     [okHttp单向和双向请求]()
 
 

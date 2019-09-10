@@ -1,29 +1,32 @@
-package com.utils.library.permission;
+优雅的解决Android6.0运行时权限问题
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Process;
+之前遇到6.0运行时权限问题的时候每次都要写一次`requestPermissions`和`checkPermission`或者`shouldShowRequestPermissionRationale`，然后在Activity的`onRequestPermissionsResult`的回调里的处理结果，每次都好烦。
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.core.content.ContextCompat;
+看了第三方的请求权限的封装，每一个都好麻烦，各种反射各种无用的代码
 
-import java.util.ArrayList;
-import java.util.List;
+突然发现了一种优雅的方式进行权限请求
 
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static android.os.Build.VERSION_CODES.M;
+这是我见过的最清新的解决方案了
 
-/**
- * Permission-related helpers
- */
+调用方式如下：
+
+```java
+ Permissions.request(this, new String[]{
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA}, integer -> {
+            if (integer == PackageManager.PERMISSION_GRANTED) {
+                Toasts.showShort(MainActivity.this, "成功accept : " + integer);
+            } else {
+                Toasts.showShort(MainActivity.this, "失败accept : " + integer);
+            }
+        });
+```
+
+
+
+完整代码如下
+
+```java
 public class Permissions {
 
 
@@ -145,21 +148,18 @@ public class Permissions {
         Consumer<Integer> mCallback;
     }
 
-    /**
-     * Represents an operation that accepts a single input argument and returns no
-     * result. Unlike most other functional interfaces, {@code Consumer} is expected
-     * to operate via side-effects.
-     *
-     * @param <T> the type of the input to the operation
-     */
+   
     public interface Consumer<T> {
-
-        /**
-         * Performs this operation on the given argument.
-         *
-         * @param t the input argument
-         */
         void accept(T t);
     }
 
 }
+
+```
+
+
+
+## 代码收录
+
+[https://github.com/ddssingsong/AnyTool](https://github.com/ddssingsong/AnyTool)
+

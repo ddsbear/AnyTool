@@ -14,7 +14,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.utils.library.snack.WebContent;
 
 /**
- * @author Oasis
+ * @author dds
  */
 public class SnackBars {
 

@@ -9,9 +9,9 @@ import java.io.File;
  * Created by dds on 2019/9/9.
  * android_shuai@163.com
  */
-public class FileUtil {
+public class FileDirUtil {
 
-    private FileUtil() {
+    private FileDirUtil() {
     }
 
 
@@ -23,6 +23,8 @@ public class FileUtil {
     }
 
     /**
+     * 程序系统文件目录绝对路径
+     *
      * @param context    上下文
      * @param customPath 自定义路径
      * @return 程序系统文件目录绝对路径
@@ -32,7 +34,6 @@ public class FileUtil {
         mkdir(path);
         return path;
     }
-
 
     /**
      * @return 程序系统缓存目录

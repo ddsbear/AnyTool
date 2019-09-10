@@ -14,7 +14,7 @@ import androidx.annotation.StringRes;
 import static android.os.Build.VERSION_CODES.LOLLIPOP;
 
 /**
- * @author Oasis
+ * @author dds
  */
 @RequiresApi(LOLLIPOP)
 public class Dialogs {
