@@ -22,7 +22,7 @@ Here is a record of the common problems encountered in Android development and h
 
 相关文章
 
-- [优雅的解决Android运行时权限问题](yellow/优雅的解决Android运行时权限问题.md)
+- [优雅的解决Android运行时权限问题](any_library/yellow/优雅的解决Android运行时权限问题.md)
 - 优雅的hook私有方法
 - 如何优雅的使用代理模式封装网络请求和图片加载
 
