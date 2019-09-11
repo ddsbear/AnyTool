@@ -41,7 +41,7 @@ public class JavaAES implements AES {
     }
 
     @Override
-    public long encFile(String inputFileUrl, String outFileUrl, String sKey) {
+    public long encFile(String inputFile, String outFile, String sKey) {
         return 0;
     }
 

@@ -50,11 +50,19 @@ Here is a record of the common problems encountered in Android development and h
 
 ### 5. 网络相关
 
-    [Android 生成p10请求]()
-    
-    [Android 合成p12证书]()
-    
-    [okHttp单向和双向请求]()
+```
+[Android 生成p10请求]()
+
+[Android 合成p12证书]()
+
+[okHttp单向和双向请求]()
+```
+
+相关文章
+
+- [keytool命令详解--学习自签名证书就看这篇](cipher/yellow/keytool命令详解.md)
+
+  
 
 
 

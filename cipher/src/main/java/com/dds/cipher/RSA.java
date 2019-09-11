@@ -11,18 +11,18 @@ public interface RSA {
 
     KeyPair generateAsymmetricKey();
 
-    String encByPubKey(String content, String pubKey,String pwd);
+    String encByPubKey(String content, String pubKey);
 
     String decByPriKey(String content, String priKey, String pwd);
 
-    public class KeyPair {
+    class KeyPair {
         public KeyPair(String priKey, String pubKey) {
             this.priKey = priKey;
             this.pubKey = pubKey;
         }
 
-        public String priKey;
-        public String pubKey;
+        String priKey;
+        String pubKey;
 
     }
 
