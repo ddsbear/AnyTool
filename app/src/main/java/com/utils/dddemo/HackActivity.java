@@ -8,7 +8,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.utils.dddemo.hack.HackDemo;
-import com.utils.library.Hack;
+import com.utils.library.hack.Hack;
 import com.utils.library.Toasts;
 
 import java.io.FileNotFoundException;

@@ -1,12 +1,11 @@
-package com.utils.library;
+package com.utils.library.hack;
 
 
 import androidx.annotation.CheckResult;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.utils.library.hack.Supplier;
-import com.utils.library.hack.Suppliers;
+import com.utils.library.BuildConfig;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;

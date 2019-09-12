@@ -16,18 +16,18 @@ public class FileDirUtil {
 
 
     /**
-     * @return 程序系统文件目录
+     * 沙箱 默认文件存储路径  data/data/file
      */
     public static String getFileDir(Context context) {
         return String.valueOf(context.getFilesDir());
     }
 
     /**
-     * 程序系统文件目录绝对路径
+     * 沙箱 程序系统文件目录绝对路径 data/data/file/customPath
      *
-     * @param context    上下文
-     * @param customPath 自定义路径
-     * @return 程序系统文件目录绝对路径
+     * @param context    context
+     * @param customPath customPath
+     * @return data/data/file/customPath
      */
     public static String getFileDir(Context context, String customPath) {
         String path = context.getFilesDir() + formatPath(customPath);
@@ -43,9 +43,10 @@ public class FileDirUtil {
     }
 
     /**
+     * 程序系统缓存目录 中自定义路径
      * @param context    上下文
      * @param customPath 自定义路径
-     * @return 程序系统缓存目录
+     * @return /data/app/pkg/cache
      */
     public static String getCacheDir(Context context, String customPath) {
         String path = context.getCacheDir() + formatPath(customPath);

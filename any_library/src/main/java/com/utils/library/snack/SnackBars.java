@@ -1,4 +1,4 @@
-package com.utils.library;
+package com.utils.library.snack;
 
 import android.content.ServiceConnection;
 import android.net.Uri;
@@ -11,6 +11,7 @@ import androidx.browser.customtabs.CustomTabsSession;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
+import com.utils.library.R;
 import com.utils.library.snack.WebContent;
 
 /**

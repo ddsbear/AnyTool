@@ -9,7 +9,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.utils.library.SnackBars;
+import com.utils.library.snack.SnackBars;
 import com.utils.library.Toasts;
 
 public class ToastActivity extends AppCompatActivity {
