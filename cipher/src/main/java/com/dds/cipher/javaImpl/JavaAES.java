@@ -22,7 +22,9 @@ public class JavaAES implements AES {
     @Override
     public String encText(String sSrc, String sKey) {
         try {
-            return AESCrypt.encrypt(sKey, sSrc);
+            return AESCrypt.encrypt(sKey, sSrc,
+                    false, null,
+                    "AES/ECB/NoPadding", null);
         } catch (GeneralSecurityException e) {
             e.printStackTrace();
         }
@@ -32,11 +34,12 @@ public class JavaAES implements AES {
     @Override
     public String decText(String sSrc, String sKey, int length) {
         try {
-            return AESCrypt.decrypt(sKey, sSrc);
+            return AESCrypt.decrypt(sKey, sSrc,
+                    false, null,
+                    "AES/ECB/NoPadding", null);
         } catch (GeneralSecurityException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 

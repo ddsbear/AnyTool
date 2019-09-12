@@ -2,6 +2,7 @@ package com.dds.cipher.aes;
 
 import android.util.Log;
 
+import com.dds.cipher.BuildConfig;
 import com.dds.cipher.base64.Base64;
 
 import java.io.UnsupportedEncodingException;
@@ -23,6 +24,7 @@ public class AESCrypt {
     //AESCrypt-ObjC uses CBC and PKCS7Padding
     private static final String AES_MODE_CBC = "AES/CBC/PKCS7Padding";
     private static final String AES_MODE_ECB = "AES/ECB/NoPadding";
+
     private static final String CHARSET = "UTF-8";
 
     //AESCrypt-ObjC uses SHA-256 (and so a 256-bit key)
@@ -36,23 +38,31 @@ public class AESCrypt {
             0x00, 0x00, 0x00, 0x00};
 
     //togglable log option (please turn off in live!)
-    public static boolean DEBUG_LOG_ENABLED = true;
+    public static boolean DEBUG_LOG_ENABLED = BuildConfig.DEBUG;
 
 
     /**
-     * Generates SHA256 hash of the password which is used as key
+     * Generates hash of the password which is used as key
      *
-     * @param password used to generated key
-     * @return SHA256 of the password
+     * @param password   password
+     * @param needDigest true:Generates hash of the password  false:no deal
+     * @param algorithm  SHA1/SHA-256/MD5
+     * @return SecretKeySpec
      */
-    private static SecretKeySpec generateKey(final String password)
+    private static SecretKeySpec generateKey(final String password, boolean needDigest, String algorithm)
             throws NoSuchAlgorithmException, UnsupportedEncodingException {
-//        final MessageDigest digest = MessageDigest.getInstance(HASH_ALGORITHM);
-        byte[] bytes = password.getBytes(CHARSET);
-//        digest.update(bytes, 0, bytes.length);
-//        byte[] key = digest.digest();
+        byte[] bytes;
+        if (needDigest) {
+            final MessageDigest digest = MessageDigest.getInstance(algorithm);
+            byte[] bytesPwd = password.getBytes(CHARSET);
+            digest.update(bytesPwd, 0, bytesPwd.length);
+            bytes = digest.digest();
+            log(algorithm + " key ", bytes);
+        } else {
+            bytes = password.getBytes(CHARSET);
+            log(algorithm + " key ", bytes);
+        }
 
-//        log("SHA-256 key ", key);
 
         return new SecretKeySpec(bytes, "AES");
     }
@@ -61,24 +71,27 @@ public class AESCrypt {
     /**
      * Encrypt and encode message using 256-bit AES with key generated from password.
      *
-     * @param password used to generated key
-     * @param message  the thing you want to encrypt assumed String UTF-8
+     * @param password   used to generated key
+     * @param message    the thing you want to encrypt assumed String UTF-8
+     * @param needDigest true:Generates hash of the password  false:no deal
+     * @param algorithm  SHA1/SHA-256/MD5
      * @return Base64 encoded CipherText
      * @throws GeneralSecurityException if problems occur during encryption
      */
-    public static String encrypt(final String password, String message)
+    public static String encrypt(final String password, String message, boolean needDigest,
+                                 String algorithm, String aes_mode, final byte[] iv)
             throws GeneralSecurityException {
 
         try {
-            final SecretKeySpec key = generateKey(password);
+            final SecretKeySpec key = generateKey(password, needDigest, algorithm);
 
             log("message", message);
 
-            byte[] cipherText = encrypt(key, ivBytes, message.getBytes(CHARSET));
+            byte[] cipherText = encrypt(key, message.getBytes(CHARSET), iv, aes_mode);
 
-            //NO_WRAP is important as was getting \n at the end
             String encoded = new String(Base64.encode(cipherText));
-            log("Base64.NO_WRAP", encoded);
+
+            log("Base64 encode", encoded);
             return encoded;
         } catch (UnsupportedEncodingException e) {
             if (DEBUG_LOG_ENABLED)
@@ -97,15 +110,17 @@ public class AESCrypt {
      * @return Encrypted cipher text (not encoded)
      * @throws GeneralSecurityException if something goes wrong during encryption
      */
-    public static byte[] encrypt(final SecretKeySpec key, final byte[] iv, final byte[] message)
+    public static byte[] encrypt(final SecretKeySpec key, final byte[] message, final byte[] iv, String aes_mode)
             throws GeneralSecurityException {
-        final Cipher cipher = Cipher.getInstance(AES_MODE_ECB);
-        IvParameterSpec ivSpec = new IvParameterSpec(iv);
-        cipher.init(Cipher.ENCRYPT_MODE, key);
+        final Cipher cipher = Cipher.getInstance(aes_mode);
+        if (aes_mode.contains("CBC")) {
+            IvParameterSpec ivSpec = new IvParameterSpec(iv);
+            cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec);
+        } else {
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+        }
         byte[] cipherText = cipher.doFinal(message);
-
         log("cipherText", cipherText);
-
         return cipherText;
     }
 
@@ -118,17 +133,18 @@ public class AESCrypt {
      * @return message in Plain text (String UTF-8)
      * @throws GeneralSecurityException if there's an issue decrypting
      */
-    public static String decrypt(final String password, String base64EncodedCipherText)
+    public static String decrypt(final String password, String base64EncodedCipherText, boolean needDigest,
+                                 String algorithm, String aes_mode, final byte[] iv)
             throws GeneralSecurityException {
 
         try {
-            final SecretKeySpec key = generateKey(password);
+            final SecretKeySpec key = generateKey(password, needDigest, algorithm);
 
             log("base64EncodedCipherText", base64EncodedCipherText);
             byte[] decodedCipherText = Base64.decode(base64EncodedCipherText.getBytes());
             log("decodedCipherText", decodedCipherText);
 
-            byte[] decryptedBytes = decrypt(key, ivBytes, decodedCipherText);
+            byte[] decryptedBytes = decrypt(key, decodedCipherText, ivBytes, aes_mode);
 
             log("decryptedBytes", decryptedBytes);
             String message = new String(decryptedBytes);
@@ -155,11 +171,15 @@ public class AESCrypt {
      * @return Decrypted message cipher text (not encoded)
      * @throws GeneralSecurityException if something goes wrong during encryption
      */
-    public static byte[] decrypt(final SecretKeySpec key, final byte[] iv, final byte[] decodedCipherText)
+    public static byte[] decrypt(final SecretKeySpec key, final byte[] decodedCipherText, final byte[] iv, String aes_mode)
             throws GeneralSecurityException {
-        final Cipher cipher = Cipher.getInstance(AES_MODE_ECB);
-        IvParameterSpec ivSpec = new IvParameterSpec(iv);
-        cipher.init(Cipher.DECRYPT_MODE, key);
+        final Cipher cipher = Cipher.getInstance(aes_mode);
+        if (aes_mode.contains("CBC")) {
+            IvParameterSpec ivSpec = new IvParameterSpec(iv);
+            cipher.init(Cipher.DECRYPT_MODE, key, ivSpec);
+        } else {
+            cipher.init(Cipher.DECRYPT_MODE, key);
+        }
         byte[] decryptedBytes = cipher.doFinal(decodedCipherText);
 
         log("decryptedBytes", decryptedBytes);

@@ -2,13 +2,19 @@ package com.dds.cipher;
 
 import android.content.Context;
 
-import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import java.io.File;
+import java.io.FileInputStream;
+
+import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -23,5 +29,28 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
         assertEquals("com.dds.cipher.test", appContext.getPackageName());
+    }
+
+
+
+    @Test
+    public void testAES() throws Exception {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+
+        String content = "123456";
+        String key = "12345678901234567890123456789012";
+
+
+
+
+
+
+
+        Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
+        String filePath = "";
+        File file = new File(filePath);
+        FileInputStream fileInputStream = new FileInputStream(file);
+        CipherInputStream inputStream = new CipherInputStream(fileInputStream, cipher);
+
     }
 }
