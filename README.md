@@ -14,17 +14,22 @@ Here is a record of the common problems encountered in Android development and h
 
 下面是各个模块的功能介绍，每个功能都介绍的非常详细
 
-### 1.any_library
+### 1. any_library
 
 这里放了一些常用的工具类
 
 - File相关
 
-  [FileDirUtil.java](any_library/src/main/java/com/utils/library/file/FileDirUtil.java)  文件目录工具
+  [FileDirUtil.java](any_library/src/main/java/com/utils/library/file/FileDirUtil.java)    文件目录工具
+  
+  - 获取沙箱内文件路径
+  - 获取外部存储文件路径
+  - 获取缓存目录
+  - 获取下载目录
+  
+- [Fileutils.java](any_library/src/main/java/com/utils/library/file/FileUtils.java)    文件操作工具
 
-
-
-
+  - 文件增、删、改、查、写入、各种骚操作
 
 
 
