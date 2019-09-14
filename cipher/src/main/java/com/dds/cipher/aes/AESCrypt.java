@@ -2,7 +2,6 @@ package com.dds.cipher.aes;
 
 import android.util.Log;
 
-import com.dds.cipher.BuildConfig;
 import com.dds.cipher.base64.Base64;
 
 import java.io.UnsupportedEncodingException;
@@ -19,16 +18,8 @@ import javax.crypto.spec.SecretKeySpec;
  * android_shuai@163.com
  */
 public class AESCrypt {
-    private static final String TAG = "AESCrypt";
-
-    //AESCrypt-ObjC uses CBC and PKCS7Padding
-    private static final String AES_MODE_CBC = "AES/CBC/PKCS7Padding";
-    private static final String AES_MODE_ECB = "AES/ECB/NoPadding";
-
+    private static final String TAG = "dds_test";
     private static final String CHARSET = "UTF-8";
-
-    //AESCrypt-ObjC uses SHA-256 (and so a 256-bit key)
-    private static final String HASH_ALGORITHM = "SHA-256";
 
     //AESCrypt-ObjC uses blank IV (not the best security, but the aim here is compatibility)
     private static final byte[] ivBytes = {
@@ -38,7 +29,7 @@ public class AESCrypt {
             0x00, 0x00, 0x00, 0x00};
 
     //togglable log option (please turn off in live!)
-    public static boolean DEBUG_LOG_ENABLED = BuildConfig.DEBUG;
+    public static boolean DEBUG_LOG_ENABLED = true;
 
 
     /**
@@ -198,14 +189,7 @@ public class AESCrypt {
             Log.d(TAG, what + "[" + value.length() + "] [" + value + "]");
     }
 
-
-    /**
-     * Converts byte array to hexidecimal useful for logging and fault finding
-     *
-     * @param bytes
-     * @return
-     */
-    private static String bytesToHex(byte[] bytes) {
+    public static String bytesToHex(byte[] bytes) {
         final char[] hexArray = {'0', '1', '2', '3', '4', '5', '6', '7', '8',
                 '9', 'A', 'B', 'C', 'D', 'E', 'F'};
         char[] hexChars = new char[bytes.length * 2];

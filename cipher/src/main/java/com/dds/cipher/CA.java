@@ -2,26 +2,13 @@ package com.dds.cipher;
 
 
 import android.os.Environment;
-import android.util.Log;
 
 import com.dds.cipher.base64.Base64;
 
-import org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import org.bouncycastle.asn1.x500.X500Name;
-import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
-import org.bouncycastle.asn1.x509.BasicConstraints;
-import org.bouncycastle.asn1.x509.Extension;
-import org.bouncycastle.asn1.x509.ExtensionsGenerator;
-import org.bouncycastle.asn1.x509.KeyUsage;
-import org.bouncycastle.crypto.params.AsymmetricKeyParameter;
-import org.bouncycastle.crypto.util.PrivateKeyFactory;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.openssl.PEMWriter;
+import org.bouncycastle.openssl.jcajce.JcaPEMWriter;
 import org.bouncycastle.operator.ContentSigner;
-import org.bouncycastle.operator.DefaultDigestAlgorithmIdentifierFinder;
-import org.bouncycastle.operator.DefaultSignatureAlgorithmIdentifierFinder;
-import org.bouncycastle.operator.OperatorCreationException;
-import org.bouncycastle.operator.bc.BcRSAContentSignerBuilder;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 import org.bouncycastle.pkcs.PKCS10CertificationRequest;
 import org.bouncycastle.pkcs.PKCS10CertificationRequestBuilder;
@@ -184,20 +171,30 @@ public class CA {
 
     // 生成p10证书
     public static String generatePKCS10(KeyPair keyPair) throws Exception {
+        // 证书签名算法
         String sigAlg = "SHA256withRSA";
+        // 各种基本信息
         String params = "CN=CN,OU=Trustmobi,O=client3,L=BJ2";
+
+        // CN和公钥
         PKCS10CertificationRequestBuilder p10Builder = new JcaPKCS10CertificationRequestBuilder(
-                new X500Name(params), keyPair.getPublic());// CN和公钥
-        JcaContentSignerBuilder csBuilder = new JcaContentSignerBuilder(sigAlg);// 签名算法
+                new X500Name(params), keyPair.getPublic());
+        // 签名算法
+        JcaContentSignerBuilder csBuilder = new JcaContentSignerBuilder(sigAlg);
         csBuilder.setProvider(new BouncyCastleProvider());
+
         ContentSigner signer = csBuilder.build(keyPair.getPrivate());
+        // 生成PKCS10的二进制编码格式(ber/der)
         PKCS10CertificationRequest p10 = p10Builder.build(signer);
+
+        //将二进制格式转换为证书格式(csr)
         PemObject pemObject = new PemObject("CERTIFICATE REQUEST", p10.getEncoded());
         StringWriter str = new StringWriter();
-        PEMWriter pemWriter = new PEMWriter(str);
-        pemWriter.writeObject(pemObject);
-        pemWriter.close();
+        JcaPEMWriter jcaPEMWriter = new JcaPEMWriter(str);
+        jcaPEMWriter.writeObject(pemObject);
+        jcaPEMWriter.close();
         str.close();
+        // base64便于网络传输
         return Base64.encode(str.toString());
     }
 
@@ -218,50 +215,12 @@ public class CA {
     public static void storeP12(PrivateKey pri, String p7, String p12Path, String p12Password) throws Exception {
         CertificateFactory factory = CertificateFactory.getInstance("X509");
         X509Certificate p7X509 = (X509Certificate) factory.generateCertificate(new ByteArrayInputStream(p7.getBytes()));
-        pri.getEncoded();
         Certificate[] chain = new Certificate[]{p7X509};
         KeyStore ks = KeyStore.getInstance("PKCS12", "BC");
         ks.load(null, null);
         ks.setKeyEntry("private", pri, p12Password.toCharArray(), chain);
         FileOutputStream fOut = new FileOutputStream(p12Path);
         ks.store(fOut, p12Password.toCharArray());
-    }
-
-    public static String parseCertDN(String dn, String type) {
-        type = type + "=";
-        String[] split = dn.split(",");
-        for (String x : split) {
-            if (x.contains(type)) {
-                x = x.trim();
-                return x.substring(type.length());
-            }
-        }
-        return null;
-    }
-
-    public static String generateCSRFile(KeyPair keyPair) throws IOException, OperatorCreationException {
-        String principal = "CN = CN，OU = Trustmobi，O = client3，L = BJ2";
-        AsymmetricKeyParameter privateKey = PrivateKeyFactory.createKey(keyPair.getPrivate().getEncoded());
-        AlgorithmIdentifier signatureAlgorithm = new DefaultSignatureAlgorithmIdentifierFinder().find("SHA256withRSA");
-        AlgorithmIdentifier digestAlgorithm = new DefaultDigestAlgorithmIdentifierFinder().find("SHA-256");
-        ContentSigner signer = new BcRSAContentSignerBuilder(signatureAlgorithm, digestAlgorithm).build(privateKey);
-
-        PKCS10CertificationRequestBuilder csrBuilder = new JcaPKCS10CertificationRequestBuilder(new X500Name(principal), keyPair.getPublic());
-        ExtensionsGenerator extensionsGenerator = new ExtensionsGenerator();
-        extensionsGenerator.addExtension(Extension.basicConstraints, true, new BasicConstraints(true));
-        extensionsGenerator.addExtension(Extension.keyUsage, true, new KeyUsage(KeyUsage.keyCertSign | KeyUsage.cRLSign));
-        csrBuilder.addAttribute(PKCSObjectIdentifiers.pkcs_9_at_extensionRequest, extensionsGenerator.generate());
-        PKCS10CertificationRequest csr = csrBuilder.build(signer);
-
-
-        String code = "-----BEGIN CERTIFICATE REQUEST-----\n";
-        code += new String(Base64.encode(csr.getEncoded()));
-        code += "\n-----END CERTIFICATE REQUEST----";
-
-        Log.e("dds_test", code);
-
-
-        return Base64.encode(code);
     }
 
 
