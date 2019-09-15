@@ -81,7 +81,7 @@ Here is a record of the common problems encountered in Android development and h
 
 - [Android 生成pkcs10(csr)请求](cipher/yellow/PKCS10.md)
 
-- [Android 合成pkcs12证书](cipher/yellow/PKCS10.md)
+- [Android 合成pkcs12证书](cipher/yellow/PKCS12.md)
 
   
 

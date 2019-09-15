@@ -75,8 +75,16 @@ public class AESCrypt {
 
         try {
             final SecretKeySpec key = generateKey(password, needDigest, algorithm);
-
-            log("message", message);
+            //不足16的倍数补空格
+            if (message.getBytes().length % 16 != 0) {
+                int tem = message.getBytes().length % 16;
+                StringBuilder messageBuilder = new StringBuilder(message);
+                for (int i = 0; i < 16 - tem; i++) {
+                    messageBuilder.append(" ");
+                }
+                message = messageBuilder.toString();
+            }
+            log("input message", message);
 
             byte[] cipherText = encrypt(key, message.getBytes(CHARSET), iv, aes_mode);
 
@@ -111,7 +119,7 @@ public class AESCrypt {
             cipher.init(Cipher.ENCRYPT_MODE, key);
         }
         byte[] cipherText = cipher.doFinal(message);
-        log("cipherText", cipherText);
+        log("cipherText hex", cipherText);
         return cipherText;
     }
 
@@ -137,10 +145,9 @@ public class AESCrypt {
 
             byte[] decryptedBytes = decrypt(key, decodedCipherText, ivBytes, aes_mode);
 
-            log("decryptedBytes", decryptedBytes);
             String message = new String(decryptedBytes);
 
-            log("message", message);
+            log("output message", message);
 
 
             return message;
@@ -173,7 +180,7 @@ public class AESCrypt {
         }
         byte[] decryptedBytes = cipher.doFinal(decodedCipherText);
 
-        log("decryptedBytes", decryptedBytes);
+        log("decrypted text hex", decryptedBytes);
 
         return decryptedBytes;
     }

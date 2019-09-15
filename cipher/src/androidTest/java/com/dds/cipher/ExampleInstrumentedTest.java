@@ -33,27 +33,28 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testAES() throws Exception {
-        String content = "1234567890123456";
-        String key = "GAOQXQQ99QPKOMTZE9YF96OLTD8EU6T9";
+        String content = "欢迎来到chacuo.net";
+        String key = "123456";
 
 
         // 1. NoPadding 加密的内容必须是16的倍数
-        // 2.
 
 
         String encrypt = AESCrypt.encrypt(key, content,
-                false, null,
+                true, "SHA-256",
                 "AES/ECB/NoPadding", null);
+
+
 
         Log.d(TAG, "加密出内容：" + encrypt);
 
         String result = AESCrypt.decrypt(key, encrypt,
-                false, null,
+                true, "SHA-256",
                 "AES/ECB/NoPadding", null);
 
         Log.d(TAG, "解密出内容：" + result);
 
-        assertEquals(result, content);
+        assertEquals(result.trim(), content);
 
 
     }
