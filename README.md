@@ -79,7 +79,9 @@ Here is a record of the common problems encountered in Android development and h
 
 - [keytool命令详解--学习自签名证书就看这篇](cipher/yellow/keytool命令详解.md)
 
-- [Android端生成pkcs10请求]()
+- [Android 生成pkcs10(csr)请求](cipher/yellow/PKCS10.md)
+
+- [Android 合成pkcs12证书](cipher/yellow/PKCS10.md)
 
   
 
