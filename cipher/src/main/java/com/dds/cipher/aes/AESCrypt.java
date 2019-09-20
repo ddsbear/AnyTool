@@ -75,15 +75,18 @@ public class AESCrypt {
 
         try {
             final SecretKeySpec key = generateKey(password, needDigest, algorithm);
-            //不足16的倍数补空格
-            if (message.getBytes().length % 16 != 0) {
-                int tem = message.getBytes().length % 16;
-                StringBuilder messageBuilder = new StringBuilder(message);
-                for (int i = 0; i < 16 - tem; i++) {
-                    messageBuilder.append(" ");
+            if(aes_mode.contains("NoPadding")){
+                //不足16的倍数补空格
+                if (message.getBytes().length % 16 != 0) {
+                    int tem = message.getBytes().length % 16;
+                    StringBuilder messageBuilder = new StringBuilder(message);
+                    for (int i = 0; i < 16 - tem; i++) {
+                        messageBuilder.append(" ");
+                    }
+                    message = messageBuilder.toString();
                 }
-                message = messageBuilder.toString();
             }
+
             log("input message", message);
 
             byte[] cipherText = encrypt(key, message.getBytes(CHARSET), iv, aes_mode);

@@ -63,7 +63,10 @@ Here is a record of the common problems encountered in Android development and h
 
 
 ### 4. git教程
-   [git教程](git_markdown/git_markdown.pptx)
+- [一套完整git的PPT教程](git_markdown/git_markdown.pptx)
+- [git合并多个commit](git_markdown/git合并多个commit.md)
+
+
 
 ### 5. 网络相关
 

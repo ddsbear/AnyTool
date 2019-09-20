@@ -37,13 +37,12 @@ public class ExampleInstrumentedTest {
         String key = "123456";
 
 
+        //========================NoPadding test ==================================
         // 1. NoPadding 加密的内容必须是16的倍数
-
 
         String encrypt = AESCrypt.encrypt(key, content,
                 true, "SHA-256",
                 "AES/ECB/NoPadding", null);
-
 
 
         Log.d(TAG, "加密出内容：" + encrypt);
@@ -56,6 +55,40 @@ public class ExampleInstrumentedTest {
 
         assertEquals(result.trim(), content);
 
+        //========================PKCS5Padding test ==================================
+
+        String encrypt1 = AESCrypt.encrypt(key, content,
+                true, "SHA-256",
+                "AES/ECB/PKCS5Padding", null);
+
+
+        Log.d(TAG, "加密出内容：" + encrypt1);
+
+        String result1 = AESCrypt.decrypt(key, encrypt1,
+                true, "SHA-256",
+                "AES/ECB/PKCS5Padding", null);
+
+        Log.d(TAG, "解密出内容：" + result1);
+
+        assertEquals(result1.trim(), content);
+        //========================PKCS7Padding test ==================================
+
+        // 1. pkcs7padding和pkcs5padding的区别在于pkcs7padding的块大小不固定
+
+        String encrypt2 = AESCrypt.encrypt(key, content,
+                true, "SHA-256",
+                "AES/ECB/PKCS7Padding", null);
+
+
+        Log.d(TAG, "加密出内容：" + encrypt2);
+
+        String result2 = AESCrypt.decrypt(key, encrypt2,
+                true, "SHA-256",
+                "AES/ECB/PKCS7Padding", null);
+
+        Log.d(TAG, "解密出内容：" + result2);
+
+        assertEquals(result2.trim(), content);
 
     }
 }
