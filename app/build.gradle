@@ -41,7 +41,7 @@ dependencies {
     implementation 'net.sourceforge.streamsupport:android-retrostreams:1.7.1'
     implementation 'net.sourceforge.streamsupport:android-retrofuture:1.7.1'
     implementation project(path: ':any_library')
-    implementation project(path: ':dblibrary')
+    implementation project(path: ':any_db_litepal')
     implementation project(path: ':jetpack')
     implementation project(path: ':cameraview')
     implementation project(path: ':videoplayer')
