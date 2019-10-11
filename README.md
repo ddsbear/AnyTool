@@ -24,26 +24,21 @@ Here is a record of the common problems encountered in Android development and h
 
   [FileDirUtil.java](any_library/src/main/java/com/utils/library/file/FileDirUtil.java)    文件目录工具
   
-  - 获取沙箱内文件路径
-  - 获取外部存储文件路径
-  - 获取缓存目录
-  - 获取下载目录
-  
-  [Fileutils.java](any_library/src/main/java/com/utils/library/file/FileUtils.java)    文件操作工具
-  
-  - 文件增、删、改、查、写入、各种骚操作
+  [Fileutils.java](any_library/src/main/java/com/utils/library/file/FileUtils.java)        文件操作工具
   
 - io相关
 
+  [IoUtils.java](any_library/src/main/java/com/utils/library/io/IoUtils.java)
   
+- 动态权限相关
+
+  [Permissions.java](any_library/src/main/java/com/utils/library/permission/Permissions.java)   动态权限请求类
 
 **相关文章**
 
 - [优雅的解决Android运行时权限问题](any_library/yellow/优雅的解决Android运行时权限问题.md)
 - 优雅的hook私有方法
 - 如何优雅的使用代理模式封装网络请求和图片加载
-
-
 
 
 
@@ -57,18 +52,14 @@ Here is a record of the common problems encountered in Android development and h
 
 
 
-### 3. UI
 
-1. 大图拖拽返回效果实现
-
-
-### 4. git教程
+### 3. git教程
 - [一套完整git的PPT教程](git_markdown/git_markdown.pptx)
 - [git合并多个commit](git_markdown/git合并多个commit.md)
 
 
 
-### 5. 网络相关
+### 4. 网络相关
 
 ```
 [Android 生成p10请求]()
@@ -88,7 +79,7 @@ Here is a record of the common problems encountered in Android development and h
 
   
 
-### 6. 加解密相关
+### 5. 加解密相关
 
 
 
