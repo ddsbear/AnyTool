@@ -8,7 +8,6 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dds.jetpack.JetPackActivity;
-import com.dds.uilibrary.UILibraryActivity;
 import com.utils.library.Toasts;
 import com.utils.library.permission.Permissions;
 
@@ -82,9 +81,7 @@ public class MainActivity extends AppCompatActivity {
         DBFrameworkActivity.openActivity(this);
     }
 
-    // UI仓库
     public void onUILibrary(View view) {
-        UILibraryActivity.openActivity(this);
     }
 
     // 测试网络

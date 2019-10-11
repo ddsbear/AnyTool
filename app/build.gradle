@@ -46,7 +46,6 @@ dependencies {
     implementation project(path: ':cameraview')
     implementation project(path: ':videoplayer')
     implementation project(path: ':any_dbframwork')
-    implementation project(path: ':uilibrary')
     implementation project(path: ':cipher')
     implementation project(path: ':any_rxlibrary')
     implementation project(path: ':any_library_impl')

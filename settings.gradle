@@ -1,1 +1,5 @@
-include ':app', ':any_library',':any_db_library', ':any_db_litepal', ':jetpack', ':cameraview', ':videoplayer', ':any_dbframwork', ':uilibrary', ':cipher', ':any_rxlibrary', ':any_library_impl'
+include ':app', ':any_library', ':any_library_impl', ':any_rxlibrary'
+include ':any_db_library', ':any_db_litepal', ':any_dbframwork'
+include ':cameraview', ':videoplayer'
+include ':jetpack'
+include ':cipher'
