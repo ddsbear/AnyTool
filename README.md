@@ -32,23 +32,31 @@ Here is a record of the common problems encountered in Android development and h
   
 - 动态权限相关
 
-  [Permissions.java](any_library/src/main/java/com/utils/library/permission/Permissions.java)   动态权限请求类
+  [Permissions.java](any_library/src/main/java/com/utils/library/permission/Permissions.java)   
   
-- 接口类log日志打印类
+- 接口类log日志打印接口类
 
-  [LogA.java](any_library/src/main/java/com/utils/library/log/LogA.java)  
+  [LogA.java](any_library/src/main/java/com/utils/library/log/LogA.java)
 
-  
+- 弹框类
+
+  [Toasts.java](any_library/src/main/java/com/utils/library/Toasts.java)
+
+  [Dialogs.java](any_library/src/main/java/com/utils/library/Dialogs.java)
+
+  [SnackBars.java](any_library/src/main/java/com/utils/library/snack/SnackBars.java)
+
+
 
 **相关文章**
 
 - [优雅的解决Android运行时权限问题](https://blog.csdn.net/u011077027/article/details/100694123)
-- 优雅的hook私有方法
+- [优雅的hook私有方法](https://blog.csdn.net/u011077027/article/details/102630313)
 - 如何优雅的使用代理模式封装网络请求和图片加载
 
 
 
-### 2. dbframework
+### 2. db
 
 手撸数据库框架
 
@@ -59,21 +67,11 @@ Here is a record of the common problems encountered in Android development and h
 
 
 
-### 3. git教程
-- [一套完整git的PPT教程](git_markdown/git_markdown.pptx)
-- [git合并多个commit](git_markdown/git合并多个commit.md)
 
 
+### 3. net 
 
-### 4. 网络相关
 
-```
-[Android 生成p10请求]()
-
-[Android 合成p12证书]()
-
-[okHttp单向和双向请求]()
-```
 
 相关文章
 
@@ -85,10 +83,17 @@ Here is a record of the common problems encountered in Android development and h
 
   
 
-### 5. 加解密相关
+### 4. cipher
 
 
 
 
+
+## tools
+
+### 1. git
+
+- [git  markdown教程  ppt](git_markdown/git_markdown/git_markdown.md)
+- [git合并多个commit为一个commit](git_markdown/git合并多个commit.md)
 
 

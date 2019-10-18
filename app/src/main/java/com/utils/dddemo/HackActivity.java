@@ -19,6 +19,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 public class HackActivity extends AppCompatActivity {
+    private Hack.AssertionException mFailure;
 
     public static void openActivity(Activity activity) {
         Intent intent = new Intent(activity, HackActivity.class);
@@ -136,7 +137,6 @@ public class HackActivity extends AppCompatActivity {
 
     }
 
-    private Hack.AssertionException mFailure;
 
     private void assertFail(final Class<? extends Throwable> failure, final Object hack) {
         assertNull(hack);

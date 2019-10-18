@@ -1,27 +1,55 @@
 package com.utils.dddemo.hack;
 
-import java.io.IOException;
+import android.util.Log;
 
-/**
- * Created by dds on 2019/5/31.
- * android_shuai@163.com
- */
+import com.utils.library.log.LogA;
+
 public class HackDemo {
-
     private int mIntField;
+    private String mStr;
 
-    private HackDemo(final int x) throws IOException {
-        mIntField = x;
+    private static String staticField = "dds";
+
+    private HackDemo() {
+        Log.d("dds_test", "constructor");
     }
 
+    private HackDemo(int x) {
+        mIntField = x;
+        Log.d("dds_test", "constructor " + x);
+    }
+
+    private HackDemo(int x, String str) {
+        mIntField = x;
+        mStr = str;
+        Log.d("dds_test", "constructor " + x);
+    }
 
     private int foo() {
+        Log.d("dds_test", "method :foo");
+        return mIntField;
+    }
+
+    private int foo(int type, String str) {
+        Log.d("dds_test", "method :foo " + type + "," + str);
         return 7;
     }
 
-    private static void bar(final int type, final String name, final HackDemo simple) throws IOException {
+    private static void bar() {
+        Log.d("dds_test", "static method :bar");
+    }
 
+    private static int bar(int type) {
+        Log.d("dds_test", "static method :bar " + type);
+        return type;
+    }
+
+    private static void bar(int type, String name, Bean bean) {
+        LogA.d("dds_test", "static method :bar type:%d,%s,%s", type, name, bean.toString());
     }
 
 
+    public void printStaticField() {
+        Log.d("dds_test", "printStaticField:" + staticField);
+    }
 }
