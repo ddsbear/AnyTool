@@ -81,7 +81,12 @@ public class MainActivity extends AppCompatActivity {
         DBFrameworkActivity.openActivity(this);
     }
 
-    public void onUILibrary(View view) {
+
+    // drawa
+    public void DrawableHelper(View view) {
+        DrawHelperActivity.openActivity(this);
+
+
     }
 
     // 测试网络

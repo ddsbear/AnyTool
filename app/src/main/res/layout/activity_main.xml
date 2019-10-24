@@ -93,8 +93,8 @@
             <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="onUILibrary"
-                    android:text="UILibrary"
+                    android:onClick="DrawableHelper"
+                    android:text="DrawableHelper"
                     android:textAllCaps="false" />
 
             <Button
