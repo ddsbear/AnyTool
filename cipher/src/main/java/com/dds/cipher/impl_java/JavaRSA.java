@@ -1,6 +1,6 @@
-package com.dds.cipher.javaImpl;
+package com.dds.cipher.impl_java;
 
-import com.dds.cipher.RSA;
+import com.dds.cipher.rsa.RSA;
 import com.dds.cipher.base64.Base64;
 import com.dds.cipher.rsa.RSACrypt;
 
@@ -17,6 +17,12 @@ import java.util.Enumeration;
  * android_shuai@163.com
  */
 public class JavaRSA implements RSA {
+
+    private int length;
+
+    public JavaRSA(int length) {
+        this.length = length;
+    }
 
     @Override
     public KeyPair generateAsymmetricKey() {

@@ -1,4 +1,4 @@
-package com.dds.cipher;
+package com.dds.cipher.ca;
 
 
 import android.os.Environment;
@@ -30,7 +30,7 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 
-public class CA {
+public class CAUtils {
 
     // 生成KeyPair
     public static KeyPair generateKeyPair() throws NoSuchAlgorithmException {
@@ -83,7 +83,6 @@ public class CA {
 
     // 合成p12证书
     public static void storeP12(PrivateKey pri, String p7, String p12Path, String p12Password) throws Exception {
-
         CertificateFactory factory = CertificateFactory.getInstance("X509");
         //初始化证书链
         X509Certificate p7X509 = (X509Certificate) factory.generateCertificate(new ByteArrayInputStream(p7.getBytes()));

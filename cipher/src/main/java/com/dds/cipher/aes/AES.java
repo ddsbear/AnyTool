@@ -1,4 +1,4 @@
-package com.dds.cipher;
+package com.dds.cipher.aes;
 
 import java.io.InputStream;
 

@@ -18,7 +18,7 @@ import javax.crypto.spec.SecretKeySpec;
  * android_shuai@163.com
  */
 public class AESCrypt {
-    private static final String TAG = "dds_test";
+    private static final String TAG = "dds_AESCrypt";
     private static final String CHARSET = "UTF-8";
 
     //AESCrypt-ObjC uses blank IV (not the best security, but the aim here is compatibility)

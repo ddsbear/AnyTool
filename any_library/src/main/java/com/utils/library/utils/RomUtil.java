@@ -82,6 +82,13 @@ public class RomUtil {
         return check(ROM_SMARTISAN);
     }
 
+    private final static String ZTEC2016 = "zte c2016";
+
+    public static boolean isZTKC2016() {
+        final String board = android.os.Build.MODEL;
+        return board != null && board.toLowerCase().contains(ZTEC2016);
+    }
+
     private static String sName;
 
     public static String getName() {
@@ -149,5 +156,6 @@ public class RomUtil {
         }
         return line;
     }
+
 
 }

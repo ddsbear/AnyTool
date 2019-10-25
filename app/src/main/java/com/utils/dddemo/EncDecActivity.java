@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dds.cipher.javaImpl.JavaAES;
-import com.dds.cipher.javaImpl.JavaRSA;
+import com.dds.cipher.impl_java.JavaAES;
+import com.dds.cipher.impl_java.JavaRSA;
 
 public class EncDecActivity extends AppCompatActivity {
     private EditText edit;

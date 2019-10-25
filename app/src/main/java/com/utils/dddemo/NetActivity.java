@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dds.cipher.CA;
+import com.dds.cipher.ca.CAUtils;
 import com.dds.cipher.base64.Base64;
 import com.utils.library.net.HttpRequestPresenter;
 import com.utils.library.net.ICallback;
@@ -70,9 +70,9 @@ public class NetActivity extends AppCompatActivity {
         executor.execute(() -> {
             try {
                 // 生成密钥对
-                keyPair = CA.generateKeyPair();
+                keyPair = CAUtils.generateKeyPair();
                 // 生成p10请求
-                String pks10 = CA.generatePKCS10(keyPair);
+                String pks10 = CAUtils.generatePKCS10(keyPair);
                 String url = text1.getText().toString();
                 Map<String, String> map = new HashMap<>();
                 map.put("p10", pks10);
@@ -226,7 +226,7 @@ public class NetActivity extends AppCompatActivity {
                     try {
                         String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/test.p12";
                         // 保存p12证书
-                        CA.storeP12(aPrivate, p7, path, "111111");
+                        CAUtils.storeP12(aPrivate, p7, path, "111111");
                         InputStream certificate;
                         File file = new File(path);
                         if (file.exists()) {

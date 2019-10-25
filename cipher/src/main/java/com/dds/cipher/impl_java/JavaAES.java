@@ -1,6 +1,6 @@
-package com.dds.cipher.javaImpl;
+package com.dds.cipher.impl_java;
 
-import com.dds.cipher.AES;
+import com.dds.cipher.aes.AES;
 import com.dds.cipher.aes.AESCrypt;
 
 import java.io.InputStream;
@@ -17,7 +17,6 @@ public class JavaAES implements AES {
     public JavaAES(int length) {
         this.length = length;
     }
-
 
     @Override
     public String encText(String sSrc, String sKey) {

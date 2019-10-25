@@ -1,7 +1,8 @@
 package com.dds.cipher;
 
-import com.dds.cipher.javaImpl.JavaAES;
-import com.dds.cipher.javaImpl.JavaMd5;
+import com.dds.cipher.aes.AES;
+import com.dds.cipher.impl_java.JavaAES;
+import com.dds.cipher.impl_java.JavaMd5;
 
 import org.junit.Test;
 
