@@ -51,7 +51,7 @@ public class AESCrypt {
             log(algorithm + " key ", bytes);
         } else {
             bytes = password.getBytes(CHARSET);
-            log(algorithm + " key ", bytes);
+            log("algorithm:" + algorithm + ",key ", bytes);
         }
 
 
@@ -75,10 +75,10 @@ public class AESCrypt {
 
         try {
             final SecretKeySpec key = generateKey(password, needDigest, algorithm);
-            if(aes_mode.contains("NoPadding")){
+            if (aes_mode.contains("NoPadding")) {
                 //不足16的倍数补空格
-                if (message.getBytes().length % 16 != 0) {
-                    int tem = message.getBytes().length % 16;
+                if (message.getBytes(CHARSET).length % 16 != 0) {
+                    int tem = message.getBytes(CHARSET).length % 16;
                     StringBuilder messageBuilder = new StringBuilder(message);
                     for (int i = 0; i < 16 - tem; i++) {
                         messageBuilder.append(" ");
@@ -91,9 +91,9 @@ public class AESCrypt {
 
             byte[] cipherText = encrypt(key, message.getBytes(CHARSET), iv, aes_mode);
 
-            String encoded = new String(Base64.encode(cipherText));
+            String encoded = new String(Base64.encode(cipherText), CHARSET);
 
-            log("Base64 encode", encoded);
+            log("base64Enc", encoded);
             return encoded;
         } catch (UnsupportedEncodingException e) {
             if (DEBUG_LOG_ENABLED)
@@ -122,7 +122,7 @@ public class AESCrypt {
             cipher.init(Cipher.ENCRYPT_MODE, key);
         }
         byte[] cipherText = cipher.doFinal(message);
-        log("cipherText hex", cipherText);
+        log("aesEnc", cipherText);
         return cipherText;
     }
 
@@ -130,25 +130,25 @@ public class AESCrypt {
     /**
      * Decrypt and decode ciphertext using 256-bit AES with key generated from password
      *
-     * @param password                used to generated key
-     * @param base64EncodedCipherText the encrpyted message encoded with base64
+     * @param password  used to generated key
+     * @param base64Enc the encrpyted message encoded with base64
      * @return message in Plain text (String UTF-8)
      * @throws GeneralSecurityException if there's an issue decrypting
      */
-    public static String decrypt(final String password, String base64EncodedCipherText, boolean needDigest,
+    public static String decrypt(final String password, String base64Enc, boolean needDigest,
                                  String algorithm, String aes_mode, final byte[] iv)
             throws GeneralSecurityException {
 
         try {
             final SecretKeySpec key = generateKey(password, needDigest, algorithm);
 
-            log("base64EncodedCipherText", base64EncodedCipherText);
-            byte[] decodedCipherText = Base64.decode(base64EncodedCipherText.getBytes());
-            log("decodedCipherText", decodedCipherText);
+            log("base64Enc", base64Enc);
+            byte[] decodedCipherText = Base64.decode(base64Enc.getBytes(CHARSET));
+            log("aesEnc", decodedCipherText);
 
             byte[] decryptedBytes = decrypt(key, decodedCipherText, ivBytes, aes_mode);
 
-            String message = new String(decryptedBytes);
+            String message = new String(decryptedBytes, CHARSET);
 
             log("output message", message);
 
@@ -181,11 +181,7 @@ public class AESCrypt {
         } else {
             cipher.init(Cipher.DECRYPT_MODE, key);
         }
-        byte[] decryptedBytes = cipher.doFinal(decodedCipherText);
-
-        log("decrypted text hex", decryptedBytes);
-
-        return decryptedBytes;
+        return cipher.doFinal(decodedCipherText);
     }
 
 

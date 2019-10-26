@@ -94,12 +94,22 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testAES2() throws Exception {
-        String content = "5d173A31lO9Yb5k57x7oC5m3915ai5g7";
+        String content = "123456";
         String key = "GAOQXQQ99QPKOMTZE9YF96OLTD8EU6T9";
+
 
         String encrypt = AESCrypt.encrypt(key, content,
                 false, null,
                 "AES/ECB/PKCS5Padding", null);
         Log.d(TAG, "加密出内容：" + encrypt);
+
+        String decrypt = AESCrypt.decrypt(key, content,
+                false, null,
+                "AES/ECB/PKCS5Padding", null);
+        Log.d(TAG, "解密出内容：" + decrypt);
+
+        assertEquals("123456", decrypt.trim());
+
+
     }
 }
