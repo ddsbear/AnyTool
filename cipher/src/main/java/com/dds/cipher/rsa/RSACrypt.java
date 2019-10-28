@@ -11,6 +11,9 @@ import java.security.Key;
 import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.Signature;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
@@ -68,7 +71,7 @@ public class RSACrypt {
      * @return
      * @throws Exception
      */
-    public static String decByPri(String data, String private_key) throws RuntimeException{
+    public static String decByPri(String data, String private_key) throws RuntimeException {
         try {
             byte[] keyBytes = Base64.decode(private_key.getBytes());
             byte[] dataBytes = Base64.decode(data.getBytes());
@@ -84,6 +87,42 @@ public class RSACrypt {
         }
     }
 
+    /**
+     * 签名
+     *
+     * @param data       待签名数据
+     * @param privateKey 私钥
+     * @return 签名
+     */
+    public static String sign(String data, PrivateKey privateKey) throws Exception {
+        byte[] keyBytes = privateKey.getEncoded();
+        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        PrivateKey key = keyFactory.generatePrivate(keySpec);
+        Signature signature = Signature.getInstance("MD5withRSA");
+        signature.initSign(key);
+        signature.update(data.getBytes());
+        return new String(Base64.encode(signature.sign()));
+    }
+
+    /**
+     * 验签
+     *
+     * @param srcData   原始字符串
+     * @param publicKey 公钥
+     * @param sign      签名
+     * @return 是否验签通过
+     */
+    public static boolean verify(String srcData, PublicKey publicKey, String sign) throws Exception {
+        byte[] keyBytes = publicKey.getEncoded();
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        PublicKey key = keyFactory.generatePublic(keySpec);
+        Signature signature = Signature.getInstance("MD5withRSA");
+        signature.initVerify(key);
+        signature.update(srcData.getBytes());
+        return signature.verify(Base64.decode(sign.getBytes()));
+    }
 
     private static byte[] rsaSplitCodec(Cipher cipher, int opcodes, byte[] datas, int keySize) {
         int maxBlock = 0;
