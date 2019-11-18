@@ -7,7 +7,7 @@ Here is a record of the common problems encountered in Android development and h
 
 - 基于androidx
 - 模块分离，需要哪个功能就拷贝哪个
-- 每一个问题都会配有一篇文章
+- 一些功能会配有一篇文章来讲解
 - 请注意，这不仅仅是轮子
 
 ## Module
@@ -67,25 +67,30 @@ Here is a record of the common problems encountered in Android development and h
 
 
 
-
-
 ### 3. net 
-
-
 
 相关文章
 
-- [keytool命令详解--学习自签名证书就看这篇](cipher/yellow/keytool命令详解.md)
 
-- [Android 生成pkcs10(csr)请求](cipher/yellow/PKCS10.md)
 
-- [Android 合成pkcs12证书](cipher/yellow/PKCS12.md)
 
-  
 
 ### 4. cipher
 
+加解密模块: [https://github.com/ddssingsong/AnyTool/tree/master/cipher](https://github.com/ddssingsong/AnyTool/tree/master/cipher)
 
+- AES 
+- RSA
+- Base64
+- MD5
+- 证书相关
+
+相关文章
+
+- [Android 合成pkcs12证书](cipher/yellow/PKCS12.md)
+- [Android 生成pkcs10(csr)请求](cipher/yellow/PKCS10.md)
+- [keytool命令详解--学习自签名证书就看这篇](cipher/yellow/keytool命令详解.md)
+- [JNI AES加解密 c++和java互通详解](https://blog.csdn.net/u011077027/article/details/102757225)
 
 
 

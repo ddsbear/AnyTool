@@ -6,6 +6,7 @@ package com.dds.cipher.util;
  */
 public class ByteUtil {
 
+    // hex2Bytes
     public static byte[] hexStr2Bytes(String hex) {
         hex = hex.length() % 2 != 0 ? "0" + hex : hex;
 
@@ -18,6 +19,7 @@ public class ByteUtil {
         return b;
     }
 
+    // bytes2HexStr
     public static String byte2HexStr(byte[] b) {
         if (b == null) {
             return null;

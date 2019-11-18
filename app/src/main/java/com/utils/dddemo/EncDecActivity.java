@@ -64,14 +64,14 @@ public class EncDecActivity extends AppCompatActivity {
     String decContent = "";
 
     public void rsaEnc(View view) {
-        JavaRSA rsa = new JavaRSA();
+        JavaRSA rsa = new JavaRSA(2048);
         String s = rsa.encByPubKey(content, pubkey);
         decContent = s;
         text.setText(s);
     }
 
     public void rsaDec(View view) {
-        JavaRSA rsa = new JavaRSA();
+        JavaRSA rsa = new JavaRSA(2048);
         String s = rsa.decByPriKey(decContent, priKey, pwd);
         text.setText(s);
     }
