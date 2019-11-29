@@ -8,7 +8,7 @@ import java.util.Map;
  * android_shuai@163.com
  */
 public class HttpRequestPresenter implements HttpRequest {
-    private HttpRequest httpRequest;
+    protected HttpRequest httpRequest;
     private static volatile HttpRequestPresenter instance;
 
     public HttpRequestPresenter(HttpRequest httpRequest) {

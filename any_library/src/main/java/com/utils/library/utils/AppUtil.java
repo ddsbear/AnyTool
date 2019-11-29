@@ -1,5 +1,6 @@
 package com.utils.library.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -11,8 +12,6 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
-
-import com.utils.library.log.LogB;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -45,34 +44,13 @@ public class AppUtil {
     public static String wifiMac = "";
     public static String androidId = "";
 
-    public static String getVerName(Context context) {
-        String var1 = null;
-        try {
-            String var2 = context.getPackageName();
-            PackageManager var3 = context.getPackageManager();
-            PackageInfo var4 = var3.getPackageInfo(var2, 0);
-            var1 = var4.versionName;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return var1;
-    }
-
-    public static int getVerCode(Context context) {
-        int var1 = 0;
-        try {
-            String var2 = context.getPackageName();
-            PackageManager var3 = context.getPackageManager();
-            PackageInfo var4 = var3.getPackageInfo(var2, 0);
-            var1 = var4.versionCode;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return var1;
-    }
-
+    /**
+     * 获取meta里的信息
+     *
+     * @param context
+     * @param key
+     * @return
+     */
     public static String getMetaData(Context context, String key) {
         String var2 = null;
         try {
@@ -93,6 +71,13 @@ public class AppUtil {
         return var2;
     }
 
+    /**
+     * 获取DeviceId
+     *
+     * @param var0
+     * @return
+     */
+    @SuppressLint("MissingPermission")
     public static String getDeviceId(Context var0) {
         String var1 = "";
         if (!TextUtils.isEmpty(deviceId)) {
@@ -108,6 +93,13 @@ public class AppUtil {
         return var1;
     }
 
+    /**
+     * 获取SimId
+     *
+     * @param var0
+     * @return
+     */
+    @SuppressLint("MissingPermission")
     public static String getSimId(Context var0) {
         String var1 = "";
         if (!TextUtils.isEmpty(simId)) {
@@ -124,6 +116,11 @@ public class AppUtil {
         return var1;
     }
 
+    /**
+     * 获取cpu信息
+     *
+     * @return
+     */
     public static String getCpu() {
         if (!TextUtils.isEmpty(cpu)) {
             return cpu;
@@ -170,6 +167,12 @@ public class AppUtil {
         return var0 == null ? "" : var0;
     }
 
+    /**
+     * 获取AndroidId
+     *
+     * @param var0
+     * @return
+     */
     public static String getAndroidId(Context var0) {
         if (!TextUtils.isEmpty(androidId)) {
             return androidId;
@@ -185,7 +188,9 @@ public class AppUtil {
     }
 
 
-    //获取本应用的签名
+    /**
+     * 获取本应用的签名
+     */
     public static String getApkSignatures(Context context) {
         PackageManager pm = context.getPackageManager();
         List<PackageInfo> apps = pm.getInstalledPackages(PackageManager.GET_SIGNATURES);
@@ -200,7 +205,9 @@ public class AppUtil {
         return null;
     }
 
-    //获取应用的签名信息
+    /**
+     * 获取应用的签名信息
+     */
     public static String getApkSignatures(Context context, File file) {
         String var2 = getApkSignatures(context, file, false);
         if (var2 == null) {
@@ -297,7 +304,9 @@ public class AppUtil {
         return var1;
     }
 
-    //如果apk未安装时，当我们需要获取APK包的相关信息时，可以直接使用这个类
+    /**
+     * 如果apk未安装时，当我们需要获取APK包的相关信息时，可以直接使用这个类
+     */
     private static PackageInfo parsePackage(String archiveFilePath, int flag) {
         try {
             Class packageParser = Class.forName("android.content.pm.PackageParser");
@@ -373,7 +382,9 @@ public class AppUtil {
     }
 
 
-    // 获取应用列表
+    /**
+     * 获取应用列表
+     */
     public static List<PackageInfo> getAllApps(Context context) {
         PackageManager pm = context.getPackageManager();
         List<PackageInfo> installedPackages;
@@ -385,6 +396,13 @@ public class AppUtil {
         return installedPackages;
     }
 
+    /**
+     * 获取签名md5值
+     *
+     * @param context
+     * @param pkgName
+     * @return
+     */
     public static byte[] getSignMd5(Context context, String pkgName) {
         Signature[] rawSignature = getRawSignature(context, pkgName);
         byte[] md5 = null;
@@ -394,6 +412,13 @@ public class AppUtil {
         return md5;
     }
 
+    /**
+     * 获取packageInfo
+     *
+     * @param context
+     * @param path
+     * @return
+     */
     public static PackageInfo getPkgInfo(Context context, String path) {
         PackageManager pm = context.getPackageManager();
         return pm.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES | PackageManager.GET_SIGNATURES);
@@ -401,7 +426,6 @@ public class AppUtil {
 
     private static Signature[] getRawSignature(Context context, String pkg) {
         if ((pkg == null) || (pkg.length() == 0)) {
-            LogB.e(TAG, "获取签名失败，包名为 null");
             return null;
         }
         PackageManager localPackageManager = context.getPackageManager();
@@ -409,11 +433,9 @@ public class AppUtil {
         try {
             localPackageInfo = localPackageManager.getPackageInfo(pkg, PackageManager.GET_SIGNATURES);
             if (localPackageInfo == null) {
-                LogB.e(TAG, "信息为 null, 包名 = " + pkg);
                 return null;
             }
         } catch (PackageManager.NameNotFoundException localNameNotFoundException) {
-            LogB.e(TAG, "包名没有找到...");
             return null;
         }
 

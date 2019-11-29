@@ -55,8 +55,6 @@ public class Utils {
     }
 
     public static boolean isFinish() {
-
-
         return false;
     }
 

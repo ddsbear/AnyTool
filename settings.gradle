@@ -1,4 +1,4 @@
-include ':app', ':any_library', ':any_library_impl', ':any_rxlibrary', ':protobuf'
+include ':app', ':any_library', ':any_library_impl', ':any_rx2library', ':protobuf'
 include ':any_db_library', ':any_db_litepal', ':any_db_framwork'
 include ':cameraview', ':videoplayer'
 include ':jetpack'

@@ -31,3 +31,14 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+task hello {
+    doLast {
+        println("hello world!")
+    }
+}
+task releaseTest(dependsOn: hello) {
+    doLast {
+        println "I'm release task"
+    }
+}

@@ -35,4 +35,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation project(path:':any_library')
+
+    implementation group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.15'
+    implementation group: 'io.reactivex.rxjava2', name: 'rxandroid', version: '2.1.1'
+
 }
