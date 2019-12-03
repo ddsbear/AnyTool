@@ -18,7 +18,7 @@
         <activity android:name=".DrawHelperActivity"></activity>
         <activity android:name=".NetActivity" />
         <activity android:name=".DBFrameworkActivity" />
-        <activity android:name=".VideoPlayActivity" />
+
         <activity android:name=".LitePalActivity" />
         <activity android:name=".EncDecActivity" />
         <activity android:name=".DialogActivity" />

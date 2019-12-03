@@ -93,12 +93,3 @@ Here is a record of the common problems encountered in Android development and h
 - [JNI AES加解密 c++和java互通详解](https://blog.csdn.net/u011077027/article/details/102757225)
 
 
-
-## tools
-
-### 1. git
-
-- [git  markdown教程  ppt](git_markdown/git_markdown/git_markdown.md)
-- [git合并多个commit为一个commit](git_markdown/git合并多个commit.md)
-
-

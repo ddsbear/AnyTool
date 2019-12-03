@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         HackActivity.openActivity(this);
     }
 
-
     // enc dec
     public void onEncDec(View view) {
         EncDecActivity.openActivity(this);
@@ -68,11 +67,6 @@ public class MainActivity extends AppCompatActivity {
     public void onJetpack(View view) {
         JetPackActivity.openActivity(this);
 
-    }
-
-    // videoPlayer
-    public void onVideoPlayer(View view) {
-        VideoPlayActivity.openActivity(this);
     }
 
 
