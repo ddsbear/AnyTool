@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by dds on 2019/9/12.
@@ -112,6 +113,27 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 从文件中读取字符串
+     *
+     * @param fileStr 文件的绝对路径
+     */
+    public static String readFile(String fileStr) {
+        try {
+            File file = new File(fileStr);
+            FileInputStream inputStream = new FileInputStream(file);
+            int length = inputStream.available();
+            byte bytes[] = new byte[length];
+            inputStream.read(bytes);
+            inputStream.close();
+            return new String(bytes, StandardCharsets.UTF_8);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**

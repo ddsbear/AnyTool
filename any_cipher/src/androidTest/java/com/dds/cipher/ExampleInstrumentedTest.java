@@ -11,6 +11,8 @@ import com.dds.cipher.aes.AESCrypt;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.File;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -21,6 +23,11 @@ import static org.junit.Assert.assertEquals;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
     private final static String TAG = "dds_test";
+    private static final byte[] ivBytes = {
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00};
 
     @Test
     public void useAppContext() {
@@ -32,43 +39,44 @@ public class ExampleInstrumentedTest {
 
 
     @Test
-    public void testAES() throws Exception {
-        String content = "欢迎来到chacuo.net";
+    public void testAESECBNoPadding() throws Exception {
+        String content = "欢迎来到 any_cipher";
         String key = "123456";
-
-
-        //========================NoPadding test ==================================
-        // 1. NoPadding 加密的内容必须是16的倍数
-
+        //========================NoPadding test =================================
         String encrypt = AESCrypt.encrypt(key, content,
                 true, "SHA-256",
                 "AES/ECB/NoPadding", null);
 
-
-        Log.d(TAG, "加密出内容：" + encrypt);
+        Log.d(TAG, "encrypt result-------------->：" + encrypt);
 
         String result = AESCrypt.decrypt(key, encrypt,
                 true, "SHA-256",
                 "AES/ECB/NoPadding", null);
 
-        Log.d(TAG, "解密出内容：" + result);
+        Log.d(TAG, "decrypt result-------------->：" + result);
 
         assertEquals(result.trim(), content);
 
-        //========================PKCS5Padding test ==================================
 
+    }
+
+    @Test
+    public void testAESCBCPKCS5Padding() throws Exception {
+        //========================PKCS5Padding ==================================
+        String content = "欢迎来到any_cipher";
+        String key = "123456";
         String encrypt1 = AESCrypt.encrypt(key, content,
                 true, "SHA-256",
-                "AES/ECB/PKCS5Padding", null);
+                "AES/CBC/PKCS5Padding", ivBytes);
 
 
-        Log.d(TAG, "加密出内容：" + encrypt1);
+        Log.d(TAG, "result------------>：" + encrypt1);
 
         String result1 = AESCrypt.decrypt(key, encrypt1,
                 true, "SHA-256",
-                "AES/ECB/PKCS5Padding", null);
+                "AES/CBC/PKCS5Padding", ivBytes);
 
-        Log.d(TAG, "解密出内容：" + result1);
+        Log.d(TAG, "result------------>：" + result1);
 
         assertEquals(result1.trim(), content);
         //========================PKCS7Padding test ==================================
@@ -93,6 +101,35 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
+    public void testAESFile() throws Exception {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        File srcFile = new File(appContext.getFilesDir(), "test.txt");
+        // 创建一个文件并写入内容
+        Utils.writeFile("hello world", srcFile.getAbsolutePath(), false);
+        String key = "123456";
+        File encDir = new File(appContext.getFilesDir(), "a_enc");
+        if (!encDir.exists()) {
+            encDir.mkdirs();
+        }
+        String s = AESCrypt.encryptFile(key, srcFile.getAbsolutePath(), encDir.getAbsolutePath(),
+                true, "SHA-256", "AES/ECB/PKCS5Padding", null);
+        if (s != null) {
+            String s1 = Utils.readFile(s);
+            Log.d(TAG, "enc result------>" + s1);
+        }
+        File decDir = new File(appContext.getFilesDir(), "a_dec");
+        if (!decDir.exists()) {
+            decDir.mkdirs();
+        }
+        String s2 = AESCrypt.decryptFile(key, s, decDir.getAbsolutePath(),
+                true, "SHA-256", "AES/ECB/PKCS5Padding", null);
+        if (s2 != null) {
+            String s3 = Utils.readFile(s2);
+            Log.d(TAG, "dec result------>" + s3);
+        }
+    }
+
+    @Test
     public void testAES2() throws Exception {
         String content = "123456";
         String key = "GAOQXQQ99QPKOMTZE9YF96OLTD8EU6T9";
@@ -112,4 +149,10 @@ public class ExampleInstrumentedTest {
 
 
     }
+
+    @Test
+    public void testRSA() {
+
+    }
+
 }

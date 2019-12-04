@@ -4,12 +4,21 @@ import android.util.Log;
 
 import com.dds.cipher.base64.Base64;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -48,7 +57,7 @@ public class AESCrypt {
             byte[] bytesPwd = password.getBytes(CHARSET);
             digest.update(bytesPwd, 0, bytesPwd.length);
             bytes = digest.digest();
-            log(algorithm + " key ", bytes);
+            log(" key " + algorithm, bytes);
         } else {
             bytes = password.getBytes(CHARSET);
             log("algorithm:" + algorithm + ",key ", bytes);
@@ -69,12 +78,13 @@ public class AESCrypt {
      * @return Base64 encoded CipherText
      * @throws GeneralSecurityException if problems occur during encryption
      */
-    public static String encrypt(final String password, String message, boolean needDigest,
-                                 String algorithm, String aes_mode, final byte[] iv)
-            throws GeneralSecurityException {
-
+    public static String encrypt(final String password,
+                                 String message,
+                                 boolean needDigest,
+                                 String algorithm,
+                                 String aes_mode,
+                                 final byte[] iv) throws GeneralSecurityException {
         try {
-            final SecretKeySpec key = generateKey(password, needDigest, algorithm);
             if (aes_mode.contains("NoPadding")) {
                 //不足16的倍数补空格
                 if (message.getBytes(CHARSET).length % 16 != 0) {
@@ -88,12 +98,13 @@ public class AESCrypt {
             }
 
             log("input message", message);
+            final SecretKeySpec key = generateKey(password, needDigest, algorithm);
 
             byte[] cipherText = encrypt(key, message.getBytes(CHARSET), iv, aes_mode);
 
             String encoded = new String(Base64.encode(cipherText), CHARSET);
 
-            log("base64Enc", encoded);
+            log("Base64Enc", encoded);
             return encoded;
         } catch (UnsupportedEncodingException e) {
             if (DEBUG_LOG_ENABLED)
@@ -112,17 +123,20 @@ public class AESCrypt {
      * @return Encrypted cipher text (not encoded)
      * @throws GeneralSecurityException if something goes wrong during encryption
      */
-    public static byte[] encrypt(final SecretKeySpec key, final byte[] message, final byte[] iv, String aes_mode)
+    public static byte[] encrypt(final SecretKeySpec key, final byte[] message, byte[] iv, String aes_mode)
             throws GeneralSecurityException {
         final Cipher cipher = Cipher.getInstance(aes_mode);
         if (aes_mode.contains("CBC")) {
+            if (iv == null) {
+                iv = ivBytes;
+            }
             IvParameterSpec ivSpec = new IvParameterSpec(iv);
             cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec);
         } else {
             cipher.init(Cipher.ENCRYPT_MODE, key);
         }
         byte[] cipherText = cipher.doFinal(message);
-        log("aesEnc", cipherText);
+        log("AesEnc", cipherText);
         return cipherText;
     }
 
@@ -140,17 +154,18 @@ public class AESCrypt {
             throws GeneralSecurityException {
 
         try {
+            log("input message", base64Enc);
+
             final SecretKeySpec key = generateKey(password, needDigest, algorithm);
 
-            log("base64Enc", base64Enc);
             byte[] decodedCipherText = Base64.decode(base64Enc.getBytes(CHARSET));
-            log("aesEnc", decodedCipherText);
+            log("Base64Dec", decodedCipherText);
 
             byte[] decryptedBytes = decrypt(key, decodedCipherText, ivBytes, aes_mode);
 
             String message = new String(decryptedBytes, CHARSET);
 
-            log("output message", message);
+            log("AesDec", message);
 
 
             return message;
@@ -172,16 +187,117 @@ public class AESCrypt {
      * @return Decrypted message cipher text (not encoded)
      * @throws GeneralSecurityException if something goes wrong during encryption
      */
-    public static byte[] decrypt(final SecretKeySpec key, final byte[] decodedCipherText, final byte[] iv, String aes_mode)
+    public static byte[] decrypt(final SecretKeySpec key, final byte[] decodedCipherText, byte[] iv, String aes_mode)
             throws GeneralSecurityException {
         final Cipher cipher = Cipher.getInstance(aes_mode);
         if (aes_mode.contains("CBC")) {
+            if (iv == null) {
+                iv = ivBytes;
+            }
             IvParameterSpec ivSpec = new IvParameterSpec(iv);
             cipher.init(Cipher.DECRYPT_MODE, key, ivSpec);
         } else {
             cipher.init(Cipher.DECRYPT_MODE, key);
         }
         return cipher.doFinal(decodedCipherText);
+    }
+
+    public static String encryptFile(final String password, String srcPath, String targetDir,
+                                     boolean needDigest, String algorithm, String aes_mode,
+                                     final byte[] iv) throws GeneralSecurityException {
+        File srcFile = new File(srcPath);
+        if (!srcFile.exists()) {
+            return null;
+        }
+        try {
+            final SecretKeySpec key = generateKey(password, needDigest, algorithm);
+            String fileName = srcFile.getName();
+            File targetFile = new File(targetDir, fileName);
+            encryptFile(key, srcFile, targetFile, iv, aes_mode);
+            if (targetFile.exists()) {
+                return targetFile.getAbsolutePath();
+            }
+        } catch (Exception e) {
+            if (DEBUG_LOG_ENABLED)
+                Log.e(TAG, "encFile Exception ", e);
+            throw new GeneralSecurityException(e);
+        }
+        return null;
+
+    }
+
+    private static void encryptFile(final SecretKeySpec key, File source, File target, byte[] iv, String aes_mode) throws Exception {
+        FileInputStream fis = new FileInputStream(source);
+        final Cipher cipher = Cipher.getInstance(aes_mode);
+        if (aes_mode.contains("CBC")) {
+            if (iv == null) {
+                iv = ivBytes;
+            }
+            IvParameterSpec ivSpec = new IvParameterSpec(iv);
+            cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec);
+        } else {
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+        }
+        OutputStream out = new FileOutputStream(target);
+        CipherInputStream cin = new CipherInputStream(fis, cipher);
+        byte[] buffer = new byte[1024];
+        int i;
+        while ((i = cin.read(buffer)) != -1) {
+            out.write(buffer, 0, i);
+        }
+        out.flush();
+        out.close();
+        cin.close();
+    }
+
+    public static String decryptFile(final String password, String srcPath, String targetDir,
+                                     boolean needDigest, String algorithm, String aes_mode,
+                                     final byte[] iv) throws GeneralSecurityException {
+        File srcFile = new File(srcPath);
+        if (!srcFile.exists()) {
+            return null;
+        }
+        try {
+            final SecretKeySpec key = generateKey(password, needDigest, algorithm);
+            String fileName = srcFile.getName();
+            File targetFile = new File(targetDir, fileName);
+            decryptFile(key, srcFile, targetFile, iv, aes_mode);
+            if (targetFile.exists()) {
+                return targetFile.getAbsolutePath();
+            }
+        } catch (Exception e) {
+            if (DEBUG_LOG_ENABLED)
+                Log.e(TAG, "encFile Exception ", e);
+            throw new GeneralSecurityException(e);
+        }
+        return null;
+
+    }
+
+    private static void decryptFile(final SecretKeySpec key, File source, File target, byte[] iv, String aes_mode)
+            throws IOException, NoSuchPaddingException, NoSuchAlgorithmException,
+            InvalidAlgorithmParameterException, InvalidKeyException {
+        FileInputStream fis = new FileInputStream(source);
+        final Cipher cipher = Cipher.getInstance(aes_mode);
+        if (aes_mode.contains("CBC")) {
+            if (iv == null) {
+                iv = ivBytes;
+            }
+            IvParameterSpec ivSpec = new IvParameterSpec(iv);
+            cipher.init(Cipher.DECRYPT_MODE, key, ivSpec);
+        } else {
+            cipher.init(Cipher.DECRYPT_MODE, key);
+        }
+        OutputStream out = new FileOutputStream(target);
+        CipherInputStream cin = new CipherInputStream(fis, cipher);
+        byte[] buffer = new byte[1024];
+        int i;
+        while ((i = cin.read(buffer)) != -1) {
+            out.write(buffer, 0, i);
+        }
+        out.flush();
+        out.close();
+        cin.close();
     }
 
 
