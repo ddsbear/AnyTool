@@ -86,9 +86,39 @@
 
 2. **RSA**
 
+    ```java
+   String content = "123456";
+   // 生成公私钥
+   KeyPair keyPair = RSACrypt.generateKeys();
+   PrivateKey aPrivate = keyPair.getPrivate();
+   PublicKey aPublic = keyPair.getPublic();
+   String pubkey = new String(Base64.encode(aPublic.getEncoded()));
+   // 用公钥加密
+   String encStr = RSACrypt.encByPub(content, pubkey);
+   Log.d(TAG, "encStr---------> " + encStr);
+   String priKey = new String(Base64.encode(aPrivate.getEncoded()));
+   // 用私钥解密
+   String decStr = RSACrypt.decByPri(encStr, priKey);
+   Log.d(TAG, "decStr---------> " + decStr);
+   ```
+
    
 
-3. base64
+3. **base64**
 
-4. md5
+     ```java
+    String src = "ddssingsong";
+    String encode = Base64.encode(src);
+    Log.d(TAG, "base64 enc:" + encode);
+    String decode = Base64.decode(encode);
+    Log.d(TAG, "base64 dec:" + decode);
+     ```
+
+4. **md5**
+
+   ```java
+  
+   ```
+  
+  
 

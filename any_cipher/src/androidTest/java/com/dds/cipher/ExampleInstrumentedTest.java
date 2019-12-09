@@ -7,11 +7,16 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.dds.cipher.aes.AESCrypt;
+import com.dds.cipher.base64.Base64;
+import com.dds.cipher.rsa.RSACrypt;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.File;
+import java.security.KeyPair;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 
 import static org.junit.Assert.assertEquals;
 
@@ -151,7 +156,30 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void testRSA() {
+    public void testRSA() throws Exception {
+        String content = "123456";
+        // 生成公私钥
+        KeyPair keyPair = RSACrypt.generateKeys();
+        PrivateKey aPrivate = keyPair.getPrivate();
+        PublicKey aPublic = keyPair.getPublic();
+        String pubkey = new String(Base64.encode(aPublic.getEncoded()));
+        // 用公钥加密
+        String encStr = RSACrypt.encByPub(content, pubkey);
+        Log.d(TAG, "encStr---------> " + encStr);
+        String priKey = new String(Base64.encode(aPrivate.getEncoded()));
+        // 用私钥解密
+        String decStr = RSACrypt.decByPri(encStr, priKey);
+        Log.d(TAG, "decStr---------> " + decStr);
+    }
+
+    @Test
+    public void testBase64() {
+        String src = "ddssingsong";
+
+        String encode = Base64.encode(src);
+        Log.d(TAG, "base64 enc:" + encode);
+        String decode = Base64.decode(encode);
+        Log.d(TAG, "base64 dec:" + decode);
 
     }
 

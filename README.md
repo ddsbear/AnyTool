@@ -71,9 +71,9 @@ This project includes various tools in Android development. make development fas
 
 手撸数据库框架
 
-- [Android徒手撸数据库系列——注解与反射数据库关系模型](any2_dbframwork/zmark/mark1.md)
-- [Android徒手撸数据库系列——实现单表的增删改查](any2_dbframwork/zmark/mark2.md)
-- [Android徒手撸数据库系列——多用户分库的实现](any2_dbframwork/zmark/mark3.md)
+- [Android徒手撸数据库系列——注解与反射数据库关系模型](https://blog.csdn.net/u011077027/article/details/95646227)
+- [Android徒手撸数据库系列——实现单表的增删改查](https://blog.csdn.net/u011077027/article/details/95987608)
+- [Android徒手撸数据库系列——多用户分库的实现](https://blog.csdn.net/u011077027/article/details/96135613)
 
 
 
@@ -88,7 +88,7 @@ This project includes various tools in Android development. make development fas
 
 ### 4. cipher
 
-加解密模块: [https://github.com/ddssingsong/AnyTool/tree/master/cipher](https://github.com/ddssingsong/AnyTool/tree/master/cipher)
+加解密模块: [cipher](any_cipher)
 
 - AES 
 - RSA
@@ -98,9 +98,9 @@ This project includes various tools in Android development. make development fas
 
 相关文章
 
-- [Android 合成pkcs12证书](cipher/yellow/PKCS12.md)
-- [Android 生成pkcs10(csr)请求](cipher/yellow/PKCS10.md)
-- [keytool命令详解--学习自签名证书就看这篇](cipher/yellow/keytool命令详解.md)
+- [Android 合成pkcs12证书](https://blog.csdn.net/u011077027/article/details/100847057)
+- [Android 生成pkcs10(csr)请求](https://blog.csdn.net/u011077027/article/details/100839294)
+- [keytool命令详解--学习自签名证书就看这篇](https://blog.csdn.net/u011077027/article/details/100731436)
 - [JNI AES加解密 c++和java互通详解](https://blog.csdn.net/u011077027/article/details/102757225)
 
 
