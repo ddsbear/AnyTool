@@ -1,4 +1,4 @@
-package com.utils.library.net.okhttp;
+package com.utils.library.net;
 
 import java.io.IOException;
 import java.io.InputStream;

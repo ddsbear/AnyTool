@@ -22,7 +22,7 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.os.Build.VERSION_CODES.M;
 
 /**
- * Permission-related helpers
+ * Permission-related helpers Created by dds
  */
 public class Permissions {
 
