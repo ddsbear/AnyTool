@@ -1,209 +1,32 @@
 package com.utils.library.utils;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.os.Build;
-import android.provider.Settings;
-import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.security.MessageDigest;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 
 /**
- * 获取关于设备的信息
+ * 解析apk
  */
-public class AppUtil {
-    private static final String TAG = "dds_AppUtils";
-    public static String deviceId = "";
-    public static String simId = "";
-    public static String cpu = "";
-    public static String wifiMac = "";
-    public static String androidId = "";
+public class ApkUtil {
 
-    /**
-     * 获取meta里的信息
-     *
-     * @param context
-     * @param key
-     * @return
-     */
-    public static String getMetaData(Context context, String key) {
-        String var2 = null;
-        try {
-            String var3 = context.getPackageName();
-            PackageManager var4 = context.getPackageManager();
-            ApplicationInfo var5 = var4.getApplicationInfo(var3, PackageManager.GET_META_DATA);
-            var2 = String.valueOf(var5.metaData.get(key));
-            try {
-                int var6 = Integer.parseInt(var2);
-                var2 = Integer.toHexString(var6);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return var2;
-    }
-
-    /**
-     * 获取DeviceId
-     *
-     * @param var0
-     * @return
-     */
-    @SuppressLint("MissingPermission")
-    public static String getDeviceId(Context var0) {
-        String var1 = "";
-        if (!TextUtils.isEmpty(deviceId)) {
-            var1 = deviceId;
-        } else {
-            try {
-                TelephonyManager var2 = (TelephonyManager) var0.getSystemService(Context.TELEPHONY_SERVICE);
-                var1 = var2.getDeviceId();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return var1;
-    }
-
-    /**
-     * 获取SimId
-     *
-     * @param var0
-     * @return
-     */
-    @SuppressLint("MissingPermission")
-    public static String getSimId(Context var0) {
-        String var1 = "";
-        if (!TextUtils.isEmpty(simId)) {
-            var1 = simId;
-        } else {
-            try {
-                TelephonyManager var2 = (TelephonyManager) var0.getSystemService(Context.TELEPHONY_SERVICE);
-                var1 = var2.getSubscriberId();
-            } catch (Exception var3) {
-                var3.printStackTrace();
-            }
-        }
-
-        return var1;
-    }
-
-    /**
-     * 获取cpu信息
-     *
-     * @return
-     */
-    public static String getCpu() {
-        if (!TextUtils.isEmpty(cpu)) {
-            return cpu;
-        } else {
-            String var0 = null;
-            InputStreamReader var1 = null;
-            BufferedReader var2 = null;
-            try {
-                Process var3 = Runtime.getRuntime().exec("getprop ro.product.cpu.abi");
-                var1 = new InputStreamReader(var3.getInputStream());
-                var2 = new BufferedReader(var1);
-                String var4 = var2.readLine();
-                if (var4.contains("x86")) {
-                    var0 = nullToStr("i686");
-                } else {
-                    var0 = nullToStr(System.getProperty("os.arch"));
-                }
-            } catch (Throwable var18) {
-                var0 = nullToStr(System.getProperty("os.arch"));
-                var18.printStackTrace();
-            } finally {
-                try {
-                    if (var2 != null) {
-                        var2.close();
-                    }
-                } catch (IOException var17) {
-                    var17.printStackTrace();
-                }
-                try {
-                    if (var1 != null) {
-                        var1.close();
-                    }
-                } catch (IOException var16) {
-                    var16.printStackTrace();
-                }
-
-            }
-
-            return var0;
-        }
-    }
-
-    private static String nullToStr(String var0) {
-        return var0 == null ? "" : var0;
-    }
-
-    /**
-     * 获取AndroidId
-     *
-     * @param var0
-     * @return
-     */
-    public static String getAndroidId(Context var0) {
-        if (!TextUtils.isEmpty(androidId)) {
-            return androidId;
-        } else {
-            try {
-                androidId = Settings.Secure.getString(var0.getContentResolver(), "android_id");
-            } catch (Exception var2) {
-                var2.printStackTrace();
-            }
-
-            return androidId;
-        }
-    }
-
-
-    /**
-     * 获取本应用的签名
-     */
-    public static String getApkSignatures(Context context) {
-        PackageManager pm = context.getPackageManager();
-        List<PackageInfo> apps = pm.getInstalledPackages(PackageManager.GET_SIGNATURES);
-        Iterator<PackageInfo> inter = apps.iterator();
-        while (inter.hasNext()) {
-            PackageInfo packageinfo = inter.next();
-            String packageName = packageinfo.packageName;
-            if (packageName.equals(context.getPackageName())) {
-                return packageinfo.signatures[0].toCharsString();
-            }
-        }
-        return null;
-    }
 
     /**
      * 获取应用的签名信息
@@ -379,80 +202,6 @@ public class AppUtil {
         }
 
         return new String(chars);
-    }
-
-
-    /**
-     * 获取应用列表
-     */
-    public static List<PackageInfo> getAllApps(Context context) {
-        PackageManager pm = context.getPackageManager();
-        List<PackageInfo> installedPackages;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            installedPackages = pm.getInstalledPackages(PackageManager.GET_SIGNING_CERTIFICATES);
-        } else {
-            installedPackages = pm.getInstalledPackages(PackageManager.GET_SIGNATURES);
-        }
-        return installedPackages;
-    }
-
-    /**
-     * 获取签名md5值
-     *
-     * @param context
-     * @param pkgName
-     * @return
-     */
-    public static byte[] getSignMd5(Context context, String pkgName) {
-        Signature[] rawSignature = getRawSignature(context, pkgName);
-        byte[] md5 = null;
-        if (rawSignature != null) {
-            md5 = getMD5(rawSignature[0].toByteArray());
-        }
-        return md5;
-    }
-
-    /**
-     * 获取packageInfo
-     *
-     * @param context
-     * @param path
-     * @return
-     */
-    public static PackageInfo getPkgInfo(Context context, String path) {
-        PackageManager pm = context.getPackageManager();
-        return pm.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES | PackageManager.GET_SIGNATURES);
-    }
-
-    private static Signature[] getRawSignature(Context context, String pkg) {
-        if ((pkg == null) || (pkg.length() == 0)) {
-            return null;
-        }
-        PackageManager localPackageManager = context.getPackageManager();
-        PackageInfo localPackageInfo;
-        try {
-            localPackageInfo = localPackageManager.getPackageInfo(pkg, PackageManager.GET_SIGNATURES);
-            if (localPackageInfo == null) {
-                return null;
-            }
-        } catch (PackageManager.NameNotFoundException localNameNotFoundException) {
-            return null;
-        }
-
-
-        return localPackageInfo.signatures;
-    }
-
-    private static byte[] getMD5(byte[] data) {
-        byte[] keyMD5 = null;
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(data);
-            keyMD5 = md.digest();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return keyMD5;
     }
 
 }
