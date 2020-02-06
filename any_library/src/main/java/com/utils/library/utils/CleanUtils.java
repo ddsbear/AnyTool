@@ -27,7 +27,7 @@ public class CleanUtils {
      * @return {@code true}: 清除成功<br>{@code false}: 清除失败
      */
     public static boolean cleanInternalCache(Context context) {
-        return FileUtils.deleteDirection(context.getCacheDir());
+        return FileUtils.deleteFilesInDir(context.getCacheDir());
     }
 
     /**
@@ -38,7 +38,7 @@ public class CleanUtils {
      * @return {@code true}: 清除成功<br>{@code false}: 清除失败
      */
     public static boolean cleanInternalFiles(Context context) {
-        return FileUtils.deleteDirection(context.getFilesDir());
+        return FileUtils.deleteFilesInDir(context.getFilesDir());
     }
 
     /**
@@ -49,7 +49,7 @@ public class CleanUtils {
      * @return {@code true}: 清除成功<br>{@code false}: 清除失败
      */
     public static boolean cleanInternalDbs(Context context) {
-        return FileUtils.deleteDirection(context.getFilesDir().getParent() + File.separator + "databases");
+        return FileUtils.deleteFilesInDir(context.getFilesDir().getParent() + File.separator + "databases");
     }
 
     /**
@@ -71,7 +71,7 @@ public class CleanUtils {
      * @return {@code true}: 清除成功<br>{@code false}: 清除失败
      */
     public static boolean cleanInternalSP(Context context) {
-        return FileUtils.deleteDirection(context.getFilesDir().getParent() + File.separator + "shared_prefs");
+        return FileUtils.deleteFilesInDir(context.getFilesDir().getParent() + File.separator + "shared_prefs");
     }
 
     /**
@@ -82,7 +82,7 @@ public class CleanUtils {
      * @return {@code true}: 清除成功<br>{@code false}: 清除失败
      */
     public static boolean cleanExternalCache(Context context) {
-        return FileDirUtil.isMountSdcard() && FileUtils.deleteDirection(context.getExternalCacheDir());
+        return FileDirUtil.isMountSdcard() && FileUtils.deleteFilesInDir(context.getExternalCacheDir());
     }
 
     /**
@@ -92,7 +92,7 @@ public class CleanUtils {
      * @return {@code true}: 清除成功<br>{@code false}: 清除失败
      */
     public static boolean cleanCustomCache(String dirPath) {
-        return FileUtils.deleteDirection(dirPath);
+        return FileUtils.deleteFilesInDir(dirPath);
     }
 
     /**
@@ -102,6 +102,6 @@ public class CleanUtils {
      * @return {@code true}: 清除成功<br>{@code false}: 清除失败
      */
     public static boolean cleanCustomCache(File dir) {
-        return FileUtils.deleteDirection(dir);
+        return FileUtils.deleteFilesInDir(dir);
     }
 }
