@@ -3,11 +3,11 @@ package com.utils.dddemo;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dds.jetpack.JetPackActivity;
 import com.utils.library.Toasts;
 import com.utils.library.permission.Permissions;
 
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     public void onPermission(View view) {
         Permissions.request(this, new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.CAMERA}, integer -> {
+                Manifest.permission.READ_EXTERNAL_STORAGE}, integer -> {
             if (integer == PackageManager.PERMISSION_GRANTED) {
                 Toasts.showShort(MainActivity.this, "成功accept : " + integer);
             } else {
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     // test JetPack
     public void onJetpack(View view) {
-        JetPackActivity.openActivity(this);
+        // JetPackActivity.openActivity(this);
 
     }
 
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // drawa
+    // drawable
     public void DrawableHelper(View view) {
         DrawHelperActivity.openActivity(this);
 
@@ -87,4 +87,11 @@ public class MainActivity extends AppCompatActivity {
     public void onNet(View view) {
         NetActivity.openActivity(this);
     }
+
+
+    public void onTest(View view) {
+        String deviceId = DeviceIdUtils.getToken(this);
+        Log.d("dds_test", deviceId);
+    }
+
 }
