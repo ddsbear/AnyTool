@@ -21,7 +21,7 @@ public class RxHttpRequestPresenter extends HttpRequestPresenter {
 
     public Observable get(String url, Map<String, String> params) {
         return Observable.create(emitter -> {
-            httpRequest.get(url, params, new ICallback() {
+            httpRequest.get(url, params, new ICallback<String>() {
                 @Override
                 public void onSuccess(String result) {
                     emitter.onNext(result);
@@ -39,7 +39,7 @@ public class RxHttpRequestPresenter extends HttpRequestPresenter {
 
     public Observable post(String url, Map<String, String> params) {
         return Observable.create(emitter -> httpRequest.post(url, params,
-                new ICallback() {
+                new ICallback<String>() {
                     @Override
                     public void onSuccess(String result) {
                         emitter.onNext(result);

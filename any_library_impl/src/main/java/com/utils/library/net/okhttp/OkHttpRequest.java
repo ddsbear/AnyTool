@@ -83,7 +83,7 @@ public class OkHttpRequest implements HttpRequest {
     }
 
     @Override
-    public void setCertificate(InputStream certificate, String pwd) {
+    public void initCertificate(InputStream certificate, String pwd) {
         okHttpClientBuilder = new OkHttpClient.Builder();
         okHttpClientBuilder.hostnameVerifier(HttpsUtils.UnSafeHostnameVerifier);
         HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory(null, certificate, pwd, null);

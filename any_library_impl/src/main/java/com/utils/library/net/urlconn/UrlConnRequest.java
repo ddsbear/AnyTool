@@ -27,7 +27,7 @@ public class UrlConnRequest implements HttpRequest {
     }
 
     @Override
-    public void setCertificate(InputStream certificate, String pwd) {
+    public void initCertificate(InputStream certificate, String pwd) {
 
     }
 }

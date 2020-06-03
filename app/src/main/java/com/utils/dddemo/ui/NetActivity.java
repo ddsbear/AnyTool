@@ -80,7 +80,7 @@ public class NetActivity extends AppCompatActivity {
                 sb.append("url:").append(url).append("\n");
                 sb.append("param:p10=").append(pks10).append("\n");
                 Log.d("dds_test", sb.toString());
-                HttpRequestPresenter.getInstance().post(url, map, new ICallback() {
+                HttpRequestPresenter.getInstance().post(url, map, new ICallback<String>() {
                     @Override
                     public void onSuccess(String result) {
                         Message message = new Message();
@@ -122,7 +122,7 @@ public class NetActivity extends AppCompatActivity {
         if (file.exists()) {
             try {
                 certificate = new FileInputStream(file);
-                HttpRequestPresenter.getInstance().setCertificate(certificate, "111111");
+                HttpRequestPresenter.getInstance().initCertificate(certificate, "111111");
                 sb.append("双向建立完成").append("\n");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -144,7 +144,7 @@ public class NetActivity extends AppCompatActivity {
         executor.execute(() -> {
             try {
                 Map<String, String> map = new HashMap<>();
-                HttpRequestPresenter.getInstance().get(url, map, new ICallback() {
+                HttpRequestPresenter.getInstance().get(url, map, new ICallback<String>() {
                     @Override
                     public void onSuccess(String result) {
                         Log.e("dds_test", result);
@@ -182,7 +182,7 @@ public class NetActivity extends AppCompatActivity {
             try {
                 Map<String, String> map = new HashMap<>();
                 map.put("param", "param");
-                HttpRequestPresenter.getInstance().get(url, map, new ICallback() {
+                HttpRequestPresenter.getInstance().get(url, map, new ICallback<String>() {
                     @Override
                     public void onSuccess(String result) {
                         Log.e("dds_test", result);
@@ -233,7 +233,7 @@ public class NetActivity extends AppCompatActivity {
                         if (file.exists()) {
                             try {
                                 certificate = new FileInputStream(file);
-                                HttpRequestPresenter.getInstance().setCertificate(certificate, "111111");
+                                HttpRequestPresenter.getInstance().initCertificate(certificate, "111111");
                                 sb.append("双向建立成功").append("\n");
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();

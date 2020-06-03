@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
 
-    private static final String TAG = "dds_DataBaseHelper";
+    private static final String TAG = DataBaseHelper.class.getSimpleName();
     private static final String DB_NAME = "tavd_enc";
     public static final int DB_VERSION = 2;
 
@@ -26,7 +26,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.beginTransaction();
         try {
             // 创建表
-           // db.execSQL(SQL_CREATE_TABLE);
+            // db.execSQL(SQL_CREATE_TABLE);
             // 添加索引
             //db.execSQL(SQL_CREATE_UNIQUE_INDEX);
             db.setTransactionSuccessful();

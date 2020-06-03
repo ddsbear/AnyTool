@@ -39,9 +39,8 @@ public class HttpRequestPresenter implements HttpRequest {
         httpRequest.post(url, params, callback);
     }
 
-    // 设置双向证书
     @Override
-    public void setCertificate(InputStream certificate, String pwd) {
-        httpRequest.setCertificate(certificate, pwd);
+    public void initCertificate(InputStream certificate, String pwd) {
+        httpRequest.initCertificate(certificate, pwd);
     }
 }
