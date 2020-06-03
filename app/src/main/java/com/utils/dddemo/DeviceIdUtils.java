@@ -9,6 +9,7 @@ import android.os.Build;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -16,7 +17,6 @@ import java.util.UUID;
 
 /**
  * Created by dds on 2020/3/2.
- * android_shuai@163.com
  * <p>
  * 获取设备唯一id
  */
@@ -38,12 +38,13 @@ public class DeviceIdUtils {
             }
             return token;
         }
+        Log.d(TAG, token);
         return token;
 
     }
 
     private static String getUUID(Context context) {
-        String serial = null;
+        String serial;
         String m_szDevIDShort = "35" +
                 Build.BOARD.length() % 10 + Build.BRAND.length() % 10 +
                 Build.CPU_ABI.length() % 10 + Build.DEVICE.length() % 10 +

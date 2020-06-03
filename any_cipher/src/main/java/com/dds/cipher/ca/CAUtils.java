@@ -69,18 +69,6 @@ public class CAUtils {
         return Base64.encode(str.toString());
     }
 
-    public static void write(String content) throws IOException {
-        //创建一个带缓冲区的输出流
-        String state = Environment.getExternalStorageState();
-        if (state.equals(Environment.MEDIA_MOUNTED)) {
-            File SDPath = Environment.getExternalStorageDirectory();//SD根目录
-            File file = new File(SDPath, "data.txt");
-            FileWriter writer = new FileWriter(file, true);
-            writer.write(content);
-            writer.close();
-        }
-    }
-
     // 合成p12证书
     public static void storeP12(PrivateKey pri, String p7, String p12Path, String p12Password) throws Exception {
         CertificateFactory factory = CertificateFactory.getInstance("X509");
@@ -95,6 +83,18 @@ public class CAUtils {
         // 加密保存p12证书
         FileOutputStream fOut = new FileOutputStream(p12Path);
         ks.store(fOut, p12Password.toCharArray());
+    }
+
+    public static void write(String content) throws IOException {
+        //创建一个带缓冲区的输出流
+        String state = Environment.getExternalStorageState();
+        if (state.equals(Environment.MEDIA_MOUNTED)) {
+            File SDPath = Environment.getExternalStorageDirectory();//SD根目录
+            File file = new File(SDPath, "data.txt");
+            FileWriter writer = new FileWriter(file, true);
+            writer.write(content);
+            writer.close();
+        }
     }
 
 

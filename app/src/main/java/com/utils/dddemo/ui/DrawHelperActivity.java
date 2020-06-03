@@ -1,4 +1,4 @@
-package com.utils.dddemo;
+package com.utils.dddemo.ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.utils.dddemo.R;
 import com.utils.library.helper.DrawableHelper;
 
 public class DrawHelperActivity extends AppCompatActivity {

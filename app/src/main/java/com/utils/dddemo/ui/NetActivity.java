@@ -1,4 +1,4 @@
-package com.utils.dddemo;
+package com.utils.dddemo.ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dds.cipher.ca.CAUtils;
 import com.dds.cipher.base64.Base64;
+import com.utils.dddemo.R;
 import com.utils.library.net.HttpRequestPresenter;
 import com.utils.library.net.ICallback;
 import com.utils.library.net.okhttp.OkHttpRequest;

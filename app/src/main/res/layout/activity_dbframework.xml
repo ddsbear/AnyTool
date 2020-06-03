@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:padding="16dp"
         android:orientation="vertical"
-        tools:context="com.utils.dddemo.DBFrameworkActivity">
+        tools:context="com.utils.dddemo.ui.DBFrameworkActivity">
 
 
     <TextView

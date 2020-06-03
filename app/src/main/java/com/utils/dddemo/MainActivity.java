@@ -8,6 +8,14 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.utils.dddemo.ui.DBFrameworkActivity;
+import com.utils.dddemo.ui.DialogActivity;
+import com.utils.dddemo.ui.DrawHelperActivity;
+import com.utils.dddemo.ui.EncDecActivity;
+import com.utils.dddemo.ui.HackActivity;
+import com.utils.dddemo.ui.LitePalActivity;
+import com.utils.dddemo.ui.NetActivity;
+import com.utils.dddemo.ui.ToastActivity;
 import com.utils.library.Toasts;
 import com.utils.library.permission.Permissions;
 

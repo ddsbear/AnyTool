@@ -100,7 +100,6 @@ public class FileDirUtil {
         return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
     }
 
-
     /**
      * 创建文件夹
      *

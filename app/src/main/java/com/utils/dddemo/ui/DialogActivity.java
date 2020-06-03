@@ -1,4 +1,4 @@
-package com.utils.dddemo;
+package com.utils.dddemo.ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.utils.dddemo.R;
 import com.utils.library.Dialogs;
 import com.utils.library.Toasts;
 

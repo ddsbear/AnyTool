@@ -1,10 +1,12 @@
-package com.utils.dddemo;
+package com.utils.dddemo.ui;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.dds.dblibrary.LitePalUtil;
+import com.utils.dddemo.App;
+import com.utils.dddemo.R;
 
 public class LitePalActivity extends AppCompatActivity {
 

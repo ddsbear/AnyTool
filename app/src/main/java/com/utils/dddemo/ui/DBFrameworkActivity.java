@@ -1,4 +1,4 @@
-package com.utils.dddemo;
+package com.utils.dddemo.ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import com.dds.dbframwork.db.DaoFactory;
 import com.dds.dbframwork.sub_db.SubDaoFactory;
 import com.dds.dbframwork.sub_db.User;
 import com.dds.dbframwork.sub_db.UserDao;
+import com.utils.dddemo.App;
+import com.utils.dddemo.R;
 import com.utils.dddemo.db.UserInfo;
 import com.utils.dddemo.db.UserInfoDao;
 

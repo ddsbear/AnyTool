@@ -23,15 +23,15 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".DrawHelperActivity" />
-        <activity android:name=".NetActivity" />
-        <activity android:name=".DBFrameworkActivity" />
+        <activity android:name=".ui.DrawHelperActivity" />
+        <activity android:name=".ui.NetActivity" />
+        <activity android:name=".ui.DBFrameworkActivity" />
 
-        <activity android:name=".LitePalActivity" />
-        <activity android:name=".EncDecActivity" />
-        <activity android:name=".DialogActivity" />
-        <activity android:name=".ToastActivity" />
-        <activity android:name=".HackActivity" />
+        <activity android:name=".ui.LitePalActivity" />
+        <activity android:name=".ui.EncDecActivity" />
+        <activity android:name=".ui.DialogActivity" />
+        <activity android:name=".ui.ToastActivity" />
+        <activity android:name=".ui.HackActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

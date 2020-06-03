@@ -1,4 +1,4 @@
-package com.utils.dddemo;
+package com.utils.dddemo.ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dds.cipher.impl_java.JavaAES;
 import com.dds.cipher.impl_java.JavaRSA;
+import com.utils.dddemo.R;
 
 public class EncDecActivity extends AppCompatActivity {
     private EditText edit;
