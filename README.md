@@ -67,26 +67,7 @@ This project includes various tools in Android development. make development fas
 
 
 
-### 2. db
-
-手撸数据库框架
-
-- [Android徒手撸数据库系列——注解与反射数据库关系模型](https://blog.csdn.net/u011077027/article/details/95646227)
-- [Android徒手撸数据库系列——实现单表的增删改查](https://blog.csdn.net/u011077027/article/details/95987608)
-- [Android徒手撸数据库系列——多用户分库的实现](https://blog.csdn.net/u011077027/article/details/96135613)
-
-
-
-
-### 3. net 
-
-相关文章
-
-
-
-
-
-### 4. cipher
+### 2. cipher
 
 加解密模块: [cipher](any_cipher)
 
