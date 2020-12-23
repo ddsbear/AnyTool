@@ -87,7 +87,7 @@ public class OkHttpRequest implements HttpRequest {
         okHttpClientBuilder = new OkHttpClient.Builder();
         okHttpClientBuilder.hostnameVerifier(HttpsUtils.UnSafeHostnameVerifier);
         HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory(null, certificate, pwd, null);
-        // 忽略证书
+        // 忽略验证服务器证书
         okHttpClientBuilder.sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager);
         this.client = okHttpClientBuilder.build();
     }

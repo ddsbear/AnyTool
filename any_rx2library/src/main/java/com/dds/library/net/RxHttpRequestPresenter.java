@@ -20,20 +20,18 @@ public class RxHttpRequestPresenter extends HttpRequestPresenter {
 
 
     public Observable get(String url, Map<String, String> params) {
-        return Observable.create(emitter -> {
-            httpRequest.get(url, params, new ICallback<String>() {
-                @Override
-                public void onSuccess(String result) {
-                    emitter.onNext(result);
-                    emitter.onComplete();
-                }
+        return Observable.create(emitter -> httpRequest.get(url, params, new ICallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                emitter.onNext(result);
+                emitter.onComplete();
+            }
 
-                @Override
-                public void onFailure(int code, Throwable t) {
-                    emitter.onError(t);
-                }
-            });
-        });
+            @Override
+            public void onFailure(int code, Throwable t) {
+                emitter.onError(t);
+            }
+        }));
 
     }
 
