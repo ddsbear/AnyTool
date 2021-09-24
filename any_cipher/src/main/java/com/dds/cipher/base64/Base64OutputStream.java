@@ -1,15 +1,11 @@
-/**
- * 项目名称：密信项目
- * 文件名称：Base64OutputStream.java
- * 版本：1.0.0
- * CopyRight:2014 联信摩贝软件（北京）有限公司
- */
+
 package com.dds.cipher.base64;
 
 import java.io.IOException;
 import java.io.OutputStream;
-
 /**
+ * Created by dds on 2018/5/30.
+ * android_shuai@163.com
  */
 public class Base64OutputStream extends OutputStream {
 

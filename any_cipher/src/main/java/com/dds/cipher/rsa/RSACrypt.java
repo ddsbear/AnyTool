@@ -34,7 +34,7 @@ public class RSACrypt {
     /**
      * 生成公钥和私钥
      *
-     * @throws Exception
+     * @throws Exception Exception
      */
     public static KeyPair generateKeys() throws Exception {
         KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(KEY_ALGORITHM);
@@ -45,9 +45,9 @@ public class RSACrypt {
     /**
      * 公钥加密
      *
-     * @param data
-     * @return
-     * @throws Exception
+     * @param data data
+     * @return String
+     * @throws RuntimeException Exception
      */
     public static String encByPub(String data, String public_key) throws RuntimeException {
         try {
@@ -67,9 +67,9 @@ public class RSACrypt {
     /**
      * 私钥解密
      *
-     * @param data
-     * @return
-     * @throws Exception
+     * @param data data
+     * @return String
+     * @throws RuntimeException Exception
      */
     public static String decByPri(String data, String private_key) throws RuntimeException {
         try {

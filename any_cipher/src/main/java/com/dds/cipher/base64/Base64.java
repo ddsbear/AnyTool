@@ -1,9 +1,4 @@
-/**
- * 项目名称：密信项目
- * 文件名称：Base64.java
- * 版本：1.0.0
- * CopyRight:2014 联信摩贝软件（北京）有限公司
- */
+
 package com.dds.cipher.base64;
 
 import java.io.ByteArrayInputStream;
@@ -17,14 +12,14 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
 /**
- *
+ * Created by dds on 2018/5/30.
+ * android_shuai@163.com
  */
 public class Base64 {
+
 	/**
-	 * <p>
 	 * Encodes a string.
 	 * </p>
-	 * <p>
 	 * Before the string is encoded in Base64, it is converted in a binary
 	 * sequence using the system default charset.
 	 * </p>
@@ -46,7 +41,6 @@ public class Base64 {
 	}
 
 	/**
-	 * <p>
 	 * Encodes a string.
 	 * </p>
 	 * <p>
@@ -63,8 +57,7 @@ public class Base64 {
 	 *             If an unexpected error occurs.
 	 * @since 1.2
 	 */
-	public static String encode(String str, String charset)
-			throws RuntimeException {
+	public static String encode(String str, String charset) throws RuntimeException {
 		byte[] bytes;
 		try {
 			bytes = str.getBytes(charset);
@@ -80,7 +73,6 @@ public class Base64 {
 	}
 
 	/**
-	 * <p>
 	 * Decodes the supplied string.
 	 * </p>
 	 * <p>
@@ -106,7 +98,6 @@ public class Base64 {
 	}
 
 	/**
-	 * <p>
 	 * Decodes the supplied string.
 	 * </p>
 	 * <p>
@@ -123,8 +114,7 @@ public class Base64 {
 	 *             If an unexpected error occurs.
 	 * @since 1.2
 	 */
-	public static String decode(String str, String charset)
-			throws RuntimeException {
+	public static String decode(String str, String charset) throws RuntimeException {
 		byte[] bytes;
 		try {
 			bytes = str.getBytes("ASCII");
@@ -140,7 +130,6 @@ public class Base64 {
 	}
 
 	/**
-	 * <p>
 	 * Encodes a binary sequence.
 	 * </p>
 	 * <p>
@@ -161,7 +150,6 @@ public class Base64 {
 	}
 
 	/**
-	 * <p>
 	 * Encodes a binary sequence, wrapping every encoded line every
 	 * <em>wrapAt</em> characters. A <em>wrapAt</em> value less than 1 disables
 	 * wrapping.
@@ -182,8 +170,7 @@ public class Base64 {
 	 *             If an unexpected error occurs.
 	 * @since 1.2
 	 */
-	public static byte[] encode(byte[] bytes, int wrapAt)
-			throws RuntimeException {
+	public static byte[] encode(byte[] bytes, int wrapAt) throws RuntimeException {
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		try {
@@ -264,8 +251,7 @@ public class Base64 {
 	 * @throws IOException
 	 *             If an I/O error occurs.
 	 */
-	public static void encode(InputStream inputStream, OutputStream outputStream)
-			throws IOException {
+	public static void encode(InputStream inputStream, OutputStream outputStream) throws IOException {
 		encode(inputStream, outputStream, 0);
 	}
 
@@ -293,8 +279,7 @@ public class Base64 {
 	 * @throws IOException
 	 *             If an I/O error occurs.
 	 */
-	public static void encode(InputStream inputStream,
-                              OutputStream outputStream, int wrapAt) throws IOException {
+	public static void encode(InputStream inputStream, OutputStream outputStream, int wrapAt) throws IOException {
 		Base64OutputStream aux = new Base64OutputStream(outputStream, wrapAt);
 		copy(inputStream, aux);
 		aux.commit();
@@ -320,8 +305,7 @@ public class Base64 {
 	 * @throws IOException
 	 *             If an I/O error occurs.
 	 */
-	public static void decode(InputStream inputStream, OutputStream outputStream)
-			throws IOException {
+	public static void decode(InputStream inputStream, OutputStream outputStream) throws IOException {
 		copy(new Base64InputStream(inputStream), outputStream);
 	}
 
@@ -343,8 +327,7 @@ public class Base64 {
 	 *             If an I/O error occurs.
 	 * @since 1.3
 	 */
-	public static void encode(File source, File target, int wrapAt)
-			throws IOException {
+	public static void encode(File source, File target, int wrapAt) throws IOException {
 		InputStream inputStream = null;
 		OutputStream outputStream = null;
 		try {
@@ -457,8 +440,7 @@ public class Base64 {
 	 * @throws IOException
 	 *             If a unexpected I/O error occurs.
 	 */
-	private static void copy(InputStream inputStream, OutputStream outputStream)
-			throws IOException {
+	private static void copy(InputStream inputStream, OutputStream outputStream) throws IOException {
 		// 1KB buffer
 		byte[] b = new byte[1024];
 		int len;

@@ -1,2 +1,7 @@
-include ':app', ':any_library', ':any_library_impl', ':any_rx2library'
+include ':app'
+include ':any_common'
 include ':any_cipher'
+// any http
+include ':any_http:basehttp'
+include ':any_http:http_impl_okhttp'
+include ':any_http:http_impl_okhttp_rx2'

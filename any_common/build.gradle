@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.browser:browser:1.0.0'
+
+
+    // other
+    // library - snack - WebContent
+    implementation 'com.google.android.material:material:1.0.0'
+
+    // glide
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+
+    // okhttp3
+    implementation 'com.squareup.okhttp3:okhttp:3.14.2'
+
+
+    // test
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2-alpha02'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

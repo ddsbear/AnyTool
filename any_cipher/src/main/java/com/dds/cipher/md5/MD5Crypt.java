@@ -10,9 +10,10 @@ import java.security.NoSuchAlgorithmException;
 public class MD5Crypt {
 
     /**
+     * md5 encrypt
      * @param b 需要加密在数据
-     * @return
-     * @throws NoSuchAlgorithmException
+     * @return md5 byte[]
+     * @throws NoSuchAlgorithmException throw
      */
     public static byte[] md5(byte[] b) throws NoSuchAlgorithmException {
         // 获得MD5摘要算法的 MessageDigest 对象

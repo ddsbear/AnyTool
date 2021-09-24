@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        package="com.utils.dddemo">
+        package="com.dds.dddemo">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -16,23 +16,23 @@
             tools:ignore="ProtectedPermissions" />
 
     <application
-            android:name=".App"
+            android:name="com.dds.dddemo.App"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.DrawHelperActivity" />
-        <activity android:name=".ui.NetActivity" />
-        <activity android:name=".ui.DBFrameworkActivity" />
+        <activity android:name="com.dds.dddemo.ui.DrawHelperActivity" />
+        <activity android:name="com.dds.dddemo.ui.NetActivity" />
 
-        <activity android:name=".ui.LitePalActivity" />
-        <activity android:name=".ui.EncDecActivity" />
-        <activity android:name=".ui.DialogActivity" />
-        <activity android:name=".ui.ToastActivity" />
-        <activity android:name=".ui.HackActivity" />
-        <activity android:name=".MainActivity">
+
+
+        <activity android:name="com.dds.dddemo.ui.EncDecActivity" />
+        <activity android:name="com.dds.dddemo.ui.DialogActivity" />
+        <activity android:name="com.dds.dddemo.ui.ToastActivity" />
+        <activity android:name="com.dds.dddemo.ui.HackActivity" />
+        <activity android:name="com.dds.dddemo.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
