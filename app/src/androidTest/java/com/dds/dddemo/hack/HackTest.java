@@ -115,7 +115,10 @@ public class HackTest {
 
     @Test
     public void hookStaticField() throws Throwable {
-        Hack.HackedTargetField field = Hack.into("com.utils.dddemo.hack.HackDemo").staticField("staticField").ofType(String.class);
+        Hack.HackedTargetField field = Hack.into("com.utils.dddemo.hack.HackDemo")
+                .staticField("staticField")
+                .ofType(String.class);
+
         field.set("dds111111111");
         Hack.HackedMethod0 constructor = Hack
                 .into("com.utils.dddemo.hack.HackDemo")

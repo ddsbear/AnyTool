@@ -1,4 +1,4 @@
-package com.dds.common.impl.urlconn;
+package com.dds.http.impl.urlconn;
 
 
 import com.dds.http.HttpRequest;

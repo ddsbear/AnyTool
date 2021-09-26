@@ -114,14 +114,14 @@ public class SDCardUtils {
     }
 
     public static class SDCardInfo {
-        boolean isExist;
-        long    totalBlocks;
-        long    freeBlocks;
-        long    availableBlocks;
-        long    blockByteSize;
-        long    totalBytes;
-        long    freeBytes;
-        long    availableBytes;
+        public boolean isExist;
+        public long totalBlocks;
+        public long freeBlocks;
+        public long availableBlocks;
+        public long blockByteSize;
+        public long totalBytes;
+        public long freeBytes;
+        public long availableBytes;
 
         @Override
         public String toString() {

@@ -28,8 +28,7 @@ public class DisplayHelper {
     /**
      * 屏幕密度,系统源码注释不推荐使用
      */
-    public static final float DENSITY = Resources.getSystem()
-            .getDisplayMetrics().density;
+    public static final float DENSITY = Resources.getSystem().getDisplayMetrics().density;
     /**
      * 屏幕密度
      */
@@ -207,7 +206,6 @@ public class DisplayHelper {
     /**
      * 是否有硬件menu
      */
-    @SuppressWarnings("SimplifiableIfStatement")
     public static boolean hasHardwareMenuKey(Context context) {
         boolean flag;
         if (Build.VERSION.SDK_INT < 11)

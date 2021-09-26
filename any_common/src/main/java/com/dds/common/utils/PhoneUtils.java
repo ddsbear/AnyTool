@@ -321,7 +321,6 @@ public class PhoneUtils {
         return list;
     }
 
-
     /**
      * 获取手机短信并保存到xml中
      * <p>需添加权限 {@code <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>}</p>

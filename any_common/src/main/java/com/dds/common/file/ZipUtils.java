@@ -1,4 +1,4 @@
-package com.dds.common.utils;
+package com.dds.common.file;
 
 import android.text.TextUtils;
 

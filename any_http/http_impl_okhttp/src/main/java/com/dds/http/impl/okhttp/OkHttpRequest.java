@@ -1,4 +1,4 @@
-package com.dds.common.impl.okhttp;
+package com.dds.http.impl.okhttp;
 
 import com.dds.http.HttpRequest;
 import com.dds.http.ICallback;

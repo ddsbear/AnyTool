@@ -1,4 +1,4 @@
-package com.dds.common.impl.okhttp;
+package com.dds.http.impl;
 
 import java.io.IOException;
 import java.io.InputStream;

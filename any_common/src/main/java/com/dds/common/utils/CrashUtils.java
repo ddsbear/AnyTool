@@ -24,8 +24,7 @@ import java.util.Locale;
  *     desc  : 崩溃相关工具类
  * </pre>
  */
-public class CrashUtils
-        implements UncaughtExceptionHandler {
+public class CrashUtils implements UncaughtExceptionHandler {
 
     private volatile static CrashUtils mInstance;
 

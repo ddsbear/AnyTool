@@ -19,7 +19,7 @@ import com.dds.cipher.ca.CAUtils;
 import com.dds.cipher.base64.Base64;
 import com.dds.dddemo.R;
 
-import com.dds.common.impl.okhttp.OkHttpRequest;
+import com.dds.http.impl.okhttp.OkHttpRequest;
 import com.dds.http.HttpRequestPresenter;
 import com.dds.http.ICallback;
 

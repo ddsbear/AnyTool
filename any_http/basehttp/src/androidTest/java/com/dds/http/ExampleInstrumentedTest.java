@@ -1,4 +1,4 @@
-package com.dds.common;
+package com.dds.http;
 
 import android.content.Context;
 
