@@ -18,9 +18,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dds.cipher.ca.CAUtils;
 import com.dds.cipher.base64.Base64;
 import com.dds.dddemo.R;
-import com.dds.http.impl.HttpRequestPresenter;
-import com.dds.http.impl.ICallback;
-import com.dds.http.impl.okhttp.OkHttpRequest;
+
+import com.dds.common.impl.okhttp.OkHttpRequest;
+import com.dds.http.HttpRequestPresenter;
+import com.dds.http.ICallback;
 
 import java.io.File;
 import java.io.FileInputStream;

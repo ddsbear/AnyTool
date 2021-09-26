@@ -6,6 +6,7 @@ import com.dds.cipher.base64.Base64;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -23,6 +24,8 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
+ * AES Encrypt/Decrypt
+ *
  * Created by dds on 2019/9/9.
  * android_shuai@163.com
  */
@@ -37,34 +40,8 @@ public class AESCrypt {
             0x00, 0x00, 0x00, 0x00,
             0x00, 0x00, 0x00, 0x00};
 
-    //togglable log option (please turn off in live!)
+    //toggleable log option (please turn off in live!)
     public static boolean DEBUG_LOG_ENABLED = true;
-
-
-    /**
-     * Generates hash of the password which is used as key
-     *
-     * @param password   password
-     * @param needDigest true:Generates hash of the password  false:no deal
-     * @param algorithm  SHA1/SHA-256/MD5
-     * @return SecretKeySpec
-     */
-    private static SecretKeySpec generateKey(final String password, boolean needDigest, String algorithm) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        byte[] bytes;
-        if (needDigest) {
-            final MessageDigest digest = MessageDigest.getInstance(algorithm);
-            byte[] bytesPwd = password.getBytes(CHARSET);
-            digest.update(bytesPwd, 0, bytesPwd.length);
-            bytes = digest.digest();
-            log(" key " + algorithm, bytes);
-        } else {
-            bytes = password.getBytes(CHARSET);
-            log("algorithm:" + algorithm + ",key ", bytes);
-        }
-
-
-        return new SecretKeySpec(bytes, "AES");
-    }
 
 
     /**
@@ -107,11 +84,10 @@ public class AESCrypt {
         }
     }
 
-
     /**
      * More flexible AES encrypt that doesn't encode
      *
-     * @param key     AES key typically 128, 192 or 256 bit
+     * @param key     AES key typically 128, 192 or 256 bit  {@link #generateKey(String, boolean, String)}
      * @param iv      Initiation Vector
      * @param message in bytes (assumed it's already been decoded)
      * @return Encrypted cipher text (not encoded)
@@ -133,7 +109,6 @@ public class AESCrypt {
         return cipherText;
     }
 
-
     /**
      * Decrypt and decode ciphertext using 256-bit AES with key generated from password
      *
@@ -143,7 +118,6 @@ public class AESCrypt {
      * @throws GeneralSecurityException if there's an issue decrypting
      */
     public static String decrypt(final String password, String base64Enc, boolean needDigest, String algorithm, String aes_mode, final byte[] iv) throws GeneralSecurityException {
-
         try {
             log("input message", base64Enc);
 
@@ -152,7 +126,7 @@ public class AESCrypt {
             byte[] decodedCipherText = Base64.decode(base64Enc.getBytes(CHARSET));
             log("Base64Dec", decodedCipherText);
 
-            byte[] decryptedBytes = decrypt(key, decodedCipherText, ivBytes, aes_mode);
+            byte[] decryptedBytes = decrypt(key, decodedCipherText, iv, aes_mode);
 
             String message = new String(decryptedBytes, CHARSET);
 
@@ -168,7 +142,6 @@ public class AESCrypt {
         }
     }
 
-
     /**
      * More flexible AES decrypt that doesn't encode
      *
@@ -178,8 +151,7 @@ public class AESCrypt {
      * @return Decrypted message cipher text (not encoded)
      * @throws GeneralSecurityException if something goes wrong during encryption
      */
-    public static byte[] decrypt(final SecretKeySpec key, final byte[] decodedCipherText, byte[] iv, String aes_mode)
-            throws GeneralSecurityException {
+    public static byte[] decrypt(final SecretKeySpec key, final byte[] decodedCipherText, byte[] iv, String aes_mode) throws GeneralSecurityException {
         final Cipher cipher = Cipher.getInstance(aes_mode);
         if (aes_mode.contains("CBC")) {
             if (iv == null) {
@@ -193,8 +165,20 @@ public class AESCrypt {
         return cipher.doFinal(decodedCipherText);
     }
 
-
-    public static String encryptFile(final String password, String srcPath, String targetDir, boolean needDigest, String algorithm, String aes_mode, final byte[] iv) throws GeneralSecurityException {
+    /**
+     * Encrypt file return target file path
+     *
+     * @param password   used to generated key
+     * @param srcPath    source file path
+     * @param targetDir  target file dir
+     * @param needDigest true:Generates hash of the password  false:no deal
+     * @param algorithm  SHA1/SHA-256/MD5
+     * @param aes_mode   CBC/ECB
+     * @param iv         Initiation Vector
+     * @return target file path
+     * @throws GeneralSecurityException if something goes wrong during encryption
+     */
+    public static String encryptFile(final String password, String srcPath, String targetDir, boolean needDigest, String algorithm, String aes_mode, final byte[] iv) throws Exception {
         File srcFile = new File(srcPath);
         if (!srcFile.exists()) {
             return null;
@@ -210,13 +194,27 @@ public class AESCrypt {
         } catch (Exception e) {
             if (DEBUG_LOG_ENABLED)
                 Log.e(TAG, "encFile Exception ", e);
-            throw new GeneralSecurityException(e);
+            throw new Exception(e);
         }
         return null;
 
     }
 
-    private static void encryptFile(final SecretKeySpec key, File source, File target, byte[] iv, String aes_mode) throws Exception {
+    /**
+     * Encrypt file
+     *
+     * @param key      AES key typically 128, 192 or 256 bit
+     * @param source   source file
+     * @param target   target file
+     * @param iv       Initiation Vector
+     * @param aes_mode CBC/ECB
+     * @throws IOException                        IOException
+     * @throws NoSuchPaddingException             NoSuchPaddingException
+     * @throws NoSuchAlgorithmException           NoSuchAlgorithmException
+     * @throws InvalidKeyException                InvalidKeyException
+     * @throws InvalidAlgorithmParameterException InvalidAlgorithmParameterException
+     */
+    private static void encryptFile(final SecretKeySpec key, File source, File target, byte[] iv, String aes_mode) throws IOException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, InvalidAlgorithmParameterException {
         FileInputStream fis = new FileInputStream(source);
         final Cipher cipher = Cipher.getInstance(aes_mode);
         if (aes_mode.contains("CBC")) {
@@ -240,7 +238,20 @@ public class AESCrypt {
         cin.close();
     }
 
-    public static String decryptFile(final String password, String srcPath, String targetDir, boolean needDigest, String algorithm, String aes_mode, final byte[] iv) throws GeneralSecurityException {
+    /**
+     * Decrypt file return target file path
+     *
+     * @param password   used to generated key
+     * @param srcPath    source file path
+     * @param targetDir  target file dir
+     * @param needDigest true:Generates hash of the password  false:no deal
+     * @param algorithm  SHA1/SHA-256/MD5
+     * @param aes_mode   CBC/ECB
+     * @param iv         Initiation Vector
+     * @return target file path
+     * @throws Exception if something goes wrong during encryption
+     */
+    public static String decryptFile(final String password, String srcPath, String targetDir, boolean needDigest, String algorithm, String aes_mode, final byte[] iv) throws Exception {
         File srcFile = new File(srcPath);
         if (!srcFile.exists()) {
             return null;
@@ -256,13 +267,27 @@ public class AESCrypt {
         } catch (Exception e) {
             if (DEBUG_LOG_ENABLED)
                 Log.e(TAG, "encFile Exception ", e);
-            throw new GeneralSecurityException(e);
+            throw new Exception(e);
         }
         return null;
 
     }
 
-    private static void decryptFile(final SecretKeySpec key, File source, File target, byte[] iv, String aes_mode) throws IOException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException {
+    /**
+     * Decrypt file
+     *
+     * @param key      AES key typically 128, 192 or 256 bit
+     * @param source   source file
+     * @param target   target file
+     * @param iv       Initiation Vector
+     * @param aes_mode CBC/ECB
+     * @throws IOException                        IOException
+     * @throws NoSuchPaddingException             NoSuchPaddingException
+     * @throws NoSuchAlgorithmException           NoSuchAlgorithmException
+     * @throws InvalidKeyException                InvalidKeyException
+     * @throws InvalidAlgorithmParameterException InvalidAlgorithmParameterException
+     */
+    private static void decryptFile(final SecretKeySpec key, File source, File target, byte[] iv, String aes_mode) throws IOException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, InvalidAlgorithmParameterException {
         FileInputStream fis = new FileInputStream(source);
         final Cipher cipher = Cipher.getInstance(aes_mode);
         if (aes_mode.contains("CBC")) {
@@ -286,6 +311,29 @@ public class AESCrypt {
         cin.close();
     }
 
+    /**
+     * Generates hash of the password which is used as key
+     *
+     * @param password   password
+     * @param needDigest true:Generates hash of the password  false:no deal
+     * @param algorithm  SHA1/SHA-256/MD5
+     * @return SecretKeySpec
+     */
+    public static SecretKeySpec generateKey(final String password, boolean needDigest, String algorithm) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        byte[] bytes;
+        if (needDigest) {
+            final MessageDigest digest = MessageDigest.getInstance(algorithm);
+            byte[] bytesPwd = password.getBytes(CHARSET);
+            digest.update(bytesPwd, 0, bytesPwd.length);
+            bytes = digest.digest();
+            log(" key " + algorithm, bytes);
+        } else {
+            bytes = password.getBytes(CHARSET);
+            log("algorithm:" + algorithm + ",key ", bytes);
+        }
+        return new SecretKeySpec(bytes, "AES");
+    }
+
     private static void log(String what, byte[] bytes) {
         if (DEBUG_LOG_ENABLED)
             Log.d(TAG, what + "[" + bytes.length + "] [" + bytesToHex(bytes) + "]");
@@ -296,7 +344,7 @@ public class AESCrypt {
             Log.d(TAG, what + "[" + value.length() + "] [" + value + "]");
     }
 
-    public static String bytesToHex(byte[] bytes) {
+    private static String bytesToHex(byte[] bytes) {
         final char[] hexArray = {'0', '1', '2', '3', '4', '5', '6', '7', '8',
                 '9', 'A', 'B', 'C', 'D', 'E', 'F'};
         char[] hexChars = new char[bytes.length * 2];
@@ -308,5 +356,6 @@ public class AESCrypt {
         }
         return new String(hexChars);
     }
+
 
 }

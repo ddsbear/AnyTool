@@ -9,8 +9,8 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dds.dddemo.R;
-import com.dds.http.Dialogs;
-import com.dds.http.Toasts;
+import com.dds.common.Dialogs;
+import com.dds.common.Toasts;
 
 public class DialogActivity extends AppCompatActivity {
     public static void openActivity(Activity activity) {

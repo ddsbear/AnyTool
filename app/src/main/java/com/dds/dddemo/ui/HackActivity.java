@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dds.dddemo.R;
 import com.dds.dddemo.hack.HackDemo;
-import com.dds.http.hack.Hack;
-import com.dds.http.Toasts;
+import com.dds.common.hack.Hack;
+import com.dds.common.Toasts;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

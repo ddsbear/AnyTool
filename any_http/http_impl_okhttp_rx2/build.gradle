@@ -32,7 +32,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation project(path: ':any_common')
+    implementation project(path: ':any_http:basehttp')
 
     implementation group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.15'
     implementation group: 'io.reactivex.rxjava2', name: 'rxandroid', version: '2.1.1'

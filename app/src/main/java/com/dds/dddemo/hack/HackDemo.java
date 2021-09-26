@@ -2,7 +2,7 @@ package com.dds.dddemo.hack;
 
 import android.util.Log;
 
-import com.dds.http.log.LogA;
+import com.dds.common.log.LogA;
 
 public class HackDemo {
     private int mIntField;

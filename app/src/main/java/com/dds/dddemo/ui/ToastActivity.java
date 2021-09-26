@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.dds.dddemo.R;
-import com.dds.http.snack.SnackBars;
-import com.dds.http.Toasts;
+import com.dds.common.snack.SnackBars;
+import com.dds.common.Toasts;
 
 public class ToastActivity extends AppCompatActivity {
 

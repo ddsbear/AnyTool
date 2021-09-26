@@ -2,7 +2,7 @@ package com.dds.dddemo.hack;
 
 import androidx.test.runner.AndroidJUnit4;
 
-import com.dds.http.hack.Hack;
+import com.dds.common.hack.Hack;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

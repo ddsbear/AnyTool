@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.dds.dddemo.R;
-import com.dds.http.helper.DrawableHelper;
+import com.dds.common.helper.DrawableHelper;
 
 public class DrawHelperActivity extends AppCompatActivity {
 

@@ -14,8 +14,8 @@ import com.dds.dddemo.ui.EncDecActivity;
 import com.dds.dddemo.ui.HackActivity;
 import com.dds.dddemo.ui.NetActivity;
 import com.dds.dddemo.ui.ToastActivity;
-import com.dds.http.Toasts;
-import com.dds.http.permission.Permissions;
+import com.dds.common.Toasts;
+import com.dds.common.permission.Permissions;
 
 public class MainActivity extends AppCompatActivity {
 
