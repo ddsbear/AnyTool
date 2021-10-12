@@ -23,7 +23,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * IAes Encrypt/Decrypt
+ * AES Encrypt/Decrypt
  *
  * Created by dds on 2019/9/9.
  * android_shuai@163.com
@@ -44,7 +44,7 @@ public class AESCrypt {
 
 
     /**
-     * Encrypt and encode message using 256-bit IAes with key generated from password.
+     * Encrypt and encode message using 256-bit AES with key generated from password.
      *
      * @param password   used to generated key
      * @param message    the thing you want to encrypt assumed String UTF-8
@@ -84,9 +84,9 @@ public class AESCrypt {
     }
 
     /**
-     * More flexible IAes encrypt that doesn't encode
+     * More flexible AES encrypt that doesn't encode
      *
-     * @param key     IAes key typically 128, 192 or 256 bit  {@link #generateKey(String, boolean, String)}
+     * @param key     AES key typically 128, 192 or 256 bit  {@link #generateKey(String, boolean, String)}
      * @param iv      Initiation Vector
      * @param message in bytes (assumed it's already been decoded)
      * @return Encrypted cipher text (not encoded)
@@ -104,12 +104,12 @@ public class AESCrypt {
             cipher.init(Cipher.ENCRYPT_MODE, key);
         }
         byte[] cipherText = cipher.doFinal(message);
-        log("IAes enc result", cipherText);
+        log("AES enc result", cipherText);
         return cipherText;
     }
 
     /**
-     * Decrypt and decode ciphertext using 256-bit IAes with key generated from password
+     * Decrypt and decode ciphertext using 256-bit AES with key generated from password
      *
      * @param password  used to generated key
      * @param base64Enc the encrpyted message encoded with base64
@@ -129,7 +129,7 @@ public class AESCrypt {
 
             String message = new String(decryptedBytes, CHARSET);
 
-            log("IAes dec result", message);
+            log("AES dec result", message);
 
 
             return message;
@@ -142,9 +142,9 @@ public class AESCrypt {
     }
 
     /**
-     * More flexible IAes decrypt that doesn't encode
+     * More flexible AES decrypt that doesn't encode
      *
-     * @param key               IAes key typically 128, 192 or 256 bit
+     * @param key               AES key typically 128, 192 or 256 bit
      * @param iv                Initiation Vector
      * @param decodedCipherText in bytes (assumed it's already been decoded)
      * @return Decrypted message cipher text (not encoded)
@@ -202,7 +202,7 @@ public class AESCrypt {
     /**
      * Encrypt file
      *
-     * @param key      IAes key typically 128, 192 or 256 bit
+     * @param key      AES key typically 128, 192 or 256 bit
      * @param source   source file
      * @param target   target file
      * @param iv       Initiation Vector
@@ -275,7 +275,7 @@ public class AESCrypt {
     /**
      * Decrypt file
      *
-     * @param key      IAes key typically 128, 192 or 256 bit
+     * @param key      AES key typically 128, 192 or 256 bit
      * @param source   source file
      * @param target   target file
      * @param iv       Initiation Vector
@@ -330,7 +330,7 @@ public class AESCrypt {
             bytes = password.getBytes(CHARSET);
             log("algorithm:" + algorithm + ",key ", bytes);
         }
-        return new SecretKeySpec(bytes, "IAes");
+        return new SecretKeySpec(bytes, "AES");
     }
 
     private static void log(String what, byte[] bytes) {

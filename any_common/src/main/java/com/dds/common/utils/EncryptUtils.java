@@ -808,6 +808,7 @@ public class EncryptUtils {
             SecretKeySpec keySpec = new SecretKeySpec(key, algorithm);
             Cipher cipher = Cipher.getInstance(transformation);
             SecureRandom random = new SecureRandom();
+         
             cipher.init(isEncrypt ? Cipher.ENCRYPT_MODE : Cipher.DECRYPT_MODE, keySpec, random);
             return cipher.doFinal(data);
         } catch (Throwable e) {
