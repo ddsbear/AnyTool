@@ -3,10 +3,10 @@ package com.dds.cipher.impl;
 import java.io.InputStream;
 
 /**
+ * Aes加解密接口
  * Created by dds on 2018/5/30.
  * android_shuai@163.com
  */
-
 public interface IAes {
 
     String encText(String sSrc, String sKey);

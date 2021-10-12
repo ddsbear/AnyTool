@@ -22,9 +22,9 @@ import javax.crypto.Cipher;
 public class RSACrypt {
 
     //加密算法RSA
-    private static final String KEY_ALGORITHM = "IRsa";
+    private static final String KEY_ALGORITHM = "RSA";
 
-    private static final String TRANSFORMATION = "IRsa/ECB/PKCS1Padding";
+    private static final String TRANSFORMATION = "RSA/ECB/PKCS1Padding";
 
     private static final int keySize = 2048;
 
@@ -97,7 +97,7 @@ public class RSACrypt {
     public static String sign(String data, PrivateKey privateKey) throws Exception {
         byte[] keyBytes = privateKey.getEncoded();
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance("IRsa");
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         PrivateKey key = keyFactory.generatePrivate(keySpec);
         Signature signature = Signature.getInstance("MD5withRSA");
         signature.initSign(key);
@@ -116,7 +116,7 @@ public class RSACrypt {
     public static boolean verify(String srcData, PublicKey publicKey, String sign) throws Exception {
         byte[] keyBytes = publicKey.getEncoded();
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance("IRsa");
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         PublicKey key = keyFactory.generatePublic(keySpec);
         Signature signature = Signature.getInstance("MD5withRSA");
         signature.initVerify(key);

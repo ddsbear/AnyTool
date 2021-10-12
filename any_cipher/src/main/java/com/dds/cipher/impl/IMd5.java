@@ -1,13 +1,6 @@
 package com.dds.cipher.impl;
 
-/**
- * @Author: dongss
- * @CreateDate: 2021/10/12
- * ========================================
- * CopyRight (c) 2021 DDS.Co.Ltd.
- * All rights reserved.
- * <p>
- */
+
 public interface IMd5 {
     /**
      * 一次 md5
