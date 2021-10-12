@@ -1,7 +1,5 @@
 package com.dds.cipher;
 
-import com.dds.cipher.impl.JavaMd5;
-
 import org.junit.Test;
 
 /**
@@ -14,7 +12,7 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         // assertEquals(4, 2 + 2);
 
-        JavaMd5 javaMd5 = new JavaMd5();
+        Md5Cipher javaMd5 = new Md5Cipher();
         String s = javaMd5.Md5("111111");
 
         System.out.println("md5 16:" + s.substring(8, 24));

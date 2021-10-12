@@ -1,6 +1,7 @@
-package com.dds.cipher.impl;
+package com.dds.cipher;
 
 import com.dds.cipher.base64.Base64;
+import com.dds.cipher.impl.IRsa;
 import com.dds.cipher.rsa.RSACrypt;
 
 import java.io.ByteArrayInputStream;

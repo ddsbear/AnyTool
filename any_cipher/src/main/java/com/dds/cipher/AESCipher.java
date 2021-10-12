@@ -1,6 +1,7 @@
-package com.dds.cipher.impl;
+package com.dds.cipher;
 
 import com.dds.cipher.aes.AESCrypt;
+import com.dds.cipher.impl.IAes;
 
 import java.io.InputStream;
 import java.security.GeneralSecurityException;

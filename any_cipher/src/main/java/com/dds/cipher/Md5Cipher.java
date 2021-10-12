@@ -1,6 +1,6 @@
-package com.dds.cipher.impl;
+package com.dds.cipher;
 
-import com.dds.cipher.md5.MD5;
+import com.dds.cipher.impl.IMd5;
 import com.dds.cipher.md5.MD5Crypt;
 import com.dds.cipher.util.ByteUtil;
 
@@ -13,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
  * Created by dds on 2019/9/9.
  * android_shuai@163.com
  */
-public class JavaMd5 implements MD5 {
+public class Md5Cipher implements IMd5 {
 
     @Override
     public String Md5(String str) {

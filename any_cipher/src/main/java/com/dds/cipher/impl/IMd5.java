@@ -1,12 +1,14 @@
-package com.dds.cipher.md5;
+package com.dds.cipher.impl;
 
 /**
- * Created by dds on 2018/5/30.
- * android_shuai@163.com
+ * @Author: dongss
+ * @CreateDate: 2021/10/12
+ * ========================================
+ * CopyRight (c) 2021 DDS.Co.Ltd.
+ * All rights reserved.
+ * <p>
  */
-
-public interface MD5 {
-
+public interface IMd5 {
     /**
      * 一次 md5
      *

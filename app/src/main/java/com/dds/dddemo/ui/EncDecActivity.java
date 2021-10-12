@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dds.cipher.impl.RSACipher;
+import com.dds.cipher.RSACipher;
 import com.dds.dddemo.R;
 
 public class EncDecActivity extends AppCompatActivity {
