@@ -1,4 +1,4 @@
-package com.dds.cipher.impl_java;
+package com.dds.cipher.impl;
 
 import com.dds.cipher.md5.MD5;
 import com.dds.cipher.md5.MD5Crypt;

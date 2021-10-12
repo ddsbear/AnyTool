@@ -6,7 +6,6 @@ import com.dds.cipher.base64.Base64;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -24,13 +23,13 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * AES Encrypt/Decrypt
+ * IAes Encrypt/Decrypt
  *
  * Created by dds on 2019/9/9.
  * android_shuai@163.com
  */
 public class AESCrypt {
-    private static final String TAG = "dds_AESCrypt";
+    private static final String TAG = "AESCrypt";
     private static final String CHARSET = "UTF-8";
 
     //AESCrypt-ObjC uses blank IV (not the best security, but the aim here is compatibility)
@@ -45,7 +44,7 @@ public class AESCrypt {
 
 
     /**
-     * Encrypt and encode message using 256-bit AES with key generated from password.
+     * Encrypt and encode message using 256-bit IAes with key generated from password.
      *
      * @param password   used to generated key
      * @param message    the thing you want to encrypt assumed String UTF-8
@@ -75,7 +74,7 @@ public class AESCrypt {
 
             String encoded = new String(Base64.encode(cipherText), CHARSET);
 
-            log("Base64Enc", encoded);
+            log("base64Enc result", encoded);
             return encoded;
         } catch (UnsupportedEncodingException e) {
             if (DEBUG_LOG_ENABLED)
@@ -85,9 +84,9 @@ public class AESCrypt {
     }
 
     /**
-     * More flexible AES encrypt that doesn't encode
+     * More flexible IAes encrypt that doesn't encode
      *
-     * @param key     AES key typically 128, 192 or 256 bit  {@link #generateKey(String, boolean, String)}
+     * @param key     IAes key typically 128, 192 or 256 bit  {@link #generateKey(String, boolean, String)}
      * @param iv      Initiation Vector
      * @param message in bytes (assumed it's already been decoded)
      * @return Encrypted cipher text (not encoded)
@@ -105,12 +104,12 @@ public class AESCrypt {
             cipher.init(Cipher.ENCRYPT_MODE, key);
         }
         byte[] cipherText = cipher.doFinal(message);
-        log("AesEnc", cipherText);
+        log("IAes enc result", cipherText);
         return cipherText;
     }
 
     /**
-     * Decrypt and decode ciphertext using 256-bit AES with key generated from password
+     * Decrypt and decode ciphertext using 256-bit IAes with key generated from password
      *
      * @param password  used to generated key
      * @param base64Enc the encrpyted message encoded with base64
@@ -124,13 +123,13 @@ public class AESCrypt {
             final SecretKeySpec key = generateKey(password, needDigest, algorithm);
 
             byte[] decodedCipherText = Base64.decode(base64Enc.getBytes(CHARSET));
-            log("Base64Dec", decodedCipherText);
+            log("base64Dec", decodedCipherText);
 
             byte[] decryptedBytes = decrypt(key, decodedCipherText, iv, aes_mode);
 
             String message = new String(decryptedBytes, CHARSET);
 
-            log("AesDec", message);
+            log("IAes dec result", message);
 
 
             return message;
@@ -143,9 +142,9 @@ public class AESCrypt {
     }
 
     /**
-     * More flexible AES decrypt that doesn't encode
+     * More flexible IAes decrypt that doesn't encode
      *
-     * @param key               AES key typically 128, 192 or 256 bit
+     * @param key               IAes key typically 128, 192 or 256 bit
      * @param iv                Initiation Vector
      * @param decodedCipherText in bytes (assumed it's already been decoded)
      * @return Decrypted message cipher text (not encoded)
@@ -203,7 +202,7 @@ public class AESCrypt {
     /**
      * Encrypt file
      *
-     * @param key      AES key typically 128, 192 or 256 bit
+     * @param key      IAes key typically 128, 192 or 256 bit
      * @param source   source file
      * @param target   target file
      * @param iv       Initiation Vector
@@ -276,7 +275,7 @@ public class AESCrypt {
     /**
      * Decrypt file
      *
-     * @param key      AES key typically 128, 192 or 256 bit
+     * @param key      IAes key typically 128, 192 or 256 bit
      * @param source   source file
      * @param target   target file
      * @param iv       Initiation Vector
@@ -326,12 +325,12 @@ public class AESCrypt {
             byte[] bytesPwd = password.getBytes(CHARSET);
             digest.update(bytesPwd, 0, bytesPwd.length);
             bytes = digest.digest();
-            log(" key " + algorithm, bytes);
+            log("digest key " + algorithm, bytes);
         } else {
             bytes = password.getBytes(CHARSET);
             log("algorithm:" + algorithm + ",key ", bytes);
         }
-        return new SecretKeySpec(bytes, "AES");
+        return new SecretKeySpec(bytes, "IAes");
     }
 
     private static void log(String what, byte[] bytes) {

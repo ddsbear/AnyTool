@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_height="match_parent"
+    tools:context=".ui.MediaPlayerActivity">
+
+    <Button
+        android:layout_width="match_parent"
+        android:onClick="pre"
+        android:text="上一首"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_width="match_parent"
+        android:text="下一首"
+        android:onClick="next"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:text="停止播放"
+        android:onClick="stop"
+        android:layout_height="wrap_content"
+        tools:ignore="OnClick" />
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_margin="5dp"
+        android:text="播放状态"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

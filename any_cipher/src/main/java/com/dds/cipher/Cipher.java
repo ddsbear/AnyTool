@@ -1,40 +1,37 @@
 package com.dds.cipher;
 
-import com.dds.cipher.aes.AES;
-import com.dds.cipher.impl_java.JavaAES;
-import com.dds.cipher.impl_java.JavaMd5;
-import com.dds.cipher.impl_java.JavaRSA;
+import com.dds.cipher.impl.JavaMd5;
+import com.dds.cipher.impl.RSACipher;
 import com.dds.cipher.md5.MD5;
-import com.dds.cipher.rsa.RSA;
+import com.dds.cipher.impl.IRsa;
 
 /**
  * Created by dds on 2019/10/25.
  * android_shuai@163.com
  */
 public class Cipher {
-    private static AES mAes;
-    private static RSA mRsa;
+
+    private static IRsa mRsa;
     private static MD5 mMd5;
 
     public static void initDefault() {
-        mAes = new JavaAES(32);
-        mRsa = new JavaRSA(2048);
+        mRsa = new RSACipher(2048);
         mMd5 = new JavaMd5();
     }
 
-    // ------------------AES--------------------------
+    // ------------------IAes--------------------------
 
 
-    // ------------------RSA--------------------------
+    // ------------------IRsa--------------------------
 
 
     // ------------------sha256-----------------------
 
 
-    // ------------------SM4----AES----------------------
+    // ------------------SM4----IAes----------------------
 
 
-    // ------------------SM2-----RSA---------------------
+    // ------------------SM2-----IRsa---------------------
 
 
     // ------------------SM3------sha256------------------

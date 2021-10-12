@@ -12,6 +12,7 @@ import com.dds.dddemo.ui.DialogActivity;
 import com.dds.dddemo.ui.DrawHelperActivity;
 import com.dds.dddemo.ui.EncDecActivity;
 import com.dds.dddemo.ui.HackActivity;
+import com.dds.dddemo.ui.MediaPlayerActivity;
 import com.dds.dddemo.ui.NetActivity;
 import com.dds.dddemo.ui.ToastActivity;
 import com.dds.common.Toasts;
@@ -85,8 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onTest(View view) {
-        String deviceId = DeviceIdUtils.getToken(this);
-        Log.d("dds_test", deviceId);
+        MediaPlayerActivity.openActivity(this);
     }
 
 }

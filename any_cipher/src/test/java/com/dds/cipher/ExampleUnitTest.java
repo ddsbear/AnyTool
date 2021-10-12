@@ -1,8 +1,6 @@
 package com.dds.cipher;
 
-import com.dds.cipher.aes.AES;
-import com.dds.cipher.impl_java.JavaAES;
-import com.dds.cipher.impl_java.JavaMd5;
+import com.dds.cipher.impl.JavaMd5;
 
 import org.junit.Test;
 
@@ -30,16 +28,5 @@ public class ExampleUnitTest {
 
     @Test
     public void aes() {
-
-        AES cipher = new JavaAES(32);
-
-        String text = "哈哈哈";
-        String key = "123456";
-        String s = cipher.encText(text, key);
-        System.out.println("src:" + text + ",key：" + key);
-        System.out.println("加密 result:" + s);
-
-        String s1 = cipher.decText(s, key, 32);
-        System.out.println("解密 result:" + s1);
     }
 }

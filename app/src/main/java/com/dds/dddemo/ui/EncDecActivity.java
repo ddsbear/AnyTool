@@ -9,8 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dds.cipher.impl_java.JavaAES;
-import com.dds.cipher.impl_java.JavaRSA;
+import com.dds.cipher.impl.RSACipher;
 import com.dds.dddemo.R;
 
 public class EncDecActivity extends AppCompatActivity {
@@ -65,14 +64,14 @@ public class EncDecActivity extends AppCompatActivity {
     String decContent = "";
 
     public void rsaEnc(View view) {
-        JavaRSA rsa = new JavaRSA(2048);
+        RSACipher rsa = new RSACipher(2048);
         String s = rsa.encByPubKey(content, pubkey);
         decContent = s;
         text.setText(s);
     }
 
     public void rsaDec(View view) {
-        JavaRSA rsa = new JavaRSA(2048);
+        RSACipher rsa = new RSACipher(2048);
         String s = rsa.decByPriKey(decContent, priKey, pwd);
         text.setText(s);
     }
@@ -88,14 +87,10 @@ public class EncDecActivity extends AppCompatActivity {
 
 
     public void aesEnc(View view) {
-        JavaAES aes = new JavaAES(32);
-        String s = aes.encText(aesContent, aesKey);
-        text.setText(s);
+
     }
 
     public void aesDec(View view) {
-        JavaAES aes = new JavaAES(32);
-        String s = aes.decText(aesDecContent, aesDecKey, 32);
-        text.setText(s);
+
     }
 }

@@ -1,6 +1,5 @@
-package com.dds.cipher.impl_java;
+package com.dds.cipher.impl;
 
-import com.dds.cipher.rsa.RSA;
 import com.dds.cipher.base64.Base64;
 import com.dds.cipher.rsa.RSACrypt;
 
@@ -16,11 +15,11 @@ import java.util.Enumeration;
  * Created by dds on 2019/9/3.
  * android_shuai@163.com
  */
-public class JavaRSA implements RSA {
+public class RSACipher implements IRsa {
 
     private int length;
 
-    public JavaRSA(int length) {
+    public RSACipher(int length) {
         this.length = length;
     }
 

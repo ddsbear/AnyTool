@@ -34,7 +34,7 @@ public class CAUtils {
 
     // 生成KeyPair
     public static KeyPair generateKeyPair() throws NoSuchAlgorithmException {
-        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("IRsa");
         keyPairGenerator.initialize(2048);
         return keyPairGenerator.genKeyPair();
 

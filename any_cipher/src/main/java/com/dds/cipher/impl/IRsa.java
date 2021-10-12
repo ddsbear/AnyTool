@@ -1,4 +1,4 @@
-package com.dds.cipher.rsa;
+package com.dds.cipher.impl;
 
 /**
  * Created by dds on 2018/5/30.
@@ -7,7 +7,7 @@ package com.dds.cipher.rsa;
  * RSA加密接口
  */
 
-public interface RSA {
+public interface IRsa {
 
     KeyPair generateAsymmetricKey();
 

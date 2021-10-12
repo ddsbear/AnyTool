@@ -1,6 +1,5 @@
-package com.dds.cipher.impl_java;
+package com.dds.cipher.impl;
 
-import com.dds.cipher.aes.AES;
 import com.dds.cipher.aes.AESCrypt;
 
 import java.io.InputStream;
@@ -10,20 +9,14 @@ import java.security.GeneralSecurityException;
  * Created by dds on 2019/9/3.
  * android_shuai@163.com
  */
-public class JavaAES implements AES {
-
-    private int length;
-
-    public JavaAES(int length) {
-        this.length = length;
-    }
+public class AESCipher implements IAes {
 
     @Override
     public String encText(String sSrc, String sKey) {
         try {
             return AESCrypt.encrypt(sKey, sSrc,
                     false, null,
-                    "AES/ECB/NoPadding", null);
+                    "IAes/ECB/NoPadding", null);
         } catch (GeneralSecurityException e) {
             e.printStackTrace();
         }
@@ -36,7 +29,7 @@ public class JavaAES implements AES {
 
             return AESCrypt.decrypt(sKey, sSrc,
                     false, null,
-                    "AES/ECB/NoPadding", null);
+                    "IAes/ECB/NoPadding", null);
         } catch (GeneralSecurityException e) {
             e.printStackTrace();
         }
@@ -63,14 +56,5 @@ public class JavaAES implements AES {
         return new byte[0];
     }
 
-    @Override
-    public String generateRandomCharAndNumber() {
-        return null;
-    }
 
-    @Override
-    public void setKeyLength(int length) {
-        this.length = length;
-
-    }
 }

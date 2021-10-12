@@ -42,98 +42,6 @@ public class ExampleInstrumentedTest {
         assertEquals("com.dds.cipher.test", appContext.getPackageName());
     }
 
-
-    @Test
-    public void testAESECBNoPadding() throws Exception {
-        String content = "欢迎来到 any_cipher";
-        String key = "123456";
-        //========================NoPadding test =================================
-        String encrypt = AESCrypt.encrypt(key, content,
-                true, "SHA-256",
-                "AES/ECB/NoPadding", null);
-
-        Log.d(TAG, "encrypt result-------------->：" + encrypt);
-
-        String result = AESCrypt.decrypt(key, encrypt,
-                true, "SHA-256",
-                "AES/ECB/NoPadding", null);
-
-        Log.d(TAG, "decrypt result-------------->：" + result);
-
-        assertEquals(result.trim(), content);
-
-
-    }
-
-    @Test
-    public void testAESCBCPKCS5Padding() throws Exception {
-        //========================PKCS5Padding ==================================
-        String content = "欢迎来到any_cipher";
-        String key = "123456";
-        String encrypt1 = AESCrypt.encrypt(key, content,
-                true, "SHA-256",
-                "AES/CBC/PKCS5Padding", ivBytes);
-
-
-        Log.d(TAG, "result------------>：" + encrypt1);
-
-        String result1 = AESCrypt.decrypt(key, encrypt1,
-                true, "SHA-256",
-                "AES/CBC/PKCS5Padding", ivBytes);
-
-        Log.d(TAG, "result------------>：" + result1);
-
-        assertEquals(result1.trim(), content);
-        //========================PKCS7Padding test ==================================
-
-        // 1. pkcs7padding和pkcs5padding的区别在于pkcs7padding的块大小不固定
-
-        String encrypt2 = AESCrypt.encrypt(key, content,
-                true, "SHA-256",
-                "AES/ECB/PKCS7Padding", null);
-
-
-        Log.d(TAG, "加密出内容：" + encrypt2);
-
-        String result2 = AESCrypt.decrypt(key, encrypt2,
-                true, "SHA-256",
-                "AES/ECB/PKCS7Padding", null);
-
-        Log.d(TAG, "解密出内容：" + result2);
-
-        assertEquals(result2.trim(), content);
-
-    }
-
-    @Test
-    public void testAESFile() throws Exception {
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        File srcFile = new File(appContext.getFilesDir(), "test.txt");
-        // 创建一个文件并写入内容
-        Utils.writeFile("hello world", srcFile.getAbsolutePath(), false);
-        String key = "123456";
-        File encDir = new File(appContext.getFilesDir(), "a_enc");
-        if (!encDir.exists()) {
-            encDir.mkdirs();
-        }
-        String s = AESCrypt.encryptFile(key, srcFile.getAbsolutePath(), encDir.getAbsolutePath(),
-                true, "SHA-256", "AES/ECB/PKCS5Padding", null);
-        if (s != null) {
-            String s1 = Utils.readFile(s);
-            Log.d(TAG, "enc result------>" + s1);
-        }
-        File decDir = new File(appContext.getFilesDir(), "a_dec");
-        if (!decDir.exists()) {
-            decDir.mkdirs();
-        }
-        String s2 = AESCrypt.decryptFile(key, s, decDir.getAbsolutePath(),
-                true, "SHA-256", "AES/ECB/PKCS5Padding", null);
-        if (s2 != null) {
-            String s3 = Utils.readFile(s2);
-            Log.d(TAG, "dec result------>" + s3);
-        }
-    }
-
     @Test
     public void testAES2() throws Exception {
         String content = "123456";
@@ -142,12 +50,12 @@ public class ExampleInstrumentedTest {
 
         String encrypt = AESCrypt.encrypt(key, content,
                 false, null,
-                "AES/ECB/PKCS5Padding", null);
+                "IAes/ECB/PKCS5Padding", null);
         Log.d(TAG, "加密出内容：" + encrypt);
 
         String decrypt = AESCrypt.decrypt(key, content,
                 false, null,
-                "AES/ECB/PKCS5Padding", null);
+                "IAes/ECB/PKCS5Padding", null);
         Log.d(TAG, "解密出内容：" + decrypt);
 
         assertEquals("123456", decrypt.trim());
