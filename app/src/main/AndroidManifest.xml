@@ -29,8 +29,6 @@
             android:name=".ui.MediaPlayerActivity"
             android:exported="true" />
         <activity android:name=".ui.DrawHelperActivity" />
-        <activity android:name=".ui.NetActivity" />
-        <activity android:name=".ui.EncDecActivity" />
         <activity android:name=".ui.DialogActivity" />
         <activity android:name=".ui.ToastActivity" />
         <activity android:name=".ui.HackActivity" />

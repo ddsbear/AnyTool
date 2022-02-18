@@ -42,9 +42,6 @@ dependencies {
     implementation 'net.sourceforge.streamsupport:android-retrofuture:1.7.1'
     implementation project(path: ':any_common')
 
-    implementation project(path: ':any_http:basehttp')
-    implementation project(path: ':any_http:http_impl_okhttp')
-    implementation project(path: ':any_http:http_impl_okhttp_rx2')
 
 
 }

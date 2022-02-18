@@ -1,7 +1,3 @@
 include ':app'
 include ':any_common'
 
-// any http
-include ':any_http:basehttp'
-include ':any_http:http_impl_okhttp'
-include ':any_http:http_impl_okhttp_rx2'

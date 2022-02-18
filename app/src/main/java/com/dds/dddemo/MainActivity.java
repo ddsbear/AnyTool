@@ -3,20 +3,17 @@ package com.dds.dddemo;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dds.dddemo.ui.DialogActivity;
-import com.dds.dddemo.ui.DrawHelperActivity;
-import com.dds.dddemo.ui.EncDecActivity;
-import com.dds.dddemo.ui.HackActivity;
-import com.dds.dddemo.ui.MediaPlayerActivity;
-import com.dds.dddemo.ui.NetActivity;
-import com.dds.dddemo.ui.ToastActivity;
 import com.dds.common.Toasts;
 import com.dds.common.permission.Permissions;
+import com.dds.dddemo.ui.DialogActivity;
+import com.dds.dddemo.ui.DrawHelperActivity;
+import com.dds.dddemo.ui.HackActivity;
+import com.dds.dddemo.ui.MediaPlayerActivity;
+import com.dds.dddemo.ui.ToastActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,12 +55,6 @@ public class MainActivity extends AppCompatActivity {
         HackActivity.openActivity(this);
     }
 
-    // enc dec
-    public void onEncDec(View view) {
-        EncDecActivity.openActivity(this);
-
-    }
-
 
     // test JetPack
     public void onJetpack(View view) {
@@ -77,11 +68,6 @@ public class MainActivity extends AppCompatActivity {
         DrawHelperActivity.openActivity(this);
 
 
-    }
-
-    // 测试网络
-    public void onNet(View view) {
-        NetActivity.openActivity(this);
     }
 
 
