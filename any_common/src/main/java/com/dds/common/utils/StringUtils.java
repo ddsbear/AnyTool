@@ -1,5 +1,14 @@
 package com.dds.common.utils;
 
+import android.content.Context;
+import android.content.res.Resources;
+
+import androidx.annotation.ArrayRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
+import java.util.IllegalFormatException;
+
 /**
  * <pre>
  *     time  : 2016/8/16
@@ -168,5 +177,67 @@ public class StringUtils {
             }
         }
         return new String(chars);
+    }
+
+    /**
+     * Return the string value associated with a particular resource ID.
+     *
+     * @param id The desired resource identifier.
+     * @return the string value associated with a particular resource ID.
+     */
+    public static String getString(Context context,@StringRes int id) {
+        return getString(context,id, (Object[]) null);
+    }
+
+    /**
+     * Return the string value associated with a particular resource ID.
+     *
+     * @param id         The desired resource identifier.
+     * @param formatArgs The format arguments that will be used for substitution.
+     * @return the string value associated with a particular resource ID.
+     */
+    public static String getString(Context context,@StringRes int id, Object... formatArgs) {
+        try {
+            return format(context.getString(id), formatArgs);
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+            return String.valueOf(id);
+        }
+    }
+
+    /**
+     * Return the string array associated with a particular resource ID.
+     *
+     * @param id The desired resource identifier.
+     * @return The string array associated with the resource.
+     */
+    public static String[] getStringArray(Context context,@ArrayRes int id) {
+        try {
+            return context.getResources().getStringArray(id);
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+            return new String[]{String.valueOf(id)};
+        }
+    }
+
+    /**
+     * Format the string.
+     *
+     * @param str  The string.
+     * @param args The args.
+     * @return a formatted string.
+     */
+    public static String format(@Nullable String str, Object... args) {
+        String text = str;
+        if (text != null) {
+            if (args != null && args.length > 0) {
+                try {
+                    text = String.format(str, args);
+                } catch (IllegalFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return text;
     }
 }

@@ -15,9 +15,9 @@ import java.util.List;
  *     desc  : Activity相关工具类
  * </pre>
  */
-public class ActivityUtils {
+public class ActivityUtils2 {
 
-    private ActivityUtils() {
+    private ActivityUtils2() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
