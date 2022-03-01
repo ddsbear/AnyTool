@@ -1,4 +1,4 @@
-package com.dds.common.utils;
+package com.dds.common.net;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

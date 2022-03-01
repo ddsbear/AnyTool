@@ -8,17 +8,12 @@ import android.content.DialogInterface;
 
 import androidx.annotation.CheckResult;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.annotation.StringRes;
-
-import static android.os.Build.VERSION_CODES.LOLLIPOP;
 
 /**
  * @author dds
  */
-@RequiresApi(LOLLIPOP)
 public class Dialogs {
-
     /**
      * Create an non-cancellable alert dialog builder.
      */
@@ -86,9 +81,8 @@ public class Dialogs {
             return this;
         }
 
-        public FluentProgressDialog start() {
+        public void start() {
             super.show();
-            return this;
         }
     }
 }

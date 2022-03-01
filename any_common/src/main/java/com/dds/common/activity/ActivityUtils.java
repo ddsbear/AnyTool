@@ -1,4 +1,4 @@
-package com.dds.common.utils;
+package com.dds.common.activity;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -61,7 +61,7 @@ public class ActivityUtils {
     }
 
     /**
-     * 获取launcher activity
+     * 获取launcher activity 名字
      *
      * @param context     上下文
      * @param packageName 包名

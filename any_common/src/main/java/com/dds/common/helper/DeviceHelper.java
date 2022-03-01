@@ -11,7 +11,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
-import com.dds.common.io.IoUtils;
+import com.dds.common.io.CloseUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -52,7 +52,7 @@ public class DeviceHelper {
 
         } catch (Exception e) {
         } finally {
-            IoUtils.closeQuietly(fileInputStream);
+            CloseUtils.closeIOQuietly(fileInputStream);
         }
     }
 

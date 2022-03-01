@@ -1,4 +1,4 @@
-package com.dds.common.utils;
+package com.dds.common.net;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
+import com.dds.common.utils.ShellUtils;
 
 import java.lang.reflect.Method;
 import java.net.InetAddress;

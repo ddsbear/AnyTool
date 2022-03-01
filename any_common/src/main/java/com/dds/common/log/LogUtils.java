@@ -1,10 +1,12 @@
 package com.dds.common.log;
 
+import android.util.Log;
+
 /**
  * @author dds
  * @date 2016-08-11
  */
-public class LogA {
+public class LogUtils {
 
     public interface LogDelegate {
         void e(final String tag, final String msg, final Object... obj);
@@ -18,9 +20,38 @@ public class LogA {
         void printErrStackTrace(String tag, Throwable tr, final String format, final Object... obj);
     }
 
-    private static LogDelegate sDelegate = new DefDelegate();
+    public static class DefLogDelegate implements LogDelegate {
+        @Override
+        public void e(String tag, String msg, Object... obj) {
+            Log.e(tag, String.format(msg, obj));
 
-    public static void setDelegete(LogDelegate delegate) {
+        }
+
+        @Override
+        public void w(String tag, String msg, Object... obj) {
+            Log.w(tag, String.format(msg, obj));
+        }
+
+        @Override
+        public void i(String tag, String msg, Object... obj) {
+            Log.i(tag, String.format(msg, obj));
+        }
+
+        @Override
+        public void d(String tag, String msg, Object... obj) {
+            Log.d(tag, String.format(msg, obj));
+        }
+
+        @Override
+        public void printErrStackTrace(String tag, Throwable tr, String format, Object... obj) {
+            Log.e(tag, String.format(format, obj));
+            Log.e(tag, Log.getStackTraceString(tr));
+        }
+    }
+
+    private static LogDelegate sDelegate = new DefLogDelegate();
+
+    public static void setDelegate(LogDelegate delegate) {
         sDelegate = delegate;
     }
 

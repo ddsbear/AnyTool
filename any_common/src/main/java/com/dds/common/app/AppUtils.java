@@ -1,4 +1,4 @@
-package com.dds.common.utils;
+package com.dds.common.app;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -18,6 +18,10 @@ import android.util.Log;
 import androidx.core.content.FileProvider;
 
 import com.dds.common.file.FileUtils;
+import com.dds.common.utils.CleanUtils;
+import com.dds.common.utils.EncryptUtils;
+import com.dds.common.utils.ProcessUtils;
+import com.dds.common.utils.ShellUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -134,7 +138,6 @@ public class AppUtils {
         }
         return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
-
 
     /**
      * 静默安装App
@@ -271,7 +274,6 @@ public class AppUtils {
         if (isSpace(packageName)) return;
         context.startActivity(getAppDetailsSettingsIntent(packageName));
     }
-
 
     // 获取App具体设置的意图
     private static Intent getAppDetailsSettingsIntent(String packageName) {
@@ -620,7 +622,6 @@ public class AppUtils {
         return !isSpace(packageName) && packageName.equals(ProcessUtils.getForegroundProcessName(context));
     }
 
-
     /**
      * 封装App信息的Bean类
      */
@@ -829,7 +830,6 @@ public class AppUtils {
 
         return var2;
     }
-
 
     /**
      * 清除App所有数据
