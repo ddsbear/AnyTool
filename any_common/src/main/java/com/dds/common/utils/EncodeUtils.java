@@ -8,14 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
-/**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/8/7
- *     desc  : 编码解码相关工具类
- * </pre>
- */
+
 public class EncodeUtils {
 
     private EncodeUtils() {

@@ -23,7 +23,7 @@ import java.util.jar.JarFile;
 
 
 /**
- * 解析apk
+ * apk未安装时解析apk信息
  */
 public class ApkUtil {
 

@@ -32,14 +32,7 @@ import static android.Manifest.permission.KILL_BACKGROUND_PROCESSES;
 
 import com.dds.common.lifecycle.Utils;
 
-/**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/10/18
- *     desc  : utils about process
- * </pre>
- */
+
 public final class ProcessUtils {
 
     private ProcessUtils() {
