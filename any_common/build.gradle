@@ -41,6 +41,8 @@ dependencies {
     // okhttp3
     implementation 'com.squareup.okhttp3:okhttp:3.14.2'
 
+    // gson
+    implementation 'com.google.code.gson:gson:2.8.5'
 
     // test
     testImplementation 'junit:junit:4.12'

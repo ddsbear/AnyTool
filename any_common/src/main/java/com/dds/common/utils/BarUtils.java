@@ -30,13 +30,9 @@ import com.dds.common.lifecycle.Utils;
 
 import java.lang.reflect.Method;
 
+
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/09/23
- *     desc  : utils about bar
- * </pre>
+ * 状态栏相关
  */
 public final class BarUtils {
 

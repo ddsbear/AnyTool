@@ -20,12 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2018/10/02
- *     desc  : utils about bus
- * </pre>
+ * 事件总线
  */
 public final class BusUtils {
 
@@ -337,9 +332,7 @@ public final class BusUtils {
                     busInfo.method.invoke(bus, arg);
                 }
             }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }

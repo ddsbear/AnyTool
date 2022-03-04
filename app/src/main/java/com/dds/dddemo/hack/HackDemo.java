@@ -2,7 +2,7 @@ package com.dds.dddemo.hack;
 
 import android.util.Log;
 
-import com.dds.common.log.LogUtils;
+import com.dds.common.log.LogDelegate;
 
 public class HackDemo {
     private int mIntField;
@@ -45,7 +45,7 @@ public class HackDemo {
     }
 
     private static void bar(int type, String name, Bean bean) {
-        LogUtils.d("dds_test", "static method :bar type:%d,%s,%s", type, name, bean.toString());
+        LogDelegate.d("dds_test", "static method :bar type:%d,%s,%s", type, name, bean.toString());
     }
 
 

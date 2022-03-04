@@ -1,5 +1,8 @@
 package com.dds.common.file;
 
+import android.os.StatFs;
+import android.text.TextUtils;
+
 import com.dds.common.io.CloseUtils;
 import com.dds.common.utils.ConvertUtils;
 
@@ -1294,4 +1297,5 @@ public class FileUtils {
     private static boolean isSpace(String s) {
         return (s == null || s.trim().length() == 0);
     }
+
 }
