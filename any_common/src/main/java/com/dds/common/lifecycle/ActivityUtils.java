@@ -1,4 +1,4 @@
-package com.dds.common.utils;
+package com.dds.common.lifecycle;
 
 
 import android.app.Activity;
@@ -22,19 +22,14 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 
+import com.dds.common.lifecycle.Utils;
+import com.dds.common.lifecycle.UtilsBridge;
+
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/09/23
- *     desc  : utils about activity
- * </pre>
- */
 public final class ActivityUtils {
 
     private ActivityUtils() {
@@ -60,7 +55,6 @@ public final class ActivityUtils {
                                                      @Nullable final Utils.ActivityLifecycleCallbacks callbacks) {
         UtilsBridge.addActivityLifecycleCallbacks(activity, callbacks);
     }
-
     /**
      * Remove callbacks of activity lifecycle.
      *
@@ -89,13 +83,6 @@ public final class ActivityUtils {
                                                         @Nullable final Utils.ActivityLifecycleCallbacks callbacks) {
         UtilsBridge.removeActivityLifecycleCallbacks(activity, callbacks);
     }
-
-    /**
-     * Return the activity by context.
-     *
-     * @param context The context.
-     * @return the activity by context.
-     */
     @Nullable
     public static Activity getActivityByContext(@Nullable Context context) {
         if (context == null) return null;
@@ -149,8 +136,7 @@ public final class ActivityUtils {
      * @param cls The name of the class.
      * @return {@code true}: yes<br>{@code false}: no
      */
-    public static boolean isActivityExists(@NonNull final String pkg,
-                                           @NonNull final String cls) {
+    public static boolean isActivityExists(@NonNull final String pkg, @NonNull final String cls) {
         Intent intent = new Intent();
         intent.setClassName(pkg, cls);
         PackageManager pm = Utils.getApp().getPackageManager();
@@ -1469,7 +1455,6 @@ public final class ActivityUtils {
      * @return the name of launcher activity
      */
     public static String getLauncherActivity(@NonNull final String pkg) {
-        if (UtilsBridge.isSpace(pkg)) return "";
         Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         intent.setPackage(pkg);

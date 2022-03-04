@@ -1,5 +1,7 @@
 package com.dds.common.utils;
 
+import static android.Manifest.permission.EXPAND_STATUS_BAR;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -7,7 +9,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Build;
-import android.provider.Settings;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.KeyCharacterMap;
@@ -19,15 +20,15 @@ import android.view.ViewGroup.MarginLayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 
-import java.lang.reflect.Method;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.RequiresPermission;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import static android.Manifest.permission.EXPAND_STATUS_BAR;
+import com.dds.common.lifecycle.Utils;
+
+import java.lang.reflect.Method;
 
 /**
  * <pre>
@@ -269,10 +270,9 @@ public final class BarUtils {
      * @param fakeStatusBar The fake status bar view.
      * @param color         The status bar's color.
      */
-    public static void setStatusBarColor(@NonNull final View fakeStatusBar,
+    public static void setStatusBarColor(Activity activity,@NonNull final View fakeStatusBar,
                                          @ColorInt final int color) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
-        Activity activity = UtilsBridge.getActivityByContext(fakeStatusBar.getContext());
         if (activity == null) return;
         transparentStatusBar(activity);
         fakeStatusBar.setVisibility(View.VISIBLE);
@@ -287,9 +287,8 @@ public final class BarUtils {
      *
      * @param fakeStatusBar The fake status bar view.
      */
-    public static void setStatusBarCustom(@NonNull final View fakeStatusBar) {
+    public static void setStatusBarCustom(Activity activity,@NonNull final View fakeStatusBar) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
-        Activity activity = UtilsBridge.getActivityByContext(fakeStatusBar.getContext());
         if (activity == null) return;
         transparentStatusBar(activity);
         fakeStatusBar.setVisibility(View.VISIBLE);
@@ -314,10 +313,10 @@ public final class BarUtils {
      * @param fakeStatusBar The fake status bar view.
      * @param color         The status bar's color.
      */
-    public static void setStatusBarColor4Drawer(@NonNull final DrawerLayout drawer,
+    public static void setStatusBarColor4Drawer(Activity activity,@NonNull final DrawerLayout drawer,
                                                 @NonNull final View fakeStatusBar,
                                                 @ColorInt final int color) {
-        setStatusBarColor4Drawer(drawer, fakeStatusBar, color, false);
+        setStatusBarColor4Drawer(activity,drawer, fakeStatusBar, color, false);
     }
 
     /**
@@ -329,16 +328,15 @@ public final class BarUtils {
      * @param color         The status bar's color.
      * @param isTop         True to set DrawerLayout at the top layer, false otherwise.
      */
-    public static void setStatusBarColor4Drawer(@NonNull final DrawerLayout drawer,
+    public static void setStatusBarColor4Drawer(Activity activity,@NonNull final DrawerLayout drawer,
                                                 @NonNull final View fakeStatusBar,
                                                 @ColorInt final int color,
                                                 final boolean isTop) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
-        Activity activity = UtilsBridge.getActivityByContext(fakeStatusBar.getContext());
         if (activity == null) return;
         transparentStatusBar(activity);
         drawer.setFitsSystemWindows(false);
-        setStatusBarColor(fakeStatusBar, color);
+        setStatusBarColor(activity,fakeStatusBar, color);
         for (int i = 0, count = drawer.getChildCount(); i < count; i++) {
             drawer.getChildAt(i).setFitsSystemWindows(false);
         }

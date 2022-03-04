@@ -18,9 +18,9 @@ import android.util.Log;
 import androidx.core.content.FileProvider;
 
 import com.dds.common.file.FileUtils;
+import com.dds.common.lifecycle.ProcessUtils;
 import com.dds.common.utils.CleanUtils;
 import com.dds.common.utils.EncryptUtils;
-import com.dds.common.utils.ProcessUtils;
 import com.dds.common.utils.ShellUtils;
 
 import java.io.File;
@@ -108,7 +108,7 @@ public class AppUtils {
 
     //跳转到设置-允许安装未知来源-页面
     private static void startInstallPermissionSettingActivity(Context context, int requestCode) {
-        if (android.os.Build.VERSION.SDK_INT >= 26) {
+        if (Build.VERSION.SDK_INT >= 26) {
             boolean hasInstallPermission = context.getPackageManager().canRequestPackageInstalls();
             if (!hasInstallPermission) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES);
@@ -619,7 +619,7 @@ public class AppUtils {
      * @return {@code true}: 是<br>{@code false}: 否
      */
     public static boolean isAppForeground(Context context, String packageName) {
-        return !isSpace(packageName) && packageName.equals(ProcessUtils.getForegroundProcessName(context));
+        return !isSpace(packageName) && packageName.equals(ProcessUtils.getForegroundProcessName());
     }
 
     /**

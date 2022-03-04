@@ -1,4 +1,4 @@
-package com.dds.common.utils;
+package com.dds.common.lifecycle;
 
 import android.app.ActivityManager;
 import android.app.AppOpsManager;
@@ -29,6 +29,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresPermission;
 
 import static android.Manifest.permission.KILL_BACKGROUND_PROCESSES;
+
+import com.dds.common.lifecycle.Utils;
 
 /**
  * <pre>
