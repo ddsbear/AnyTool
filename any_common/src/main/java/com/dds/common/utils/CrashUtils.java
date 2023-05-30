@@ -90,24 +90,21 @@ public class CrashUtils implements UncaughtExceptionHandler {
         String now = new SimpleDateFormat("yy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
         final String fullPath = crashDir + now + ".txt";
         if (!FileUtils.createOrExistsFile(fullPath)) return;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                PrintWriter pw = null;
-                try {
-                    pw = new PrintWriter(new FileWriter(fullPath, false));
-                    pw.write(getCrashHead());
-                    throwable.printStackTrace(pw);
-                    Throwable cause = throwable.getCause();
-                    while (cause != null) {
-                        cause.printStackTrace(pw);
-                        cause = cause.getCause();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    CloseUtils.closeIO(pw);
+        new Thread(() -> {
+            PrintWriter pw = null;
+            try {
+                pw = new PrintWriter(new FileWriter(fullPath, false));
+                pw.write(getCrashHead());
+                throwable.printStackTrace(pw);
+                Throwable cause = throwable.getCause();
+                while (cause != null) {
+                    cause.printStackTrace(pw);
+                    cause = cause.getCause();
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                CloseUtils.closeIO(pw);
             }
         }).start();
         if (mHandler != null) {

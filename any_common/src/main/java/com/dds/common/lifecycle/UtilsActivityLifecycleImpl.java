@@ -384,7 +384,7 @@ final class UtilsActivityLifecycleImpl implements Application.ActivityLifecycleC
         }
         try {
             //noinspection JavaReflectionMemberAccess
-            @SuppressLint("DiscouragedPrivateApi") Field sDurationScaleField = ValueAnimator.class.getDeclaredField("sDurationScale");
+            @SuppressLint({"DiscouragedPrivateApi", "SoonBlockedPrivateApi"}) Field sDurationScaleField = ValueAnimator.class.getDeclaredField("sDurationScale");
             sDurationScaleField.setAccessible(true);
             float sDurationScale = (Float) sDurationScaleField.get(null);
             if (sDurationScale == 0f) {

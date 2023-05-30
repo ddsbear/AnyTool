@@ -55,6 +55,7 @@ public final class ActivityUtils {
                                                      @Nullable final Utils.ActivityLifecycleCallbacks callbacks) {
         UtilsBridge.addActivityLifecycleCallbacks(activity, callbacks);
     }
+
     /**
      * Remove callbacks of activity lifecycle.
      *
@@ -83,6 +84,7 @@ public final class ActivityUtils {
                                                         @Nullable final Utils.ActivityLifecycleCallbacks callbacks) {
         UtilsBridge.removeActivityLifecycleCallbacks(activity, callbacks);
     }
+
     @Nullable
     public static Activity getActivityByContext(@Nullable Context context) {
         if (context == null) return null;

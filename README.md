@@ -1,9 +1,8 @@
 ![logo](art/anytool2.png)
 
-This project includes various tools in Android development. make development faster and easier
-
 本项目收录Android开发中的各种工具，旨在让你的开发更加简单快速
 
+This project includes various tools in Android development. make development faster and easier
 
 
 ## Instructions
@@ -12,76 +11,102 @@ This project includes various tools in Android development. make development fas
 
 我们常常在思考，我们也常常在感叹，新技术层出不穷，而我们的学习也变得越来越枯燥无味。学习的方法是总结，而能让我们进步的是分享和交流。
 
-这个项目是我的总结，我拿来分享，愿和你交流
-
-
-
-## Modules
-
-- About tools         各种工具
-- About DB            各种DB工具和用法     
-- About network   各种网络工具和用法
-- About cipher       各种加解密
-
+We are often thinking, and we are often lamenting that new technologies are emerging one after another, and our learning has become more and more boring. The way to learn is to summarize, and what makes us progress is sharing and communication.
 
 
 ## details
 
-### 1. any_library
+### 1. any_common
 
-这里放了一些常用的工具类
+Here are some commonly used tools
 
-- File相关
+- File
 
-  [FileDirUtil.java](any_library/src/main/java/com/utils/library/file/FileDirUtil.java)    文件目录工具
+  [FileDirUtil.java](any_common/src/main/java/com/dds/common/file/FileDirUtil.java)   
   
-  [Fileutils.java](any_library/src/main/java/com/utils/library/file/FileUtils.java)        文件操作工具
+  [FileUtils.java](any_common/src/main/java/com/dds/common/file/FileUtils.java)    
   
-- io相关
+- dynamic permissions
 
-  [IoUtils.java](any_library/src/main/java/com/utils/library/io/IoUtils.java)
+  [Permissions.java](any_common/src/main/java/com/dds/common/permission/Permissions.java)   
   
-- 动态权限相关
+- Log
 
-  [Permissions.java](any_library/src/main/java/com/utils/library/permission/Permissions.java)   
+  [LogA.java](any_common/src/main/java/com/dds/common/log/LogUtils.java)
+
+- Dialog
+
+  [Toasts.java](any_common/src/main/java/com/dds/common/Toasts.java)
+
+  [Dialogs.java](any_common/src/main/java/com/dds/common/Dialogs.java)
+
+  [SnackBars.java](any_common/src/main/java/com/dds/common/snack/SnackBars.java)
+
+- net
+  [NetworkUtils.java](any_common/src/main/java/com/dds/common/net/NetworkUtils.java)
+
+- state machines
+  [StateMachine.java](any_common/src/main/java/com/dds/common/state/StateMachine.java)
+
+- app
+  [AppUtils.java](any_common/src/main/java/com/dds/common/app/AppUtils.java)
+  [ApkUtils.java](any_common/src/main/java/com/dds/common/app/ApkUtil.java)
+
+- utils
+  [utils](any_common/src/main/java/com/dds/common/utils)
+
+  [ArrayUtils.java](any_common/src/main/java/com/dds/common/utils/ArrayUtils.java)
+  [BarUtils.java](any_common/src/main/java/com/dds/common/utils/BarUtils.java)
+  [BrightnessUtils.java](any_common/src/main/java/com/dds/common/utils/BrightnessUtils.java)
+  [BusUtils.java](any_common/src/main/java/com/dds/common/utils/BusUtils.java)
+  [CleanUtils.java](any_common/src/main/java/com/dds/common/utils/CleanUtils.java)
+  [ClipboardUtils.java](any_common/src/main/java/com/dds/common/utils/ClipboardUtils.java)
+  [CloneUtils.java](any_common/src/main/java/com/dds/common/utils/CloneUtils.java)
+  [CollectionUtils.java](any_common/src/main/java/com/dds/common/utils/CollectionUtils.java)
+  [ConstUtils.java](any_common/src/main/java/com/dds/common/utils/ConstUtils.java)
+  [ConvertUtils.java](any_common/src/main/java/com/dds/common/utils/ConvertUtils.java)
+  [CrashUtils.java](any_common/src/main/java/com/dds/common/utils/CrashUtils.java)
+  [EncodeUtils.java](any_common/src/main/java/com/dds/common/utils/EncodeUtils.java)
+  [EncryptUtils.java](any_common/src/main/java/com/dds/common/utils/EncryptUtils.java)
+  [FlashlightUtils.java](any_common/src/main/java/com/dds/common/utils/FlashlightUtils.java)
+  [FragmentUtils.java](any_common/src/main/java/com/dds/common/utils/FragmentUtils.java)
+  [GsonUtils.java](any_common/src/main/java/com/dds/common/utils/GsonUtils.java)
+  [ImageUtils.java](any_common/src/main/java/com/dds/common/utils/ImageUtils.java)
+  [JsonUtils.java](any_common/src/main/java/com/dds/common/utils/JsonUtils.java)
+  [KeyboardUtils.java](any_common/src/main/java/com/dds/common/utils/KeyboardUtils.java)
+  [LocationUtils.java](any_common/src/main/java/com/dds/common/utils/LocationUtils.java)
+  [MapUtils.java](any_common/src/main/java/com/dds/common/utils/MapUtils.java)
+  [MetaDataUtils.java](any_common/src/main/java/com/dds/common/utils/MetaDataUtils.java)
+  [NotificationUtils.java](any_common/src/main/java/com/dds/common/utils/NotificationUtils.java)
+  [ObjectUtils.java](any_common/src/main/java/com/dds/common/utils/ObjectUtils.java)
+  [PathUtils.java](any_common/src/main/java/com/dds/common/utils/PathUtils.java)
+  [PhoneUtils.java](any_common/src/main/java/com/dds/common/utils/PhoneUtils.java)
+  [RegexUtils.java](any_common/src/main/java/com/dds/common/utils/RegexUtils.java)
+  [RomUtil.java](any_common/src/main/java/com/dds/common/utils/RomUtil.java)
+  [RomUtils.java](any_common/src/main/java/com/dds/common/utils/RomUtils.java)
+  [ScreenUtils.java](any_common/src/main/java/com/dds/common/utils/ScreenUtils.java)
+  [SDCardUtils.java](any_common/src/main/java/com/dds/common/utils/SDCardUtils.java)
+  [ShellUtils.java](any_common/src/main/java/com/dds/common/utils/ShellUtils.java)
+  [SizeUtils.java](any_common/src/main/java/com/dds/common/utils/SizeUtils.java)
+  [SpannableStringUtils.java](any_common/src/main/java/com/dds/common/utils/SpannableStringUtils.java)
+  [SpanUtils.java](any_common/src/main/java/com/dds/common/utils/SpanUtils.java)
+  [SPUtils.java](any_common/src/main/java/com/dds/common/utils/SPUtils.java)
+  [StringUtils.java](any_common/src/main/java/com/dds/common/utils/StringUtils.java)
+  [ThreadUtils.java](any_common/src/main/java/com/dds/common/utils/ThreadUtils.java)
+  [ThrowableUtils.java](any_common/src/main/java/com/dds/common/utils/ThrowableUtils.java)
+  [TimeUtils.java](any_common/src/main/java/com/dds/common/utils/TimeUtils.java)
+  [TouchUtils.java](any_common/src/main/java/com/dds/common/utils/TouchUtils.java)
+  [UriUtils.java](any_common/src/main/java/com/dds/common/utils/UriUtils.java)
+  [VibrateUtils.java](any_common/src/main/java/com/dds/common/utils/VibrateUtils.java)
+  [ViewUtils.java](any_common/src/main/java/com/dds/common/utils/ViewUtils.java)
+  [VolumeUtils.java](any_common/src/main/java/com/dds/common/utils/VolumeUtils.java)
+
+
   
-- 接口类log日志打印接口类
-
-  [LogA.java](any_library/src/main/java/com/utils/library/log/LogA.java)
-
-- 弹框类
-
-  [Toasts.java](any_library/src/main/java/com/utils/library/Toasts.java)
-
-  [Dialogs.java](any_library/src/main/java/com/utils/library/Dialogs.java)
-
-  [SnackBars.java](any_library/src/main/java/com/utils/library/snack/SnackBars.java)
-
-
-
-**相关文章**
+### 2. csdn article
 
 - [优雅的解决Android运行时权限问题](https://blog.csdn.net/u011077027/article/details/100694123)
 - [优雅的hook私有方法](https://blog.csdn.net/u011077027/article/details/102630313)
-- 如何优雅的使用代理模式封装网络请求和图片加载
+ 
 
-
-
-### 2. cipher
-
-加解密模块: [cipher](any_cipher)
-
-- AES 
-- RSA
-- Base64
-- MD5
-- 证书相关
-
-相关文章
-
-- [Android 合成pkcs12证书](https://blog.csdn.net/u011077027/article/details/100847057)
-- [Android 生成pkcs10(csr)请求](https://blog.csdn.net/u011077027/article/details/100839294)
-- [keytool命令详解--学习自签名证书就看这篇](https://blog.csdn.net/u011077027/article/details/100731436)
-- [JNI AES加解密 c++和java互通详解](https://blog.csdn.net/u011077027/article/details/102757225)
-
-
+ 

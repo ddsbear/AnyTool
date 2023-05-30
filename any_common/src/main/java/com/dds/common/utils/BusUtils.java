@@ -20,7 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 /**
- * 事件总线
+ * event bus
  */
 public final class BusUtils {
 

@@ -17,6 +17,9 @@ public class App extends Application implements Utils.OnAppStatusChangedListener
     public void onCreate() {
         super.onCreate();
         app = this;
+
+
+        // background and foreground event
         Utils.init(app);
         Utils.registerAppStatusChangedListener(this);
     }

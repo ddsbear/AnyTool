@@ -225,12 +225,7 @@ public final class LogUtils {
                 print2Console(type_low, tagHead.tag, tagHead.consoleHead, body);
             }
             if ((CONFIG.isLog2FileSwitch() || type_high == FILE) && type_low >= CONFIG.mFileFilter) {
-                EXECUTOR.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        print2File(type_low, tagHead.tag, tagHead.fileHead + body);
-                    }
-                });
+                EXECUTOR.execute(() -> print2File(type_low, tagHead.tag, tagHead.fileHead + body));
             }
         }
     }
@@ -574,13 +569,10 @@ public final class LogUtils {
                 int l = name.length();
                 String logDay = findDate(name);
                 if (sdf.parse(logDay).getTime() <= dueMillis) {
-                    EXECUTOR.execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            boolean delete = aFile.delete();
-                            if (!delete) {
-                                Log.e("LogUtils", "delete " + aFile + " failed!");
-                            }
+                    EXECUTOR.execute(() -> {
+                        boolean delete = aFile.delete();
+                        if (!delete) {
+                            Log.e("LogUtils", "delete " + aFile + " failed!");
                         }
                     });
                 }
